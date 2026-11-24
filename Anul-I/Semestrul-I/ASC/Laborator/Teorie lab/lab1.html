@@ -1,0 +1,584 @@
+
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arhitectura Sistemelor de Calcul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=30092025">
+</head>
+<body>
+  <header>
+   <div>
+        <h1><a href="https://www.cs.ubbcluj.ro/~diana.sotropa/teaching/asc">Arhitectura Sistemelor de Calcul</a></h1>
+        <h4>Anul 1, Informatică Română, an universitar 2025-2026</h4>
+         <a href="http://www.cs.ubbcluj.ro/~diana.sotropa/">Dr. Diana Șotropa, Lector Universitar</a>
+  
+    </div>
+    <div>
+    <div class="hamburger" onclick="toggleMobileNav()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav>
+      <a href="index.php#despre">Despre</a>
+      <a href="index.php#noutati">Noutăți</a>
+      <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+      <a href="index.php#laboratoare">Laboratoare</a>
+      <a href="index.php#contact">Contact</a>
+    </nav>
+    <a class="contact" href="mailto:diana.sotropa@ubbcluj.ro"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#ffffff"/>
+</svg> diana.sotropa@ubbcluj.ro</a>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.php#despre">Despre</a>
+    <a href="index.php#noutati">Noutăți</a>
+    <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+    <a href="index.php#laboratoare">Laboratoare</a>
+    <a href="index.php#contact">Contact</a>
+  </div>
+
+  <div class="container"><link rel="stylesheet" href="assets/old-styles.css?v=30092025">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	$( function() {
+		$(".modal .x").on("click",function(){$('.modal').remove();$('.informatie_modal').remove();})
+		$(".modalP .x").on("click",function(){$('.modalP').remove();})
+		$( "#accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#second-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#third-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#fourth-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#fifth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#sixth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#accordion-trei" ).accordion({
+			collapsible: true, active : 3, heightStyle: "content"
+		});
+		// Hide all panels
+
+		// Get hash from query string
+		var hash = window.location.hash;
+		console.log(hash);
+
+		if (hash) {
+			
+		$(".article").hide();
+			// Get panel header element
+			var requestedPanel = $(hash);
+			if (requestedPanel.length) {
+				// Hide all panels
+				$(".article").hide();
+				// Show requested panel
+				requestedPanel.next(".article").show();
+			}
+		}
+});
+</script>
+  <div id="menu">
+<ul>
+<li><a href='ro-lab1-exercitii.php'>EXERCITII</a></li><li class='active'><a href='ro-lab1-teorie.php'>TEORIE</a></li></ul>
+</div>
+<div id="content">
+<h1>Laborator 1 - Suport teoretic</h1>
+<div id="accordion">
+	<h2>Conversii şi operaţii în diferite baze de numeraţie</h2>
+	<div class="article">
+
+<h3><i>Se va studia:</i></h3>
+
+<ul><li>conversia numerelor întregi şi zecimale din baza 10 într-o bază oarecare, în special baza 16 și 2
+</li><li> conversia inversă, dintr-o bază oarecare în baza 10, mai ales din baza 16 şi 2 în baza 10.
+</li><li> conversia din baza 16 direct în baza 2 şi invers.</li></ul>
+<h3><i>Consideraţii teoretice</i></h3>
+
+Un sistem de numeraţie este constituit din totalitatea regulilor de reprezentare a numerelor cu ajutorul anumitor simboluri denumite cifre.
+
+Pentru orice sistem de numeraţie , numărul semnelor distincte pentru cifrele sistemului este egal cu baza (b). Deci pentru baza b=2 (numere scrise în binar) semnele vor fi cifrele 0 şi 1. Pentru baza b=16 (hexazecimal) semnele vor fi 0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F. Se observă că pentru numerele scrise într-o bază mai mare decât baza 10 (zecimal) se folosesc şi alte simboluri (litere) pe lângă cifrele obişnuite din baza 10. Astfel, în cazul numerelor scrise în hexazecimal, literele A,B,C,D,E,F au ca şi valori asociate 10,11,12,13,14,15.
+
+Moduri de notare: scrierea la sfârşitul numărului în paranteză a bazei, de exemplu: 100101001<sub>(2)</sub>, sau 17A6B<sub>(16)</sub>.
+
+<h3><i>Conversia numerelor din baza 10 într-o bază oarecare</i></h3>
+
+Algoritmul cel mai simplu constă în împărţirea succesivă a numărului scris în baza 10 la baza spre care se doreşte conversia (se împarte numărul la bază, iar în continuare se împarte câtul obţinut la bază ş.a.m.d. până când câtul devine 0), după care se iau resturile obţinute în ordine inversă, care constituie valoarea numărului în baza cerută.
+
+<h4><i>Exemple:</i></h4>
+<ol>
+ 	<li>Să se convertească 347 din baza 10 în baza 16<sub>(H)</sub>
+Mai întâi se converteşte în baza 16 pentru că aceasta se realizează prin mai puţine împărţiri decât conversia în baza 2.
+
+<div align="center"><img src="files/baze-1.PNG" ></div>
+
+Astfel, luând resturile în ordine inversă obţinem 15B<sub>(H).</sub>
+
+<pre><code><div class="r">347<sub>(D)</sub> = 15B<sub>(H)</sub></div></pre></code></li>
+ 	<li>Să se convertească 57 din baza 10 în baza 2<sub>(B).</sub>
+
+<div align="center"><img src="files/baze-2.PNG"></div>
+
+<pre><code><div class="r">57<sub>(D)</sub> = 111001<sub>(B)</sub></div></pre></code></li>
+</ol>
+
+Există şi o metodă mai rapidă de conversie a numerelor între bazele 2 şi 16 ţinând cont că pentru fiecare cifră hexa există 4 cifre binare corespondente:
+<br>
+<br>
+<table border=1 cellspacing=0 cellpadding=10 align="center">
+<tbody>
+<tr>
+<td  align="center"><strong>Valoarea în zecimal</strong></td>
+<td  align="center"><strong>Valoarea în hexazecimal</strong></td>
+<td align="center"><strong>Numărul binar coresp. cifrei hexa</strong></td>
+</tr>
+<tr>
+<td  align="center">0</td>
+<td  align="center">0</td>
+<td align="center">0000</td>
+</tr>
+<tr>
+<td  align="center">1</td>
+<td  align="center">1</td>
+<td  align="center">0001</td>
+</tr>
+<tr>
+<td  align="center">2</td>
+<td  align="center">2</td>
+<td  align="center">0010</td>
+</tr>
+<tr>
+<td  align="center">3</td>
+<td  align="center">3</td>
+<td  align="center">0011</td>
+</tr>
+<tr>
+<td  align="center">4</td>
+<td  align="center">4</td>
+<td  align="center">0100</td>
+</tr>
+<tr>
+<td  align="center">5</td>
+<td  align="center">5</td>
+<td  align="center">0101</td>
+</tr>
+<tr>
+<td  align="center">6</td>
+<td  align="center">6</td>
+<td  align="center">0110</td>
+</tr>
+<tr>
+<td  align="center">7</td>
+<td  align="center">7</td>
+<td  align="center">0111</td>
+</tr>
+<tr>
+<td  align="center">8</td>
+<td  align="center">8</td>
+<td  align="center">1000</td>
+</tr>
+<tr>
+<td  align="center">9</td>
+<td  align="center">9</td>
+<td  align="center">1001</td>
+</tr>
+<tr>
+<td  align="center">10</td>
+<td  align="center">A</td>
+<td  align="center">1010</td>
+</tr>
+<tr>
+<td  align="center">11</td>
+<td  align="center">B</td>
+<td  align="center">1011</td>
+</tr>
+<tr>
+<td  align="center">12</td>
+<td  align="center">C</td>
+<td  align="center">1100</td>
+</tr>
+<tr>
+<td  align="center">13</td>
+<td  align="center">D</td>
+<td  align="center">1101</td>
+</tr>
+<tr>
+<td  align="center">14</td>
+<td  align="center">E</td>
+<td  align="center">1110</td>
+</tr>
+<tr>
+<td  align="center">15</td>
+<td  align="center">F</td>
+<td  align="center">1111</td>
+</tr>
+</tbody>
+</table>
+<br>
+<br>
+Mai trebuie ţinut cont la trecerea unui număr prin bazele 2 și 16 că gruparea cifrelor din baza 2 se face de la dreapta la stânga (prin completare cu zerouri la stânga numărului dacă este cazul, deci în partea care nu-i afectează valoarea.
+
+<h4><i>Exemple:</i></h4>
+<ol>
+ 	<li>Să se convertească 347 din baza 10 în bazele 2 și 16.
+	<pre><code><div class="r">347<sub>(D)</sub> = 15B<sub>(H)</sub> = 0001 0101 1011<sub>(B)</sub></div></pre></code></li>
+</ol>
+
+<h4><i>Alte exemple:</i></h4>
+
+<pre><code><div class="r">2 = 2<sub>(10) </sub>=10<sub>(2)</sub>
+62<sub>(10) </sub>= 111110<sub>(2)</sub>
+1995<sub>(10) </sub>= 11111001011<sub>(2)</sub> 
+1024<sub>(10) </sub>= 10000000000<sub>(2)</sub></div></pre></code>
+
+<h3><i>Conversia unui număr dintr-o bază oarecare în baza 10</i></h3>
+
+Pentru a converti un număr dintr-o bază oarecare în baza 10 se poate folosi formula definită în prima parte a lucrării şi anume:
+
+<pre><code><div class="i"><strong>Nr(b) = C<sub>n </sub>C<sub>n-1 </sub>C<sub>n-2</sub> … C<sub>2</sub>C<sub>1 </sub>C<sub>0</sub></strong></div></code></pre>
+
+atunci valoarea sa în baza 10 va fi:
+
+<pre><code><div class="i"><strong>Nr(10) = C<sub>n </sub>* b<sup>n</sup> + C<sub>n-1 </sub>* b<sup>n-1</sup> + … + C<sub>2 </sub>* b<sup>2 </sup>+  C<sub>1 </sub>* b<sup>1</sup>+ C<sub> 0</sub></strong></div></code></pre>
+
+<h4><i>Exemple:</i></h4>
+
+<ol>
+ 	<li>Se dă numărul întreg în hexazecimal 3A8<sub>(H)</sub> şi se cere valoarea sa în zecimal:
+<pre><code><div class="r">N = 3*16<sup>2</sup> + 10*16<sup> 1 </sup>+ 8 = 3*256 + 160 + 8 = 936<sub>(10)</sub></div></code></pre></li>
+ 	<li>Se dă numărul întreg în hexazecimal 86C<sub>(H)</sub> şi se cere valoarea sa în zecimal:
+<pre><code><div class="r">86C<sub>(16)</sub> = 8 * 16<sup>2</sup> + 6 * 16 + 12 = 2156<sub>(10)</sub></div></code></pre></li>
+ 	<li>Se dă numărul întreg în binar 1101101<sub>(2)</sub> și se cere valoarea sa în zecimal
+<pre><code><div class="r">1101101<sub>(2)</sub> = 1*2<sup>6</sup> + 1*2<sup>5</sup> + 0*2<sup>4</sup> + 1*2<sup>3</sup> + 1*2<sup>2</sup> + 0*2 + 1 = 109<sub>(10)</sub></div></code></pre>
+</li>
+</ol>
+
+
+<h4><i>Alte exemple:</i></h4>
+
+<pre><code><div class="r">1010011<sub>(2)</sub> = 83<sub>(10)</sub>  
+11100011<sub>(2)</sub> = 227<sub>(10)</sub> 
+1000000000<sub>(2)</sub> = 512<sub>(10)</sub>  
+11001<sub>(2)</sub> =25<sub>(10)</sub></div></code></pre>
+
+
+	</div>
+	<h2>Bitul. Bitul de semn. Codul complementar. Regula de reprezentare a numerelor întregi cu semn</h2>
+	<div class="article">
+<h3><i>Bitul</i></h3>
+<ul><li>Prin particularităţile ei, aritmetica binară se pretează la automatizare mai bine decât aritmetica în orice altă bază de numeraţie. Acesta este motivul pentru care în calculatoare se foloseşte aritmetica în baza 2.
+În continuare vom folosi alternativ termenul de bit ca sinonim pentru cifră binară.
+</li><li><b>Bitul = unitatea elementară de informație</b>
+</li><li>Într-un bit se poate reprezenta o informație care poate să aibă doar două valori posibile: 0 și 1.
+</li><li>În funcție de context, un bit poate să însemne 0 sau 1, true sau false, bine sau rău, etc. Totul depinde de interpretarea care se dă bitului!
+</li><li>Un <b>octet/byte</b> este o succesiune de 8 biti, numerotați de la 0 la 7 ca în figura:
+
+<table border="1" width="100%" cellpadding="10" style="text-align:center">
+<tr><td>7<br>bitul high</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0<br>bitul low</td></tr></table> 	 	 	 	 	 	 	 
+</li></ul>
+<h3><i>Bitul de semn. Codul complementar</i></h3>
+ 
+Dacă interpretăm o anumită configuraţie de biţi drept întreg cu semn, atunci prin convenţie, pentru reprezentarea semnului unui număr se foloseşte un singur bit.
+ 
+Este vorba de bitul high (bitul 7) din octetul high al locaţiei în care se reprezintă numărul. Dacă valoarea acestui bit este zero atunci numărul este pozitiv. Dacă bitul este unu, atunci numărul este negativ.
+ 
+<h4>Cum se reprezintă numerele întregi în convenţia cu semn?</h4>
+S-au propus diferite direcții pe parcursul timpului:
+<ul><li>       <b>Cod direct</b>: reprezentarea valorii absolute a numărului pe n-1 biţi din cei n ai locaţiei, iar în bitul cel mai semnificativ să se pună semnul
+Deși această soluție e foarte apropiată de cea naturală, s-a dovedit a fi mai puțin eficientă decât altele. O problemă ar fi faptul că în această reprezentare: -7 + 7 ≠ 0
+</li><li>       <b>Cod invers (complement față de 1)</b>: reprezentarea valorii absolute a numărului pe n-1 biţi din cei n ai locaţiei, iar în cazul în care numărul este negativ, să se inverseze toţi cei n biţi ai reprezentării.
+Și la această reprezentare s-a renunțat, fiind ineficientă (de ex. apare din nou problema -7 + 7 ≠ 0)
+</li><li>       <b>Cod complementar (complement față de 2)</b>: Pentru complementarea unui număr întreg reprezentat pe n biţi, mai întâi se inversează valorile tuturor biţilor (valoarea 0 devine 1 şi valoarea 1 devine 0) din locaţia de reprezentare, după care se adaugă 1 la valoarea  obţinută.
+ </li></ul>
+ 
+A treia direcție este și cea care s-a impus pentru reprezentarea numerelor întregi cu semn.
+<h4>Reguli alternative de complementare:</h4>
+<ul><li>        Se lasă neschimbaţi biţii începând din dreapta reprezentării binare până la primul bit 1 inclusiv; restul biţilor se inversează până la bitul n-1 inclusiv.
+</li><li align="center">sau
+</li><li>        Se scade binar conţinutul (evident binar) al locaţiei de complementat din 100 ...00, unde numărul de după cifra binară 1 are atâtea  zerouri câţi biţi are locaţia de complementat.
+</li><li align="center">sau
+</li><li>        Se scade hexazecimal conţinutul (evident hexazecimal) al locaţiei de complementat din 100...00, unde  după cifra hexazecimală 1 apar atâtea  zerouri câte cifre hexazecimale are locaţia de complementat.
+ </li></ul>
+Cele 3 reguli alternative de complementare sunt echivalente cu regula de complementare, dată mai sus prin definiție.
+
+<p>De exemplu, dacă  vrem să complementăm o locaţie de un octet şi care conţine numărul (18)<sub>10</sub>:<br>
+</p>
+<table border="0" cellspacing="0" cellpadding="0" width="294">
+  <tr>
+    <td width="192" valign="top"><br>
+      Locaţia iniţială:<br>
+După inversarea    biţilor<br>
+Se adaugă  1<br>
+&nbsp;<br>
+Complementul:	  </td>
+    <td width="102" valign="top"><p>00010010<br>
+	11101101<br>
+	11101101+<br>
+	<u>00000001</u><br>
+	11101110</p></td>
+  </tr>
+</table>
+<p>
+  Deci numărul (18)<sub>10</sub>  , adică (12)<sub>16</sub> , adică (00010010)<sub>2</sub> , 
+  are ca şi complement  numărul (11101110)<sub>2</sub> adică (EE)<sub>16</sub> , adică (238)<sub>10</sub>  .<br>
+  Aplicând regula de  scădere binară, avem:</p>
+<table border="0" cellspacing="0" cellpadding="0" width="299">
+  <tr>
+    <td width="192" valign="top"><br>Locaţia iniţială:<br>
+	Complementul:
+    </td>
+    <td width="107" valign="top"><p>100000000-<br>
+	<u>&nbsp;00010010</u><br>&nbsp;11101110</p></td>
+  </tr>
+</table>
+<p>
+  Aplicând regula de  scădere hexazecimală, avem:</p>
+<table border="0" cellspacing="0" cellpadding="0" width="298">
+  <tr>
+    <td width="191" valign="top"><br>Locaţia iniţială:<br>
+	Complementul:
+    </td>
+    <td width="107" valign="top">100-<br><u>&nbsp;12</u>
+	<br>&nbsp;EE</td>
+  </tr>
+ 
+</table>
+<h3><i>Regula de reprezentare a numerelor întregi cu semn</i></h3>
+  Un număr întreg  între <strong>-2<sup>n-1</sup></strong> şi <strong>2<sup>n-1</sup>-1</strong> se reprezintă într-o  locaţie de <strong>n</strong> biţi astfel:<br>
+<ul><li>dacă numărul este  pozitiv, atunci în locaţie se reprezintă numărul respectiv scris în baza 2;
+</li><li>dacă numărul este  negativ, atunci în locaţie se înscrie complementul reprezentării în baza 2 a  numărului.
+</li></ul>
+  <br>
+  Înainte de a trece  la exemple, trebuie să clarificăm situaţia reprezentării numărului  <strong>-2<sup>n-1</sup></strong> . Valoarea lui absolută nu poate fi reprezentată pe <strong>n-1</strong> biţi ca să rămână loc şi pentru bitul de semn, ci el se  reprezintă pe <strong>n</strong> biţi şi este <strong>100...0.</strong><br>
+  Pe de o parte  această reprezentare indică un număr negativ! 
+  Pe de altă parte, am arătat deja  că acest număr este propriul lui complement. 
+  Din aceste motive, prin convenţie  s-a stabilit că numărul  <strong>-2<sup>n-1</sup></strong> se reprezintă în cod  complementar pe n biţi prin  <strong>100...0.</strong>  Aceeaşi configuraţie interpretată fără semn  reprezintă numărul  <strong>2<sup>n-1</sup>.</strong><br>
+  <strong> </strong><br>
+  Tabelul următor  prezintă reprezentările mai multor numere, în locaţii de 8 biţi – 1 octet, 16  biţi – 2 octeţi şi 32 de biţi – 4 octeţi.<br>
+</p>
+<table border="1" cellspacing="0" cellpadding="0" width="591">
+  <tr>
+    <td width="93" valign="top"><br>
+      Dim. locaţie    (octeţi) </td>
+    <td width="90" valign="top">Număr în baza 10</td>
+    <td width="181" valign="top">Reprezentare în    cod complementar (hexazecimal)</td>
+    <td width="227" valign="top">Reprezentare în    cod complementar (binar)</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">1</td>
+    <td width="90" valign="top">0</td>
+    <td width="181" valign="top">00</td>
+    <td width="227" valign="top">00000000</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">2</td>
+    <td width="90" valign="top">0</td>
+    <td width="181" valign="top">0000</td>
+    <td width="227" valign="top">0000000000000000</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">1</td>
+    <td width="90" valign="top">1</td>
+    <td width="181" valign="top">01</td>
+    <td width="227" valign="top">00000001</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">2</td>
+    <td width="90" valign="top">1</td>
+    <td width="181" valign="top">0001</td>
+    <td width="227" valign="top">0000000000000001</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">1</td>
+    <td width="90" valign="top">-1</td>
+    <td width="181" valign="top">FF</td>
+    <td width="227" valign="top">11111111</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">2</td>
+    <td width="90" valign="top">-1</td>
+    <td width="181" valign="top">FFFF</td>
+    <td width="227" valign="top">1111111111111111</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">1</td>
+    <td width="90" valign="top">127</td>
+    <td width="181" valign="top">7F</td>
+    <td width="227" valign="top">01111111</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">2</td>
+    <td width="90" valign="top">127</td>
+    <td width="181" valign="top">007F</td>
+    <td width="227" valign="top">0000000001111111</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">1</td>
+    <td width="90" valign="top">-128</td>
+    <td width="181" valign="top">80</td>
+    <td width="227" valign="top">10000000</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">2</td>
+    <td width="90" valign="top">-128</td>
+    <td width="181" valign="top">FF80</td>
+    <td width="227" valign="top">1111111110000000</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">2</td>
+    <td width="90" valign="top">128</td>
+    <td width="181" valign="top">0080</td>
+    <td width="227" valign="top">0000000010000000</td>
+  </tr>
+  <tr>
+    <td width="93" valign="top">2</td>
+    <td width="90" valign="top">32767</td>
+    <td width="181" valign="top">7FFF</td>
+    <td width="227" valign="top">0111111111111111</td>
+  </tr>
+</table>
+  <h3><i>De ce codul complementar?</i></h3>
+  Implementările  operaţiilor peste întregi trebuie, pe de o parte să fie eficiente, iar pe de  altă parte să se folosească, pe cât posibil, algoritmi comuni de evaluare a  operaţiilor fundamentale peste numere întregi, indiferent de convenţia de  reprezentare.<br>
+  <br>
+  Până în prezent  reprezentarea în cod complementar răspunde cel mai bine cerinţelor de mai sus.  Principalele motive sunt următoarele două:<br>
+<ul><li>Operaţia de  adunare se execută la fel, indiferent de faptul că avem de-a face cu convenţia  de reprezentare fără semn sau cea de reprezentare cu semn. Operaţia executată  este o adunare simplă, pe n biţi (n – dimensiunea locaţiei), cu ignorarea  ultimului transport.<br>
+</li><li>Operaţia de  scădere se reduce la operaţia de adunare a descăzutului cu complementul  scăzătorului.<br>
+</ul>
+  Operațiile de  înmulțire și împărțire se efectuează cu algoritmi separați pentru  reprezentările cu și fără semn, dar procentul operațiilor de adunare și scadere  este mult mai mare în aplicații decât cel al operațiilor multiplicative. De  aici și preferința proiectanților pentru adoptarea codului complementar pentru  reprezentarea întregilor cu semn.<br>
+  Un alt avantaj este  faptul ca dacă se lucrează cu numere pozitive (și se știe asta de la început),  nu se pierde un bit pentru semn. Intervalul de reprezentare este mult mai mare.<br>
+
+  <h4>Dimensiunea reprezentării</h4>
+  Fiind vorba de  calcule efectuate cu o maşină, se impun firesc o serie de restricţii legate de  reprezentarea întregilor (şi nu numai).<br>
+  <br>
+  Cea mai importantă  dintre ele este <u>dimensiune a reprezentării</u>, adică numărul maxim de cifre  binare (numărul de biţi) din reprezentarea unui număr întreg. Să notăm cu <strong><em>n</em></strong> această dimensiune de reprezentare.<br>
+  Valorile lui <strong><em>n</em></strong> la calculatoarele actuale pot fi: 8, 16, 32 şi 64.<br>
+  Problemă: dacă avem  un număr reprezentat pe 7 biți, cum îl reprezentăm pe 8 biți?<br>
+  Răspuns: depinde de  interpretare
+<ul><li>În reprezentarea  fără semn completăm cu zerouri biții high rămași<br>
+  </li><li>În reprezentarea  cu semn completăm cu bitul de semn biții high rămași<br>
+  </li><ul>
+  Exemplu:
+  (10011)<sub>2</sub>  se reprezină pe un octet ca și:<br>
+  <ul><li>(00010011)<sub>2</sub> în reprezentarea fără semn<br>
+  </li><li>(11110011)<sub>2</sub> în reprezentarea cu semn<br>
+  </li></ul>
+  Tabelul următor  prezintă intervalele de numere reprezentabile într-o locaţie, atât în convenţia  fără semn, cât şi în convenţia cu semn, în funcţie de dimensiunea acesteia.</p>
+<table border="1" cellspacing="0" cellpadding="0" width="612">
+  <tr>
+    <td width="66" valign="top"><br>
+      Nr.<br>
+      Octeţi </td>
+    <td width="231" valign="top"><p>Convenţia fără    semn</p></td>
+    <td width="315" valign="top"><p>Convenţia cu semn</p></td>
+  </tr>
+  <tr>
+    <td width="66" valign="top"><p>1</p></td>
+    <td width="231" valign="top"><p>[0, 2<sup>8</sup>-1]  = [ 0 , 255 ]</p></td>
+    <td width="315" valign="top"><p>[-2<sup>7</sup> ,    2<sup>7</sup>-1]    = [-128 , 127]</p></td>
+  </tr>
+  <tr>
+    <td width="66" valign="top"><p>2</p></td>
+    <td width="231" valign="top"><p>[0, 2<sup>16</sup>-1]    = [ 0 , 65535 ]</p></td>
+    <td width="315" valign="top"><p>[-2<sup>15</sup>    , 2<sup>15</sup>-1] = [-32 768 , 32 767]</p></td>
+  </tr>
+  <tr>
+    <td width="66" valign="top"><p>4</p></td>
+    <td width="231" valign="top"><p>[0, 2<sup>32</sup>-1]    = [ 0 , 4 294 967 295 ]</p></td>
+    <td width="315" valign="top"><p>[-2<sup>31</sup>    , 2<sup>31</sup>-1] = [-2 147 483 648 , 2 147 483 647]</p></td>
+  </tr>
+  <tr>
+    <td width="66" valign="top"><p>8</p></td>
+    <td width="231" valign="top"><p>[0, 2<sup>64</sup>-1]    = [ 0 , 18 446 824 753<br>
+      389 551 615 ]</p></td>
+    <td width="315" valign="top"><p>[-2<sup>63</sup>    , 2<sup>63</sup>-1] = [-9 223 412 376 694 775 808 ,<br>
+      9 223 412 376 694 775 807]</p></td>
+  </tr>
+</table>
+ 
+	
+	</div>
+	<h2>Instrumente de lucru pentru laborator</h2>
+	<div class="article">
+	<h3><i>Instrumentele de lucru pentru laborator sunt următoarele:</i></h3>
+	
+<ul>
+<li>Editor: Notepad++</li>
+<li>Asamblor: NASM</li>
+<li>Linker: ALINK</li>
+<li>Debugger: Olly DBG</li>
+</ul>
+
+Setul de instrumente poate fi descarcat de aici: <a href="files/ASM_tools.zip">&#128279; ASM tools</a>.
+
+Studenții care folosesc alte sisteme de operare decât Windows pot utiliza fie un emulator (tool-urile au fost testate cu succes cu Wine), 
+fie pot rula tool-urile într-o mașină virtuală de Windows. 
+
+Pentru a ușura redactarea programelor ASM, setul de instrumente include un editor vizual (Notepad++) care are integrat un plugin ce permite 
+efectuarea majorității operațiilor din câteva combinații de taste.
+<ul><li ><a class="i" target="_blank" href="https://ubbcluj.sharepoint.com/:u:/s/ASCIR2021-2022/EZKJja_WcUxPt0BZwprnMBUBt_aDiJv5hYIb8pWHIlIuBg?e=OAH7E0">&#128279; Studentii care folosesc MAC sau LINUX in care Olly DBG nu functioneaza, accesati link-ul: https://ubbcluj.sharepoint.com/:u:/s/ASCIR2021-2022/EZKJja_WcUxPt0BZwprnMBUBt_aDiJv5hYIb8pWHIlIuBg?e=OAH7E0.</a></li></ul>
+<ul><li ><a class="r" target="_blank" href="files/Instalarea Microsoft Windows x86 pe Mac.pdf">&#128279; Instalarea Microsoft Windows x86_64 pe Apple M1/M2</a></li></ul>
+<h3><i>Instructiuni de utilizare:</i></h3>
+
+<ul>
+	<li>Descarcati setul de instrumente si extrageti continutul arhivei
+	</li><li>Porniti editorul Notepad++  din directorul <i>npp</i> (nu utilizati versiunea proprie a editorului)
+	</li><li>Procedati la redactarea programelor ce rezolva problemele care va vor fi comunicate. Puteti utiliza urmatoarele combinatiile de taste ce se regasesc in meniul Plugins -&gt; ASM Plugin:
+	<ul>
+		<table border="1" cellspacing="0" cellpadding="10">
+		<tbody><tr><td  align="center">ASM Code Template</td><td  align="center"><span class="r">Ctrl+Shift+N</span></td><td  align="center">Completeaza in editor un program minimal in ASM
+		</td></tr><tr><td  align="center">Build ASM</td><td  align="center"><span class="r">Ctrl+F7</span></td><td  align="center">Asambleaza programul curent
+		</td></tr><tr><td  align="center">Run program</td><td  align="center"><span class="r">Ctrl+F6</span></td><td  align="center">Ruleaza programul curent
+		</td></tr><tr><td  align="center">Debug program</td><td  align="center"><span class="r">F6</span></td><td  align="center">Depaneaza programul curent, folosind Olly Debugger (documentatia pentru debugger se regaseste in directorul <i>ollydbg</i> din arhiva
+		</td></tr></tbody></table>
+	</ul>
+</li></ul>
+	</div>
+	<h2>Un exemplu minimal de program în limbaj de asamblare</h2>
+	<div class="article">
+	<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">bits 32</span> <span class="comentariu">;asamblare și compilare pentru arhitectura de 32 biți</span>
+<span class="comentariu">; definim punctul de intrare in programul principal</span>
+<span class="i">global </span><span class="r">start</span>
+
+<span class="comentariu">; declaram functiile externe necesare programului nostru</span> 
+<span class="i">extern</span> <span class="r">exit</span> <span class="comentariu">; indicam asamblorului ca exit exista, chiar daca noi nu o vom defini</span>
+<span class="i">import</span> <span class="r">exit msvcrt.dll </span> <span class="comentariu">; exit este o functie care incheie procesul, este definita in msvcrt.dll</span>
+        <span class="comentariu">; msvcrt.dll contine exit, printf si toate celelalte functii C-runtime importante</span>
+
+<span class="comentariu">; segmentul de date in care se vor defini variabilele </span>
+<span class="i">segment data use32 class=data</span>
+<span class="comentariu">; ... </span>
+
+<span class="comentariu">; segmentul de cod</span>
+<span class="i">segment code use32 class=code</span>
+<span class="i">start:</span>
+<span class="comentariu">; ... </span>
+
+    <span class="comentariu">; exit(0)</span>
+    <span class="i">push</span> <span class="r">dword 0</span> <span class="comentariu">; se pune pe stiva parametrul functiei exit</span>
+    <span class="i">call</span> <span class="r">[exit]</span> <span class="comentariu">; apelul functiei exit pentru terminarea executiei programului</span>
+
+</code></pre>
+</div>
+</div>
+</div>
+</body>
+</html>

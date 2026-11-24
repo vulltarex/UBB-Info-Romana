@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arhitectura Sistemelor de Calcul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=30092025">
+</head>
+<body>
+  <header>
+   <div>
+        <h1><a href="https://www.cs.ubbcluj.ro/~diana.sotropa/teaching/asc">Arhitectura Sistemelor de Calcul</a></h1>
+        <h4>Anul 1, Informatică Română, an universitar 2025-2026</h4>
+         <a href="http://www.cs.ubbcluj.ro/~diana.sotropa/">Dr. Diana Șotropa, Lector Universitar</a>
+  
+    </div>
+    <div>
+    <div class="hamburger" onclick="toggleMobileNav()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav>
+      <a href="index.php#despre">Despre</a>
+      <a href="index.php#noutati">Noutăți</a>
+      <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+      <a href="index.php#laboratoare">Laboratoare</a>
+      <a href="index.php#contact">Contact</a>
+    </nav>
+    <a class="contact" href="mailto:diana.sotropa@ubbcluj.ro"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#ffffff"/>
+</svg> diana.sotropa@ubbcluj.ro</a>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.php#despre">Despre</a>
+    <a href="index.php#noutati">Noutăți</a>
+    <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+    <a href="index.php#laboratoare">Laboratoare</a>
+    <a href="index.php#contact">Contact</a>
+  </div>
+
+  <div class="container"><link rel="stylesheet" href="assets/old-styles.css?v=30092025">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	$( function() {
+		$(".modal .x").on("click",function(){$('.modal').remove();$('.informatie_modal').remove();})
+		$(".modalP .x").on("click",function(){$('.modalP').remove();})
+		$( "#accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#second-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#third-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#fourth-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#fifth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#sixth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#accordion-trei" ).accordion({
+			collapsible: true, active : 3, heightStyle: "content"
+		});
+		// Hide all panels
+
+		// Get hash from query string
+		var hash = window.location.hash;
+		console.log(hash);
+
+		if (hash) {
+			
+		$(".article").hide();
+			// Get panel header element
+			var requestedPanel = $(hash);
+			if (requestedPanel.length) {
+				// Hide all panels
+				$(".article").hide();
+				// Show requested panel
+				requestedPanel.next(".article").show();
+			}
+		}
+});
+</script>
+  <div id="menu">
+<ul>
+<li><a href='ro-lab6-exemple.php'>EXEMPLE</a></li><li><a href='ro-lab6-exercitii.php'>EXERCITII</a></li><li class='active'><a href='ro-lab6-teorie.php'>TEORIE</a></li></ul>
+</div>
+<div id="content">
+	<h1>Laborator 6 - Suport teoretic</h1>
+	<h2>Operatii pe siruri de bytes/words/doublewords/quadwords</h2>
+<div id="accordion">	
+	<h2>Operatii pe siruri </h2>
+	<div class="article">
+<ul><li>Instructiunile pe siruri au operanzi impliciti.</li></ul>
+<strong>Tipuri de instructiuni pe siruri:</strong>
+<ul>
+ 	<li>care folosesc un sir sursa si un sir destinatie (MOVSB, MOVSW, MOVSD, CMPSB, CMPSW, CMPSD)</li>
+ 	<li>care folosesc numai un sir sursa (LODSB, LODSW, LODSD)</li>
+ 	<li>care folosesc numai un sir destinatie (STOSB, STOSW, STOSD, SCASB, SCASW, SCASD)</li>
+</ul>
+<strong>Pentru a fi retinute mai usor</strong>
+<ul>
+ 	<li>Move String = MOVS</li>
+ 	<li>Compare String = CMPS</li>
+ 	<li>Load String = LODS</li>
+ 	<li>Store String = STOS</li>
+ 	<li>Scan String = SCAS</li>
+</ul>
+<strong>Un sir este caracterizat de:</strong>
+<ul><li> <em>tipul elementelor (octeti, cuvinte sau dublucuvinte)</em> =&gt; este indicat de ultima litera a instructiunii folosite (B=byte, W=word, D=doubleword), ambele siruri avand acelasi tip
+</li><li> <em>adresa primului element</em> =&gt; este o adresa FAR memorata astfel:
+<ul><li> in DS:ESI - pentru sirul sursa
+</li><li> in ES:EDI - pentru sirul destinatie</li></ul>
+</li><li> <em>directia de parcurgere</em> =&gt; este indicata de valoarea din flagul DF (0 - de la adrese mai mici la adrese mai mari, 1 - de la adrese mai mari la adrese mai mici.)
+</li><li> <em>numărul de elemente</em> =&gt; cand este nevoie de el, se pune în CX sau ECX
+</li></ul>
+</div>
+<h2>Instructiuni pentru transfer de date</h2>
+<div class="article">
+<table border="1" cellspacing="0" cellpadding="5">
+<tbody>
+<tr>
+<td>LODSB</td>
+<td>In AL se incarcă octetul de la adresa &lt;DS:ESI&gt;<br>
+Daca DF=0 atunci inc(ESI), altfel dec(ESI)</td>
+</tr>
+<tr>
+<td>LODSW</td>
+<td>In AX se incarcă cuvantul de la adresa &lt;DS:ESI&gt;<br>
+Daca DF=0 atunci ESI:=ESI+2, altfel ESI:=ESI-2</td>
+</tr>
+<tr>
+<td>LODSD</td>
+<td>In EAX se incarcă dublucuvantul de la adresa &lt;DS:ESI&gt;<br>
+Daca DF=0 atunci ESI:=ESI+4, altfel ESI:=ESI-4</td>
+</tr>
+<tr>
+<td>STOSB</td>
+<td>La adresa &lt;ES:EDI&gt; se incarcă octetul din AL<br>
+Daca DF=0 atunci inc(EDI), altfel dec(EDI)</td>
+</tr>
+<tr>
+<td>STOSW</td>
+<td>La adresa &lt;ES:EDI&gt; se incarcă cuvantul din AX<br>
+Daca DF=0 atunci EDI:= EDI+2, altfel EDI:= EDI-2</td>
+</tr>
+<tr>
+<td>STOSD</td>
+<td>La adresa &lt;ES:EDI&gt; se incarcă dublucuvantul din EAX<br>
+Daca DF=0 atunci EDI:= EDI+4, altfel EDI:= EDI-4</td>
+</tr>
+<tr>
+<td>MOVSB</td>
+<td>La adresa &lt;ES:EDI&gt; se incarca octetul de la adresa &lt;DS:ESI&gt;<br>
+Daca DF=0 atunci inc(SI), inc(DI), altfel dec(SI), dec(DI)</td>
+</tr>
+<tr>
+<td>MOVSW</td>
+<td>La adresa &lt;ES:EDI&gt; se incarca cuvantul de la adresa &lt;DS:ESI&gt;<br>
+Daca DF=0 atunci ESI:= ESI+2, EDI:= EDI+2, altfel ESI:= ESI-2, EDI:= EDI-2</td>
+</tr>
+<tr>
+<td>MOVSD</td>
+<td>La adresa &lt;ES:EDI&gt; se incarca dublucuvantul de la adresa &lt;DS:ESI&gt;<br>
+Daca DF=0 atunci ESI:= ESI+4, EDI:= EDI+4, altfel ESI:= ESI-4, EDI:= EDI-4</td>
+</tr>
+</tbody>
+</table>
+<ul><li><strong>Obs. Avand in vedere utilizarea modelului de memorie flat, la orice inceput de executie a programului, SO va initializa cu aceeasi valoare registrii segment DS = ES, programatorul neavând nici o responsabilitate de incarcare/actualizare/modificare a acestor valori. In cadrul codului sursa ce utilizeaza instructiuni pe siruri programatorul va trebui sa gestioneze doar offset-urile acestor siruri.</strong>
+</li></ul>
+
+<h3><i>Exemplu:</i></h3> 
+
+<pre><code><span class="comentariu">;Avem un sir sursa (cuvinte). Sa se copieze intr-un sir destinatie. Stim cate elemente avem.</span>
+<span class="i">mov</span> <span class="r">ECX, dim_sir</span> <span class="comentariu">; nr de elemente din sir</span>
+<span class="i">mov</span> <span class="r">ESI, sir_sursa</span> <span class="comentariu">; incarcare offset sir_sursa in ESI</span>
+<span class="i">mov</span> <span class="r">EDI, sir_dest</span> <span class="comentariu">; incarcare offset sir_dest in EDI</span>
+<span class="i">CLD</span>
+<span class="i">Again:</span>
+	<span class="i">LODSW</span>
+	<span class="i">STOSW</span>
+<span class="i">LOOP</span> <span class="r">Again</span>
+</code></pre>
+
+<ul><li>Avand in vedere ca LODS + STOS = MOVS bucla de mai sus se mai poate scrie:</li></ul>
+<pre><code><span class="i">Again:</span>
+<span class="i">MOVSW</span>
+<span class="i">LOOP Again</span>
+</code></pre>
+
+<ul><li>sau ( a se vedea sectiunea prefixelor de instructiune de mai jos)</li></ul>
+
+<pre><code><span class="i">rep MOVSW</span></code></pre>
+</div>
+<h2>Instructiuni pentru consultarea si compararea datelor</h2>
+<div class="article">
+<table border="1" cellspacing="0" cellpadding="5">
+<tbody>
+<tr>
+<td>SCASB</td>
+<td>CMP AL, &lt;ES:EDI&gt;<br>
+Daca DF=0 atunci inc(EDI), altfel dec(EDI)</td>
+</tr>
+<tr>
+<td>SCASW</td>
+<td>CMP AX, &lt;ES:EDI&gt;<br>
+Daca DF=0 atunci EDI:= EDI+2, altfel EDI:= EDI-2</td>
+</tr>
+<tr>
+<td>SCASD</td>
+<td>CMP EAX, &lt;ES:EDI&gt;<br>
+Daca DF=0 atunci EDI:= EDI+4, altfel EDI:= EDI-4</td>
+</tr>
+<tr>
+<td>CMPSB</td>
+<td>CMP &lt;DS:ESI&gt;, &lt;ES:EDI&gt;<br>
+Daca DF=0 atunci inc(ESI), inc(EDI), altfel dec(ESI), dec(EDI)</td>
+</tr>
+<tr>
+<td>CMPSW</td>
+<td>CMP &lt;DS:ESI&gt;, &lt;ES:EDI&gt;<br>
+Daca DF=0 atunci ESI:= ESI+2, EDI:= EDI+2, altfel ESI:= ESI-2, EDI:= EDI-2</td>
+</tr>
+<tr>
+<td>CMPSD</td>
+<td>CMP &lt;DS:ESI&gt;, &lt;ES:EDI&gt;<br>
+Daca DF=0 atunci ESI:= ESI+4, EDI:= EDI+4, altfel ESI:= ESI-4, EDI:= EDI-4</td>
+</tr>
+</tbody>
+</table>
+<h3><i>Exemplu:</i></h3>
+
+<pre><code><span class="comentariu">;Se da un sir de octeti. Sa se găsească ultimul caracter "0".</span>
+<span class="comentariu">;... se incarca toate datele despre sirul "destinatie"</span>
+<span class="i">MOV</span> <span class="r">AL, '0'</span>
+<span class="i">MOV</span> <span class="r">ECX, lung_sir</span>
+<span class="i">STD</span>
+<span class="i">Cont_caut:</span><span class="comentariu"> ;continui cautarea...</span>
+	<span class="i">SCASB</span>
+	<span class="i">JE Gasit</span>
+<span class="i">LOOP Cont_caut</span>
+<span class="comentariu">;...</span>
+<span class="i">Gasit:</span>
+	<span class="i">INC</span> <span class="r">EDI</span><span class="comentariu">;ma intorc la caracterul gasit inainte sa se fi facut decrementarea lui EDI</span>
+</code></pre>
+</div>
+<h2>Prefixe de instructiune pentru executia repetata a unei instructiuni</h2>
+<div class="article">
+<pre><code><span class="i">prefix_de_instructiune</span> <span class="r">instructiune_pe_sir</span></code></pre>
+
+<ul><li>echivalenta cu</li></ul>
+
+<pre><code><span class="i">Again:</span>
+	<span class="i">instructiune_pe_sir</span>
+<span class="i">LOOP Again</span>
+</code></pre>
+
+<ul><li> unde <em>prefix_de_instructiune</em> poate fi REP, echivalent cu REPE (<em>Repeat While Equal</em>), REPZ (<em>Repeat While Zero</em>) - care provoaca executia repetata a instructiunilor SCAS sau CMPS pana cand ECX devine 0 sau pana cand apare o nepotrivire ( =&gt; ZF=0)
+</li><li> sau poate fi REPNE (<em>Repeat While Not Equal</em>) sau REPNZ (<em>Repeat While Not Zero</em>) - care provoaca executia repetata a instructiunii SCAS sau CMPS pana cand ECX devine 0 sau pana cand apare o potrivire ( =&gt; ZF=1)
+</ul>
+
+<strong><u>Observatii:</u></strong>
+<ul><li> instructiunile pe siruri nu afecteaza flagurile in urma actiunii asupra registrilor ESI, EDI sau ECX
+</li><li> LODS, STOS, MOVS - nu afecteaza nici un flag, in timp ce SCAS si CMPS modifica flagurile doar ca rezultat al comparatiilor efectuate</li></ul>
+	</div>	
+	
+</div>	
+
+
+</div>
+</body>
+</html>

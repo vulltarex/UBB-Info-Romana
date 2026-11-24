@@ -1,0 +1,4 @@
+1;Ana;Popescu
+abc;Ion;Ionescu
+3;Maria;
+-4;Dan;Pop

@@ -1,0 +1,5 @@
+Lab OOP,Laborator C++ despre clase si obiecte,Facultate,120
+Sala,Antrenament full body,Sport,45
+Ping-Pong,Meciuri de tenis de masa,Hobby,100
+Cumparaturi,Mancare pentru saptamana viitoare,Personal,60
+Culcare,Un somn odihnitor,Personal,4

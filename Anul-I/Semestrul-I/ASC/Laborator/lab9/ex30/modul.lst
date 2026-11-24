@@ -1,0 +1,48 @@
+     1                                  bits 32
+     2                                  
+     3                                  global _procesare
+     4                                  
+     5                                  segment code public code use32
+     6                                      _procesare:
+     7 00000000 55                              push ebp
+     8 00000001 89E5                            mov ebp, esp
+     9 00000003 51                              push ecx
+    10 00000004 56                              push esi
+    11 00000005 57                              push edi
+    12 00000006 50                              push eax
+    13 00000007 8B7508                          mov esi, [ebp + 8]
+    14                                          
+    15                                      cautare_cuvinte:
+    16 0000000A 803E00                          cmp byte [esi], 0
+    17 0000000D 7423                            je final
+    18 0000000F B900000000                      mov ecx, 0
+    19 00000014 89F7                            mov edi, esi
+    20                                          cautare_spatiu:
+    21 00000016 803F20                              cmp byte [edi], ' '
+    22 00000019 57                                  push edi
+    23 0000001A 7404                                je prelucrare
+    24 0000001C 47                                  inc edi
+    25 0000001D 41                                  inc ecx
+    26 0000001E EBF6                                jmp cautare_spatiu
+    27                                          prelucrare:
+    28 00000020 39FE                                cmp esi, edi
+    29 00000022 7D0A                                jge next
+    30 00000024 8A06                                mov al, [esi]
+    31 00000026 8607                                xchg al, [edi]
+    32 00000028 8806                                mov [esi], al
+    33 0000002A 46                                  inc esi
+    34 0000002B 4F                                  dec edi
+    35 0000002C EBF2                                jmp prelucrare
+    36                                          next:
+    37 0000002E 5E                                  pop esi
+    38 0000002F 46                                  inc esi
+    39 00000030 EBD8                                jmp cautare_cuvinte
+    40                                      final:
+    41 00000032 58                              pop eax
+    42 00000033 5F                              pop edi
+    43 00000034 5E                              pop esi
+    44 00000035 59                              pop ecx
+    45 00000036 89EC                            mov esp, ebp
+    46 00000038 5D                              pop ebp
+    47                                          
+    48 00000039 C3                              ret

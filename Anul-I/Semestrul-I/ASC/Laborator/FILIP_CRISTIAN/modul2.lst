@@ -1,0 +1,25 @@
+     1                                  bits 32
+     2                                  
+     3                                  global _afisare_suma
+     4                                  extern printf
+     5                                  import printf msvcrt.dll
+     6                                  
+     7                                  segment data use32 class=data
+     8 00000000 256400                      format db "%d", 0
+     9                                  
+    10                                  segment code public code use32
+    11                                      _afisare_suma:
+    12 00000000 55                              push ebp
+    13 00000001 89E5                            mov ebp, esp
+    14                                          
+    15 00000003 8B4508                          mov eax, [ebp + 8]
+    16                                          
+    17 00000006 50                              push eax
+    18 00000007 68[00000000]                    push format
+    19 0000000C FF15[00000000]                  call [printf]
+    20 00000012 83C408                          add esp, 4*2
+    21                                          
+    22 00000015 89EC                            mov esp, ebp
+    23 00000017 5D                              pop ebp
+    24                                          
+    25 00000018 C3                              ret

@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arhitectura Sistemelor de Calcul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=30092025">
+</head>
+<body>
+  <header>
+   <div>
+        <h1><a href="https://www.cs.ubbcluj.ro/~diana.sotropa/teaching/asc">Arhitectura Sistemelor de Calcul</a></h1>
+        <h4>Anul 1, Informatică Română, an universitar 2025-2026</h4>
+         <a href="http://www.cs.ubbcluj.ro/~diana.sotropa/">Dr. Diana Șotropa, Lector Universitar</a>
+  
+    </div>
+    <div>
+    <div class="hamburger" onclick="toggleMobileNav()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav>
+      <a href="index.php#despre">Despre</a>
+      <a href="index.php#noutati">Noutăți</a>
+      <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+      <a href="index.php#laboratoare">Laboratoare</a>
+      <a href="index.php#contact">Contact</a>
+    </nav>
+    <a class="contact" href="mailto:diana.sotropa@ubbcluj.ro"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#ffffff"/>
+</svg> diana.sotropa@ubbcluj.ro</a>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.php#despre">Despre</a>
+    <a href="index.php#noutati">Noutăți</a>
+    <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+    <a href="index.php#laboratoare">Laboratoare</a>
+    <a href="index.php#contact">Contact</a>
+  </div>
+
+  <div class="container"><link rel="stylesheet" href="assets/old-styles.css?v=30092025">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	$( function() {
+		$(".modal .x").on("click",function(){$('.modal').remove();$('.informatie_modal').remove();})
+		$(".modalP .x").on("click",function(){$('.modalP').remove();})
+		$( "#accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#second-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#third-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#fourth-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#fifth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#sixth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#accordion-trei" ).accordion({
+			collapsible: true, active : 3, heightStyle: "content"
+		});
+		// Hide all panels
+
+		// Get hash from query string
+		var hash = window.location.hash;
+		console.log(hash);
+
+		if (hash) {
+			
+		$(".article").hide();
+			// Get panel header element
+			var requestedPanel = $(hash);
+			if (requestedPanel.length) {
+				// Hide all panels
+				$(".article").hide();
+				// Show requested panel
+				requestedPanel.next(".article").show();
+			}
+		}
+});
+</script>
+  <div id="menu">
+<ul>
+<li><a href='ro-lab4-exemple.php'>EXEMPLE</a></li><li><a href='ro-lab4-exercitii.php'>EXERCITII</a></li><li class='active'><a href='ro-lab4-teorie.php'>TEORIE</a></li></ul>
+</div>
+<div id="content">
+	<h1>Laborator 4 - Suport teoretic</h1>
+	<h2>Operații pe biți</h2>
+	
+<div id="accordion">	
+
+	<h2>AND</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">and</span> <span class="r">&lt;regd&gt;</span>, <span class="r">&lt;regs&gt;</span><span class="comentariu">; &lt;regd&gt; &larr; &lt;regd&gt; AND &lt;regs&gt;</span>
+<span class="i">and</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;mem&gt;</span><span class="comentariu">; &lt;reg&gt; &larr; &lt;reg&gt; AND &lt;mem&gt;</span>
+<span class="i">and</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;reg&gt;</span><span class="comentariu">; &lt;mem&gt; &larr; &lt;mem&gt; AND &lt;reg&gt;</span>
+<span class="i">and</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;reg&gt; &larr; &lt;reg&gt; AND &lt;con&gt;</span>
+<span class="i">and</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;mem&gt; &larr; &lt;mem&gt; AND &lt;con&gt;</span>
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Execută operația logică AND asupra operanzilor, punând rezultatul în primul operand.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">and</span> <span class="r">EAX</span>, <span class="r">0Fh</span><span class="comentariu">; EAX &larr; EAX AND 0Fh, are loc zerorizarea tuturor biților din EAX cu excepția ultimilor patru</span>
+</code></pre>	
+	</div>
+	
+	<h2>OR</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">or</span> <span class="r">&lt;regd&gt;</span>, <span class="r">&lt;regs&gt;</span><span class="comentariu">; &lt;regd&gt; &larr; &lt;regd&gt; OR &lt;regs&gt;</span>
+<span class="i">or</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;mem&gt;</span><span class="comentariu">; &lt;reg&gt; &larr; &lt;reg&gt; OR &lt;mem&gt;</span>
+<span class="i">or</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;reg&gt;</span><span class="comentariu">; &lt;mem&gt; &larr; &lt;mem&gt; OR &lt;reg&gt;</span>
+<span class="i">or</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;reg&gt; &larr; &lt;reg&gt; OR &lt;con&gt;</span>
+<span class="i">or</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;mem&gt; &larr; &lt;mem&gt; OR &lt;con&gt;</span>
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Execută operația logică OR asupra operanzilor, punând rezultatul în primul operand.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">or</span> <span class="r">EAX</span>, <span class="r">0Fh</span><span class="comentariu">; EAX &larr; EAX OR 0Fh, ultimii 4 biți din EAX vor fi setați la 1, restul rămânând neschimbați</span>
+</code></pre>	
+	</div>
+	
+	<h2>XOR</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">xor</span> <span class="r">&lt;regd&gt;</span>, <span class="r">&lt;regs&gt;</span><span class="comentariu">; &lt;regd&gt; &larr; &lt;regd&gt; XOR &lt;regs&gt;</span>
+<span class="i">xor</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;mem&gt;</span><span class="comentariu">; &lt;reg&gt; &larr; &lt;reg&gt; XOR &lt;mem&gt;</span>
+<span class="i">xor</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;reg&gt;</span><span class="comentariu">; &lt;mem&gt; &larr; &lt;mem&gt; XOR &lt;reg&gt;</span>
+<span class="i">xor</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;reg&gt; &larr; &lt;reg&gt; XOR &lt;con&gt;</span>
+<span class="i">xor</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;mem&gt; &larr; &lt;mem&gt; XOR &lt;con&gt;</span>
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Execută operația logică XOR asupra operanzilor, punând rezultatul în primul operand.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">xor</span> <span class="r">EDX</span>, <span class="r">EDX</span><span class="comentariu">; zerorizează conținutul lui EDX </span>
+</code></pre>	
+	</div>
+	
+	<h2>TEST</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">test</span> <span class="r">&lt;regd&gt;</span>, <span class="r">&lt;regs&gt;</span><span class="comentariu">; &lt;regd&gt; AND &lt;regs&gt;</span>
+<span class="i">test</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;mem&gt;</span><span class="comentariu">; &lt;reg&gt; AND &lt;mem&gt;</span>
+<span class="i">test</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;reg&gt;</span><span class="comentariu">; &lt;mem&gt; AND &lt;reg&gt;</span>
+<span class="i">test</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;reg&gt; AND &lt;con&gt;</span>
+<span class="i">test</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;mem&gt; AND &lt;con&gt;</span>
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Execută operația logică AND asupra operanzilor, fără să pună rezultatul în primul operand.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">TEST</span> <span class="r">AL</span>, <span class="r">01h</span><span class="comentariu">; se poate testa în acest mod dacă numărul e par sau impar </span>
+</code></pre>	
+	</div>
+	
+	<h2>NOT</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">not</span> <span class="r">&lt;reg&gt;</span> 
+<span class="i">not</span> <span class="r">&lt;mem&gt;</span>
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Execută operația logică NOT asupra operandului (inversează fiecare bit).</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">not</span> <span class="r">BYTE PTR [var]</span> ; se inversează fiecare bit din [var] </span>
+</code></pre>	
+	</div>
+	
+	<h2>SHL</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">shl</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">shl</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">shl</span> <span class="r">&lt;reg&gt;</span>, <span class="r">CL</span> 
+<span class="i">shl</span> <span class="r">&lt;mem&gt;</span>, <span class="r">CL</span> 
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Biții stocați în destinație se deplasează număr poziții (modulo 32) spre stânga. Bitul (sau biții) cel mai din dreapta se completează cu 0. Ultimul bit care iese în stânga se pastrează în CF.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">mov</span> <span class="r">al</span>, <span class="r">00110011b</span>
+<span class="i">mov</span> <span class="r">cl</span>, <span class="r">2</span>
+<span class="i">shl</span> <span class="r">al</span>, <span class="r">cl</span> <span class="comentariu">; &rarr; al = 11001100b, CF = 0</span>
+</code></pre>	
+	</div>
+	
+	<h2>SHR</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">shr</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">shr</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">shr</span> <span class="r">&lt;reg&gt;</span>, <span class="r">CL</span> 
+<span class="i">shr</span> <span class="r">&lt;mem&gt;</span>, <span class="r">CL</span> 
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Biții stocați în destinație se deplasează număr poziții (modulo 32) spre dreapta. Bitul (sau biții) cel mai din stânga se completează cu 0. Ultimul bit care iese în dreapta se pastrează în CF.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">mov</span> <span class="r">al</span>, <span class="r">01011110b</span>
+<span class="i">mov</span> <span class="r">cl</span>, <span class="r">2</span>
+<span class="i">shr</span> <span class="r">al</span>, <span class="r">cl</span> <span class="comentariu">; &rarr; al = 00010111b, CF = 1</span>
+</code></pre>	
+	</div>
+	
+	<h2>SAL</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">sal</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">sal</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">sal</span> <span class="r">&lt;reg&gt;</span>, <span class="r">CL</span> 
+<span class="i">sal</span> <span class="r">&lt;mem&gt;</span>, <span class="r">CL</span> 
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Biții stocați în destinație se deplasează număr poziții (modulo 32) spre stânga. Bitul (sau biții) cel mai din dreapta se completează cu 0. Ultimul bit care iese în stânga se pastrează în CF.</li>
+			<li>Efectul instrucțiunii SAL este identic cu cel al instrucțiunii SHL</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">mov</span> <span class="r">al</span>, <span class="r">00110011b</span>
+<span class="i">mov</span> <span class="r">cl</span>, <span class="r">2</span>
+<span class="i">sal</span> <span class="r">al</span>, <span class="r">cl</span> <span class="comentariu">; &rarr; al = 11001100b, CF = 0</span>
+</code></pre>	
+	</div>
+	
+	<h2>SAR</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">sar</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">sar</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">sar</span> <span class="r">&lt;reg&gt;</span>, <span class="r">CL</span> 
+<span class="i">sar</span> <span class="r">&lt;mem&gt;</span>, <span class="r">CL</span> 
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Biții stocați în destinație se deplasează număr poziții (modulo 32) spre dreapta. Bitul (sau biții) cel mai din stânga se completează cu bitul de semn (bitul cel mai din stânga înainte de shiftare). Ultimul bit care iese în dreapta se pastrează în CF.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">mov</span> <span class="r">al</span>, <span class="r">11011110b</span>
+<span class="i">mov</span> <span class="r">cl</span>, <span class="r">2</span>
+<span class="i">sar</span> <span class="r">al</span>, <span class="r">cl</span> <span class="comentariu">; &rarr; al = 11110111b, CF = 1</span>
+</code></pre>	
+	</div>
+	
+	<h2>ROL</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">rol</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">rol</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">rol</span> <span class="r">&lt;reg&gt;</span>, <span class="r">CL</span> 
+<span class="i">rol</span> <span class="r">&lt;mem&gt;</span>, <span class="r">CL</span> 
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Biții stocați în destinație se rotesc număr pozitii (modulo 32) spre stânga. Odată un bit ieșit în stânga el se adaugă automat în partea dreaptă a destinației. Ultimul bit rotit se păstrează în CF.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">mov</span> <span class="r">al</span>, <span class="r">00110011b</span>
+<span class="i">mov</span> <span class="r">cl</span>, <span class="r">2</span>
+<span class="i">rol</span> <span class="r">al</span>, <span class="r">cl</span> <span class="comentariu">; &rarr; al = 11001100b, CF = 0</span>
+</code></pre>	
+	</div>
+	
+	<h2>ROR</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">ror</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">ror</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">ror</span> <span class="r">&lt;reg&gt;</span>, <span class="r">CL</span> 
+<span class="i">ror</span> <span class="r">&lt;mem&gt;</span>, <span class="r">CL</span> 
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Biții stocați în destinație se rotesc număr pozitii (modulo 32) spre dreapta. Odată un bit ieșit în dreapta el se adaugă automat în partea stângă a destinației. Ultimul bit rotit se pastrează în CF.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">mov</span> <span class="r">al</span>, <span class="r">00111110b</span>
+<span class="i">mov</span> <span class="r">cl</span>, <span class="r">2</span>
+<span class="i">ror</span> <span class="r">al</span>, <span class="r">cl</span> <span class="comentariu">; &rarr; al = 10001111b, CF = 1</span>
+</code></pre>	
+	</div>
+	
+	<h2>RCL</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">rcl</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">rcl</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">rcl</span> <span class="r">&lt;reg&gt;</span>, <span class="r">CL</span> 
+<span class="i">rcl</span> <span class="r">&lt;mem&gt;</span>, <span class="r">CL</span> 
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Biții stocați în destinație se rotesc număr poziții spre stânga. Odată un bit ieșit în stânga el se păstrează în CF. Valoarea anterioră din CF se adaugă automat în partea dreaptă a destinației.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">stc</span> <span class="r">; CF = 1 (set carry)
+<span class="i">mov</span> <span class="r">al</span>, <span class="r">00110011b</span>
+<span class="i">mov</span> <span class="r">cl</span>, <span class="r">2</span>
+<span class="i">rcl</span> <span class="r">al</span>, <span class="r">cl</span> <span class="comentariu">; &rarr; al = 11001110b, CF = 0</span>
+</code></pre>	
+	</div>
+
+	<h2>RCR</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">rcr</span> <span class="r">&lt;reg&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">rcr</span> <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con8&gt;</span> 
+<span class="i">rcr</span> <span class="r">&lt;reg&gt;</span>, <span class="r">CL</span> 
+<span class="i">rcr</span> <span class="r">&lt;mem&gt;</span>, <span class="r">CL</span> 
+</code></pre>
+		<h3><i>Semantică:</i></h3>
+		<ul>
+			<li>Biții stocați în destinație se rotesc numar poziții (modulo 32) spre dreapta. Odată un bit ieșit în dreapta el se păstrează în CF. Valoarea anterioară din CF se adaugă automat în partea stângă a destinației.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">stc</span> <span class="r">; CF = 1 (set carry)
+<span class="i">mov</span> <span class="r">al</span>, <span class="r">00110011b</span>
+<span class="i">mov</span> <span class="r">cl</span>, <span class="r">2</span>
+<span class="i">rcr</span> <span class="r">al</span>, <span class="r">cl</span> <span class="comentariu">; &rarr; al = 11001100b, CF = 1</span>
+</code></pre>	
+	</div>
+
+</div>	
+</div>
+</body>
+</html>

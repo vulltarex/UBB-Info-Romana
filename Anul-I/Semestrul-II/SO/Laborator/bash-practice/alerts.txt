@@ -1,0 +1,2 @@
+Alerta: Utilizatorul student1 a fost conectat 45 minute
+Alerta: Utilizatorul profesor a fost conectat 60 minute

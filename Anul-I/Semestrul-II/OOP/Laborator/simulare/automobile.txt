@@ -1,0 +1,10 @@
+1,Toyota,electrica,300
+2,Tesla,electrica,500
+3,Dacia,sport,600
+4,BMW,SUV,100
+5,Audi,hibrida,1000
+6,Mercedes,sport,80
+7,Renault,hibrida,550
+8,Opel,electrica,340
+9,Seat,SUV,2000
+10,Skoda,sport,250

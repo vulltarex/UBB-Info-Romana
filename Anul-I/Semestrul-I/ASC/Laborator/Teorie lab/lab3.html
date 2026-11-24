@@ -1,0 +1,360 @@
+
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arhitectura Sistemelor de Calcul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=30092025">
+</head>
+<body>
+  <header>
+   <div>
+        <h1><a href="https://www.cs.ubbcluj.ro/~diana.sotropa/teaching/asc">Arhitectura Sistemelor de Calcul</a></h1>
+        <h4>Anul 1, Informatică Română, an universitar 2025-2026</h4>
+         <a href="http://www.cs.ubbcluj.ro/~diana.sotropa/">Dr. Diana Șotropa, Lector Universitar</a>
+  
+    </div>
+    <div>
+    <div class="hamburger" onclick="toggleMobileNav()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav>
+      <a href="index.php#despre">Despre</a>
+      <a href="index.php#noutati">Noutăți</a>
+      <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+      <a href="index.php#laboratoare">Laboratoare</a>
+      <a href="index.php#contact">Contact</a>
+    </nav>
+    <a class="contact" href="mailto:diana.sotropa@ubbcluj.ro"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#ffffff"/>
+</svg> diana.sotropa@ubbcluj.ro</a>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.php#despre">Despre</a>
+    <a href="index.php#noutati">Noutăți</a>
+    <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+    <a href="index.php#laboratoare">Laboratoare</a>
+    <a href="index.php#contact">Contact</a>
+  </div>
+
+  <div class="container"><link rel="stylesheet" href="assets/old-styles.css?v=30092025">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	$( function() {
+		$(".modal .x").on("click",function(){$('.modal').remove();$('.informatie_modal').remove();})
+		$(".modalP .x").on("click",function(){$('.modalP').remove();})
+		$( "#accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#second-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#third-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#fourth-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#fifth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#sixth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#accordion-trei" ).accordion({
+			collapsible: true, active : 3, heightStyle: "content"
+		});
+		// Hide all panels
+
+		// Get hash from query string
+		var hash = window.location.hash;
+		console.log(hash);
+
+		if (hash) {
+			
+		$(".article").hide();
+			// Get panel header element
+			var requestedPanel = $(hash);
+			if (requestedPanel.length) {
+				// Hide all panels
+				$(".article").hide();
+				// Show requested panel
+				requestedPanel.next(".article").show();
+			}
+		}
+});
+</script>
+  <div id="menu">
+<ul>
+<li><a href='ro-lab3-exemple.php'>EXEMPLE</a></li><li><a href='ro-lab3-exercitii.php'>EXERCITII</a></li><li class='active'><a href='ro-lab3-teorie.php'>TEORIE</a></li></ul>
+</div>
+<div id="content">
+	<h1>Laborator 3 - Suport teoretic</h1>
+	<h2>Instrucțiuni aritmetice</h2>
+<div id="accordion">	
+	<h2>ADC</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">adc</span> <span class="r">&lt;regd&gt;</span>,<span class="r">&lt;regs&gt;</span><span class="comentariu">; &lt;regd&gt; &larr; &lt;regd&gt; + &lt;regs&gt; + CF</span>
+<span class="i">adc</span> <span class="r">&lt;reg&gt;</span>,<span class="r">&lt;mem&gt;</span><span class="comentariu">; &lt;reg&gt; &larr; &lt;reg&gt; + &lt;mem&gt; + CF</span>
+<span class="i">adc</span> <span class="r">&lt;mem&gt;</span>,<span class="r">&lt;reg&gt;</span><span class="comentariu">; &lt;mem&gt; &larr; &lt;mem&gt; + &lt;reg&gt; + CF</span>
+<span class="i">adc</span> <span class="r">&lt;reg&gt;</span>,<span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;reg&gt; &larr; &lt;reg&gt; + &lt;con&gt; + CF</span>
+<span class="i">adc</span> <span class="r">&lt;mem&gt;</span>,<span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;mem&gt; &larr; &lt;mem&gt; + &lt;con&gt; + CF</span>
+</code></pre>		
+		<h3><i>Semantică și restricții:</i></h3>
+		<ul>
+			<li>Cei doi operanzi ai adunării trebuie să aibă același tip (ambii octeți, ambii cuvinte, ambii dublucuvinte);</li>
+			<li>În timp ce ambii operanzi pot fi regiștri, cel mult un operand poate fi o locație de memorie;</li>
+			<li>La suma dintre cei doi operanzi se mai adună şi valoarea bitului de transport (Carry Flag).</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">adc</span> <span class="r">EDX</span>,<span class="r">EBX</span><span class="comentariu">; EDX &larr; EDX + EBX + CF</span>
+<span class="i">adc</span> <span class="r">AX</span>,<span class="r">[var]</span><span class="comentariu">; AX &larr; AX + [var] + CF</span>
+<span class="i">adc</span> <span class="r">[var]</span>,<span class="r">AX</span><span class="comentariu">; [var] &larr; [var] + AX + CF</span>
+<span class="i">adc</span> <span class="r">EAX</span>,<span class="r">123456h</span><span class="comentariu">; EAX &larr; EAX + 123456h + CF</span>
+<span class="i">adc</span> <span class="r">BYTE [var]</span>,<span class="r">10</span><span class="comentariu">; BYTE [var] &larr; BYTE [var] + 10 + CF</span>
+</code></pre>	
+	</div>
+	<h2>SBB</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">sbb</span> <span class="r">&lt;regd&gt;</span>,<span class="r">&lt;regs&gt;</span><span class="comentariu">; &lt;regd&gt; &larr; &lt;regd&gt; - &lt;regs&gt; - CF</span>
+<span class="i">sbb</span> <span class="r">&lt;reg&gt;</span>,<span class="r">&lt;mem&gt;</span><span class="comentariu">; &lt;reg&gt; &larr; &lt;reg&gt; - &lt;mem&gt; - CF</span>
+<span class="i">sbb</span> <span class="r">&lt;mem&gt;</span>,<span class="r">&lt;reg&gt;</span><span class="comentariu">; &lt;mem&gt; &larr; &lt;mem&gt; - &lt;reg&gt; - CF</span>
+<span class="i">sbb</span> <span class="r">&lt;reg&gt;</span>,<span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;reg&gt; &larr; &lt;reg&gt; - &lt;con&gt; - CF</span>
+<span class="i">sbb</span> <span class="r">&lt;mem&gt;</span>,<span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;mem&gt; &larr; &lt;mem&gt; - &lt;con&gt; - CF</span>
+</code></pre>
+		<h3><i>Semantică și restricții:</i></h3>
+		<ul>
+			<li>Cei doi operanzi ai scăderii trebuie să aibă același tip (ambii octeți, ambii cuvinte, ambii dublucuvinte);</li>
+			<li>În timp ce ambii operanzi pot fi regiștri, cel mult un operand poate fi o locație de memorie;</li>
+			<li>Din diferenţa dintre cei doi operanzi se mai scade şi valoarea bitului de transport (Carry Flag).</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">sbb</span> <span class="r">EDX</span>,<span class="r">EBX</span><span class="comentariu">; EDX &larr; EDX - EBX - CF</span>
+<span class="i">sbb</span> <span class="r">AX</span>,<span class="r">[var]</span><span class="comentariu">; AX &larr; AX - [var] - CF</span>
+<span class="i">sbb</span> <span class="r">[var]</span>,<span class="r">AX</span><span class="comentariu">; [var] &larr; [var] - AX - CF</span>
+<span class="i">sbb</span> <span class="r">EAX</span>,<span class="r">123456h</span><span class="comentariu">; EAX &larr; EAX - 123456h - CF</span>
+<span class="i">sbb</span> <span class="r">byte [var]</span>,<span class="r">10</span><span class="comentariu">; BYTE [var] &larr; BYTE [var] - 10 - CF</span>
+</code></pre>	
+	</div>		
+	<h2>IMUL</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">imul</span> <span class="r">&lt;op8&gt;</span><span class="comentariu">; AX &larr; AL * &lt;op8&gt;</span>
+<span class="i">imul</span> <span class="r">&lt;op16&gt;</span><span class="comentariu">; DX:AX &larr; AX * &lt;op16&gt;</span>
+<span class="i">imul</span> <span class="r">&lt;op32&gt;</span><span class="comentariu">; EDX:EAX &larr; EAX * &lt;op32&gt;</span></code></pre>
+<!--<span class="i">imul</span> <span class="r">&lt;reg32d&gt;</span>, <span class="r">&lt;reg32s&gt;</span><span class="comentariu">; &lt;reg32d&gt; &larr; &lt;reg32d&gt; * &lt;reg32s&gt;</span>
+<span class="i">imul</span> <span class="r">&lt;reg32&gt;</span>, <span class="r">&lt;mem&gt;</span><span class="comentariu">; &lt;reg32&gt; &larr; &lt;reg32&gt; * &lt;mem&gt;</span>
+<span class="i">imul</span> <span class="r">&lt;reg16d&gt;</span>, <span class="r">&lt;reg16s&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;reg16d&gt; &larr; &lt;reg16s&gt; * &lt;con&gt;</span>
+<span class="i">imul</span> <span class="r">&lt;reg32d&gt;</span>, <span class="r">&lt;reg32s&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;reg32d&gt; &larr; &lt;reg32s&gt; * &lt;con&gt;</span>
+<span class="i">imul</span> <span class="r">&lt;reg32&gt;</span>, <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;reg32&gt; &larr; &lt;mem&gt; * &lt;con&gt;</span>
+<span class="i">imul</span> <span class="r">&lt;reg32&gt;</span>, <span class="r">&lt;mem&gt;</span>, <span class="r">&lt;con&gt;</span><span class="comentariu">; &lt;reg32&gt; &larr; &lt;mem&gt; * &lt;con&gt;</span>-->
+
+		<h3><i>Semantică și restricții:</i></h3>
+		<ul>
+			<li>Rezultatul operației de înmulțire se păstrează pe o lungime dublă față de lungimea operanzilor;</li>
+			<li>Instrucțiunea IMUL efectuează operația de înmulțire pentru întregi cu semn;</li>
+			<li>Se impune ca primul operand și rezultatul să se păstreze în regiștri;</li>
+			<li>Operandul explicit poate fi un registru sau o variabilă, dar nu poate fi o valoare imediată (constantă);</li>
+			<!--<li>La instrucțiunea IMUL cu doi operanzi, rezultatul înmulțirii celor doi operanzi este păstrat în primul operand;</li>
+			<li>La instrucțiunea IMUL cu trei operanzi, rezultatul înmulțirii dintre al doilea operand și valoarea imediată este păstrat în primul operand.</li>-->
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">imul</span> <span class="r">DH</span><span class="comentariu">; AX &larr; AL * DH</span>
+<span class="i">imul</span> <span class="r">mem8</span><span class="comentariu">; AX &larr; AL * mem8</span>
+<span class="i">imul</span> <span class="r">DX</span><span class="comentariu">; DX:AX &larr; AX * DX</span>
+<span class="i">imul</span> <span class="r">EBX</span><span class="comentariu">; EDX:EAX &larr; EAX * EBX</span></code></pre>
+<!--<span class="i">imul</span> <span class="r">EAX</span>, <span class="r">[var]</span><span class="comentariu">; EAX &larr; EAX * [var]</span>
+<span class="i">imul</span> <span class="r">ESI</span>, <span class="r">EDI</span>, <span class="r">25</span><span class="comentariu">; ESI &larr; EDI * 25</span>-->
+
+		<!--<h3><i>Exemplu:</i></h3>
+<pre><code>Data segment:
+	<span class="r">nrWord dw 5h</span>
+	<span class="r">nrWord2 dw 3h</span>
+Code segment:
+	<span class="i">imul</span> <span class="r">ax</span>, <span class="r">[nrWord]</span>, <span class="r">2</span> <span class="comentariu">; AX = 5h * 2h = 10h</span>
+	<span class="i">imul</span> <span class="r">eax</span>, <span class="r">[nrWord]</span>, <span class="r">2</span> <span class="comentariu">; EAX = 30005h * 2h = 6000Ah = ‭393226‬ 	</span>
+</code></pre>-->
+		
+	</div>
+	<h2>IDIV</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">idiv</span> <span class="r">&lt;reg8&gt;</span><span class="comentariu">; AL &larr; AX / &lt;reg8&gt;, AH &larr; AX % &lt;reg8&gt;</span>
+<span class="i">idiv</span> <span class="r">&lt;reg16&gt;</span><span class="comentariu">; AX &larr; DX:AX / &lt;reg16&gt;, DX &larr; DX:AX % &lt;reg16&gt;</span>
+<span class="i">idiv</span> <span class="r">&lt;reg32&gt;</span><span class="comentariu">; EAX &larr; EDX:EAX / &lt;reg32&gt;, EDX &larr; EDX:EAX % &lt;reg32&gt;</span>
+<span class="i">idiv</span> <span class="r">&lt;mem8&gt;</span><span class="comentariu">; AL &larr; AX / &lt;mem8&gt;, AH &larr; AX % &lt;mem8&gt;</span>
+<span class="i">idiv</span> <span class="r">&lt;mem16&gt;</span><span class="comentariu">; AX &larr; DX:AX / &lt;mem16&gt;, DX &larr; DX:AX % &lt;mem16&gt;</span>
+<span class="i">idiv</span> <span class="r">&lt;mem32&gt;</span><span class="comentariu">; EAX &larr; EDX:EAX / &lt;mem32&gt;, EDX &larr; EDX:EAX % &lt;mem32&gt;</span>
+</code></pre>
+		<h3><i>Semantică și restricții:</i></h3>
+		<ul>
+			<li>Instrucțiunea IDIV efectuează operația de împărțire pentru întregi cu semn;</li>
+			<li>Se impune ca primul operand și rezultatul să se păstreze în regiștri;</li>
+			<li>Primul operand nu se specifică și are o lungime dublă față de al doilea operand;</li>
+			<li>Operandul explicit poate fi un registru sau o variabilă, dar nu poate fi o valoare imediată (constantă);</li>
+			<li>Prin împărțirea unui număr mare la un număr mic, există posibilitatea ca rezultatul să depășească capacitatea de reprezentare. În acest caz, se va declanșa aceeași eroare ca și la împărțirea cu 0.</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">idiv</span> <span class="r">CL</span><span class="comentariu">; AL &larr; AX / CL, AH &larr; AX % CL</span>
+<span class="i">idiv</span> <span class="r">SI</span><span class="comentariu">; AX &larr; DX:AX / SI, DX &larr; DX:AX % SI</span>
+<span class="i">idiv</span> <span class="r">EBX</span><span class="comentariu">; EAX &larr; EDX:EAX / EBX, EDX &larr; EDX:EAX % EBX</span>
+<span class="i">idiv</span> <span class="r">DWORD [var]</span><span class="comentariu">; EAX &larr; EDX:EAX / DWORD [var], EDX &larr; EDX:EAX % DWORD [var]</span>
+</code></pre>	
+	</div>
+</div>	
+	<h2>Instructiuni de conversie cu semn</h2>
+<div id="second-accordion">
+	<h2>CBW</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">cbw</span>
+</code></pre>
+		<h3><i>Semantică și restricții:</i></h3>
+		<ul>
+			<li>converteşte cu semn BYTE-ul din AL la WORD-ul AX;</li>
+			<li>conversia se referă la extinderea reprezentării de pe 8 biţi pe 16 biţi, prin completarea cu bitul de semn în faţa octetului iniţial;</li>
+			<li>instrucţiunea nu are operanzi specificaţi explicit deoarece este întotdeauna vorba despre conversia AL &rarr; AX.</li>
+</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">cbw</span> <span class="comentariu">; dacă AL=01110111b atunci AX &larr; 00000000 01110111b</span>
+    <span class="comentariu">; dacă AL=11110111b atunci AX &larr; 11111111 11110111b</span>
+</code></pre>	
+	</div>
+	
+	<h2>CWD</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">cwd</span>
+</code></pre>
+		<h3><i>Semantică și restricții:</i></h3>
+		<ul>
+			<li>converteşte cu semn WORD-ul din AX la DWORD-ul DX:AX;</li>
+			<li>conversia se referă la extinderea reprezentării de pe 16 biţi pe 32 biţi, prin completarea cu bitul de semn în faţa cuvântului iniţial;</li>
+			<li>instrucţiunea nu are operanzi specificaţi explicit deoarece este întotdeauna vorba despre conversia AX &rarr; DX:AX.</li>
+</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">cwd</span> <span class="comentariu">; dacă AX=00110011 11001100b atunci DX:AX &larr; 00000000 00000000 00110011 11001100b</span>
+    <span class="comentariu">; dacă AX=10110011 11001100b atunci DX:AX &larr; 11111111 11111111 10110011 11001100b</span>
+</code></pre>	
+	</div>
+	
+	<h2>CWDE</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">cwde</span>
+</code></pre>
+		<h3><i>Semantică și restricții:</i></h3>
+		<ul>
+			<li>converteşte cu semn WORD-ul din AX la DWORD-ul EAX;</li>
+			<li>conversia se referă la extinderea reprezentării de pe 16 biţi pe 32 biţi, prin completarea cu bitul de semn în faţa cuvântului iniţial;</li>
+			<li>instrucţiunea nu are operanzi specificaţi explicit deoarece este întotdeauna vorba despre conversia AX &rarr; EAX.</li>
+</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">cwde</span> <span class="comentariu">; dacă AX=00110011 11001100b atunci EAX &larr; 00000000 00000000 00110011 11001100b</span>
+     <span class="comentariu">; dacă AX=10110011 11001100b atunci EAX &larr; 11111111 11111111 10110011 11001100b</span>
+</code></pre>	
+	</div>
+	
+	<h2>CDQ</h2>
+	<div class="article">
+		<h3><i>Sintaxă:</i></h3>
+<pre><code><span class="i">cdq</span>
+</code></pre>
+		<h3><i>Semantică și restricții:</i></h3>
+		<ul>
+			<li>converteşte cu semn DWORD-ul din EAX la QWORD-ul EDX:EAX;</li>
+			<li>conversia se referă la extinderea reprezentării de pe 32 biţi pe 64 biţi, prin completarea cu bitul de semn în faţa dublucuvântului iniţial;</li>
+			<li>instrucţiunea nu are operanzi specificaţi explicit deoarece este întotdeauna vorba despre conversia EAX &rarr; EDX:EAX.</li>
+</li>
+		</ul>
+		<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">cdq</span> <span class="comentariu">; dacă EAX=00110011 11001100 00110011 11001100b atunci EDX:EAX &larr; 00000000 00000000 00000000 00000000 00110011 11001100 00110011 11001100b</span>
+     <span class="comentariu">; dacă EAX=10110011 11001100 10110011 11001100b atunci EDX:EAX &larr; 11111111 11111111 11111111 11111111 10110011 11001100 10110011 11001100b</span>
+</code></pre>	
+	</div>
+	
+</div>	
+<h2>Conversie fără semn</h2>
+<div id="third-accordion">
+<h2>Conversie fără semn</h2>
+<div class="article">
+<ul>
+<li>Nu există instrucţiuni de conversie fără semn;</li>
+<li>Conversiile fără semn se realizează în limbajul de asamblare prin „zerorizarea” octetului, cuvântului sau dublucuvântului superior.</li>
+</ul>
+<h3><i>Exemple</i></h3>
+<pre><code><span class="i">mov</span> AH,0 ; pentru conversia AL &rarr; AX
+<span class="i">mov</span> DX,0 ; pentru conversia AX &rarr; DX:AX
+<span class="i">mov</span> EDX,0 ; pentru conversia EAX &rarr; EDX:EAX
+</code></pre>
+</div>
+</div>
+
+<h2>Declararea variabilelor / constantelor</h2>
+<div id="fourth-accordion">
+<h2>Declararea variabilelor cu valoare initiala</h2>
+<div class="article">
+<pre><code>a <span class="i">DB</span> 0A2h <span class="comentariu">;se declara variabila a de tip BYTE si se initializeaza cu valoarea 0A2h</span>
+b <span class="i">DW</span> 'ab' <span class="comentariu">;se declara variabila a de tip WORD si se initializeaza cu valoarea 'ab'</span>
+c <span class="i">DD</span> 12345678h <span class="comentariu">;se declara variabila a de tip DOUBLE WORD si se initializeaza cu valoarea 12345678h</span>
+d <span class="i">DQ</span> 1122334455667788h <span class="comentariu">;se declara variabila a de tip QUAD WORD si se initializeaza cu valoarea 1122334455667788h</span>
+</code></pre>
+</div>
+<h2>Declararea variabilelor fara valoare initiala</h2>
+<div class="article">
+<pre><code>a <span class="i">RESB</span> 1 <span class="comentariu">;se rezerva 1 octet</span>
+b <span class="i">RESB</span> 64 <span class="comentariu">;se rezerva 64 octeti</span>
+c <span class="i">RESW</span> 1 <span class="comentariu">;se rezerva 1 word</span>
+</code></pre>
+</div>
+<h2>Definirea constantelor</h2>
+<div class="article">
+<pre><code>zece <span class="i">EQU</span> 10 <span class="comentariu">;se defineste constanta zece care are valoarea 10</span>
+</code></pre>
+</div>
+</div>
+
+<h2>Legendă</h2>
+
+<pre><code><span class="r">&lt;op8&gt;</span>    - operand pe 8 biți
+<span class="r">&lt;op16&gt;</span>   - operand pe 16 biți
+<span class="r">&lt;op32&gt;</span>   - operand pe 32 biți
+
+<span class="r">&lt;reg8&gt;</span>   - registru pe 8 biți
+<span class="r">&lt;reg16&gt;</span>  - registru pe 16 biți
+<span class="r">&lt;reg32&gt;</span>  - registru pe 32 biți
+<span class="r">&lt;reg&gt;</span>    - registru
+<span class="r">&lt;regd&gt;</span>   - registru destinație
+<span class="r">&lt;regs&gt;</span>   - registru sursă
+
+<span class="r">&lt;mem8&gt;</span>   - variabilă de memorie pe 8 biți
+<span class="r">&lt;mem16&gt;</span>  - variabilă de memorie pe 16 biți
+<span class="r">&lt;mem32&gt;</span>  - variabilă de memorie pe 32 biți
+<span class="r">&lt;mem&gt;</span>    - variabilă de memorie
+
+<span class="r">&lt;con8&gt;</span>   - constantă (valoare imediată) pe 8 biți
+<span class="r">&lt;con16&gt;</span>  - constantă (valoare imediată) pe 16 biți
+<span class="r">&lt;con32&gt;</span>  - constantă (valoare imediată) pe 32 biți
+<span class="r">&lt;con&gt;</span>    - constantă (valoare imediată)
+</pre></code>
+
+</div>
+</body>
+</html>

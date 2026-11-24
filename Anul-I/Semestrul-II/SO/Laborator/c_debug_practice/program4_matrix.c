@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int **allocate_matrix(int rows, int cols);
+void fill_matrix(int **m, int rows, int cols);
+int diagonal_sum(int **m, int rows, int cols);
+
+int **allocate_matrix(int rows, int cols)
+{
+    int **m = malloc(rows * sizeof(int *));
+    if (!m)
+    {
+        return NULL;
+    }
+
+    for (int i = 0; i < rows; i++)
+    {
+        m[i] = malloc(cols * sizeof(int));
+    }
+
+    return m;
+}
+
+void fill_matrix(int **m, int rows, int cols)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            m[i][j] = i + j;
+        }
+    }
+}
+
+int diagonal_sum(int **m, int rows, int cols)
+{
+    int sum = 0;
+    for (int i = 0; i < rows && i < cols; i++)
+    {
+        sum += m[i][i];
+    }
+    return sum;
+}
+
+void print_matrix(int **m, int rows, int cols)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < cols; j++)
+        {
+            printf("%d ", m[i][j]);
+        }
+        printf("\n");
+    }
+    printf("diag=%d\n", diagonal_sum(m, rows, cols));
+}
+
+int main(void)
+{
+    int rows = 2, cols = 3;
+    int **mat = allocate_matrix(rows, cols);
+    int *scratch = malloc(2 * sizeof(int));
+
+    if (!mat || !scratch)
+    {
+        for(int i = 0; i < rows; i++)
+	{
+		free(mat[i]);
+	}
+	free(scratch);
+	return 1;
+    }
+
+    fill_matrix(mat, rows, cols);
+    print_matrix(mat, rows, cols);
+
+    scratch[0] = 1;
+    puts("matrix ready");
+
+    free(mat[0]);
+    free(mat[1]);
+    free(mat);
+    free(scratch);
+    return 0;
+}

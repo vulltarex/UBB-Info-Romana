@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arhitectura Sistemelor de Calcul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=30092025">
+</head>
+<body>
+  <header>
+   <div>
+        <h1><a href="https://www.cs.ubbcluj.ro/~diana.sotropa/teaching/asc">Arhitectura Sistemelor de Calcul</a></h1>
+        <h4>Anul 1, Informatică Română, an universitar 2025-2026</h4>
+         <a href="http://www.cs.ubbcluj.ro/~diana.sotropa/">Dr. Diana Șotropa, Lector Universitar</a>
+  
+    </div>
+    <div>
+    <div class="hamburger" onclick="toggleMobileNav()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav>
+      <a href="index.php#despre">Despre</a>
+      <a href="index.php#noutati">Noutăți</a>
+      <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+      <a href="index.php#laboratoare">Laboratoare</a>
+      <a href="index.php#contact">Contact</a>
+    </nav>
+    <a class="contact" href="mailto:diana.sotropa@ubbcluj.ro"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#ffffff"/>
+</svg> diana.sotropa@ubbcluj.ro</a>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.php#despre">Despre</a>
+    <a href="index.php#noutati">Noutăți</a>
+    <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+    <a href="index.php#laboratoare">Laboratoare</a>
+    <a href="index.php#contact">Contact</a>
+  </div>
+
+  <div class="container"><link rel="stylesheet" href="assets/old-styles.css?v=30092025">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	$( function() {
+		$(".modal .x").on("click",function(){$('.modal').remove();$('.informatie_modal').remove();})
+		$(".modalP .x").on("click",function(){$('.modalP').remove();})
+		$( "#accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#second-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#third-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#fourth-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#fifth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#sixth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#accordion-trei" ).accordion({
+			collapsible: true, active : 3, heightStyle: "content"
+		});
+		// Hide all panels
+
+		// Get hash from query string
+		var hash = window.location.hash;
+		console.log(hash);
+
+		if (hash) {
+			
+		$(".article").hide();
+			// Get panel header element
+			var requestedPanel = $(hash);
+			if (requestedPanel.length) {
+				// Hide all panels
+				$(".article").hide();
+				// Show requested panel
+				requestedPanel.next(".article").show();
+			}
+		}
+});
+</script>
+  <div id="menu">
+<ul>
+<li><a href='ro-lab7-exemple.php'>EXEMPLE</a></li><li><a href='ro-lab7-exercitii.php'>EXERCITII</a></li><li class='active'><a href='ro-lab7-teorie.php'>TEORIE</a></li></ul>
+</div>
+<div id="content">
+	<h1>Laborator 7 - Suport teoretic</h1>
+	<h2>Apeluri de functii sistem</h2>
+<div id="accordion">
+	<h2>Biblioteci de functii (function libraries)</h2>
+	<div class="article">
+		<p>Chiar daca limbajul de asamblare foloseste in mod direct componentele hardware ale sistemului, exista portiuni de cod utilizate frecvent, care ar fi impractic sa fie scrise de catre programator de fiecare data. De exemplu, comunicarea cu dispozitivele de intrare/iesire, care presupune de cele mai multe ori protocoale complexe. Unul dintre rolurile sistemului de operare este acela de a abstractiza masina hardware pentru programator, punand la dispozitie multiple biblioteci de functii ce pot fi apelate pentru anumite operatii frecvente, cum ar fi afisarea datelor intr-un anumit format, gasirea unui subsir intr-un sir sau diverse functii matematice.</p>
+		<p>Utilizarea unei functii presupune saltul la portiunea de cod corespunzatoare functiei, executia acestui cod, urmata de revenirea la instructiunea de dupa cea care a apelat functia, ca in figura de mai jos:</p>
+		<img src="files/lab5-img1.png" style="width:100%;max-width:600px;margin:0 auto;">
+	</div>
+	<h2>Utilizarea functiilor externe. Conventii de apel</h2>
+	<div class="article">
+		<p>Pentru apelul unei functii se foloseste instructiunea call. </p>
+		<h3><i>Sintaxa:</i></h3>
+		<pre><code><span class="i">call</span> <span class="r">&lt;nume_functie_sistem&gt;</span></code></pre>
+		<h3><i>Semantica:</i></h3>
+		Aceasta instructiune pune adresa instructiunii urmatoare pe stiva, apoi sare la inceputul functiei apelate. Punerea pe stiva a adresei instructiunii urmatoare (adresa de revenire) se face pentru ca la finalul executiei sa se poata reveni la codul apelant. 
+	</div>
+	<h2>Apelarea unei functii sistem. Parametrii</h2>
+	<div class="article">
+	<p>De cele mai multe ori, functiile pot primi parametri, si pot intoarce rezultate. Exista mai multe conventii pentru a face aceste lucruri, dintre care in acest laborator vom folosi conventia <strong>cdecl</strong>.
+</p><p>O conventie de apel nu tine de sintaxa limbajului de asamblare, ci este un ”contract” intre autorul functiei si utilizatorii acesteia, ce specifica modul de transmitere a parametrilor, respectiv de intoarcere a rezultatului.</p>
+<h3><em>Conventia cdecl</em></h3>
+<ul><li>Argumentele se pun pe stiva de la dreapta la stanga</li>
+<li>	Rezultatul implicit este returnat de catre functia sistem in EAX</li>
+<li>	Registrii EAX, ECX, EDX pot fi folositi in interiorul functiei (isi pot modifica valoarea!)</li>
+<li>  <span class="i">  Atentie deci, daca doriti pastrarea valorilor initiale din EAX, ECX, EDX sa salvati aceste valori (in variabile de memorie, pe stiva sau in alti registrii) inainte de apelul functiei</span></li>
+<li>	Functia nu va elibera argumentele de pe stiva. Este responsabilitatea programatorului sa faca acest lucru dupa apelul functiei</li>
+<li>	Exemple:  printf, scanf</li></ul>
+
+	</div>
+	<h2>Functii standard din msvcrt</h2>
+	<div class="article">
+<h3>Afisarea pe ecran</h3>
+<p>Pentru afisarea unui text pe ecran, ce respecta un anumit format, se foloseste functia <em><u>printf</u></em>.</p>
+<p>Sintaxa functiei <em><u>printf</u></em> in limbaj de programare de nivel inalt este:</p>
+
+<pre><code><span class="r">int</span> <span class="i">printf</span><span class="r">(const char * format, variabila_1, constanta_2, ...);</span></code></pre>
+
+<p>Functia <em>printf</em> respecta conventia <em>cdecl</em>.</p>
+
+<p>Primul argument al functiei este un sir de caractere ce contine formatul afisarii, urmat de un numar de argumente (valori constante sau nume de variabile) egal cu cel specificat in cadrul formatului.</p>
+<p>Sirul de caractere transmis in parametrul format poate contine anumite marcaje de formatare, ce incep cu caracterul ’%’, care vor fi inlocuite de valorile specificate in urmatoarele argumente, formatate corespunzator.</p>
+
+<table border="1" cellspacing="0" cellpadding="10">
+<tbody>
+<tr>
+<th >Specificator</th>
+<th>Ce se afiseaza</th>
+<th>Exemplu</th>
+<th>Dimensiune reprezentare valoare</th>
+</tr>
+<tr>
+<td >c</td>
+<td>Caracter</td>
+<td>a</td>
+<td>byte</td>
+</tr>
+<tr>
+<td >d sau i</td>
+<td>Intreg zecimal cu semn</td>
+<td>392</td>
+<td>dword</td>
+</tr>
+<tr>
+<td >u</td>
+<td>Intreg zecimal fara semn</td>
+<td>7235</td>
+<td>dword</td>
+</tr>
+<tr>
+<td >x</td>
+<td>Numar in hexazecimal fara semn</td>
+<td>7fa</td>
+<td>dword</td>
+</tr>
+<tr>
+<td >s</td>
+<td>String (sir de caractere, terminat cu 0)</td>
+<td>exemplu</td>
+<td>sir de bytes terminat in 0</td>
+</tr>
+</tbody>
+</table>
+&nbsp;
+<h3><span class="i">
+La intrarea in corpul functiei printf, in varful stivei se afla un dublucuvant 
+cu Adresa de Revenire, apoi imediat sub el se afla alt dublucuvant care va contine offsetul 
+stringului de formatare - argument al functiei printf. Sub acest dublucuvant se vor afla
+alte dublucuvinte corespunzatoare celorlalte argumente ale functiei printf.
+Descriptorii de afisare %d, %i, %c, %x, %u in cazul functiei printf vor fi aplicati totdeauna 
+unui dublucuvant din stiva (chiar si in cazul lui %c care foloseste si el un dublucuvant de pe stiva,
+dar din acest dublucuvant considera doar octetul cel mai putin semnificativ). Astfel, primul descriptor
+de afisare se va aplica celui de-al treilea dublucuvant de pe stiva (numarat fata de varful stivei). 
+Cel de-al doilea eventual descriptor se va aplica celui de-al patrulea dublucuvant de pe stiva
+(numarat fata de varful stivei), cel de-al treilea eventual descriptor din stringul de formatare se va
+aplica celui de-al cincilea dublucuvant de pe stiva (numarat fata de varful stivei) si tot asa.
+
+</span></h3>
+<h4>Exemple:</h4>
+<h5>Afisarea unui mesaj</h5> 
+<ul>
+<li>In limbaj de programare de nivel inalt:</li>
+	<pre><code>
+	<span class="i">printf</span><span class="r">("Ana are mere");</span>
+	</code></pre>
+
+<li>Echivalentul in limbaj de asamblare:</li>
+<pre><code>
+	<span class="i">segment</span> <span class="r">data use32 class=data</span>
+		mesaj  <span class="r">db</span> "Ana are mere", 0  <span class="comentariu">; definim mesajul</span>
+	<span class="i">segment</span> <span class="r">code use32 class=code</span>
+		<span class="comentariu">; ...</span>
+		<span class="i"> push</span> <span class="r">dword mesaj</span>  <span class="comentariu">; punem parametrul pe stiva</span>
+		<span class="i"> call</span> <span class="r">[printf]</span>       <span class="comentariu">; apelam functia printf</span>
+		<span class="i"> add</span> <span class="r">esp, 4 * 1 </span>    <span class="comentariu">; eliberam parametrii de pe stiva</span>
+		<span class="comentariu">; ...</span>
+</code></pre>
+</ul>
+
+<h5>Afisarea unui numar natural cu semn in baza 10</h5> 
+<ul>
+<li>In limbaj de programare de nivel inalt:</li>
+	<pre><code>
+	<span class="i">printf</span><span class="r">("%d", -17);</span>
+	</code></pre>
+
+<li>Echivalentul in limbaj de asamblare:</li>
+<pre><code>
+	<span class="i">segment</span> <span class="r">data use32 class=data</span>
+		format  <span class="r">db</span> "%d", 0  <span class="comentariu">; definim formatul</span>
+	<span class="i">segment</span> <span class="r">code use32 class=code</span>
+		<span class="comentariu">; ...</span>
+		<span class="i"> push</span> <span class="r">dword -17</span>  <span class="comentariu">; punem parametrii pe stiva de la dreapta la stanga</span>
+		<span class="i"> push</span> <span class="r">dword format</span>  
+		<span class="i"> call</span> <span class="r">[printf]</span>       <span class="comentariu">; apelam functia printf</span>
+		<span class="i"> add</span> <span class="r">esp, 4 * 2 </span>    <span class="comentariu">; eliberam parametrii de pe stiva</span>
+		<span class="comentariu">; ...</span>
+</code></pre>
+</ul>
+
+<h5>Afisarea unui numar natural in baza 16</h5> 
+<ul>
+<li>In limbaj de programare de nivel inalt:</li>
+	<pre><code>
+	<span class="i">printf</span><span class="r">("%x", 0xAB);</span>
+	</code></pre>
+
+<li>Echivalentul in limbaj de asamblare:</li>
+<pre><code>
+	<span class="i">segment</span> <span class="r">data use32 class=data</span>
+		format  <span class="r">db</span> "%x", 0  <span class="comentariu">; definim formatul</span>
+	<span class="i">segment</span> <span class="r">code use32 class=code</span>
+		<span class="comentariu">; ...</span>
+		<span class="i"> push</span> <span class="r">dword 0xAB</span>  <span class="comentariu">; punem parametrii pe stiva de la dreapta la stanga</span>
+		<span class="i"> push</span> <span class="r">dword format</span>  
+		<span class="i"> call</span> <span class="r">[printf]</span>       <span class="comentariu">; apelam functia printf</span>
+		<span class="i"> add</span> <span class="r">esp, 4 * 2 </span>    <span class="comentariu">; eliberam parametrii de pe stiva</span>
+		<span class="comentariu">; ...</span>
+</code></pre>
+</ul>
+
+<h5>Afisarea unui mesaj care contine un numar natural in baza 10, stocat intr-o variabila n</h5>
+<ul>
+<li>In limbaj de programare de nivel inalt:</li>
+	<pre><code>
+	<span class="i">printf</span><span class="r">("Ana are %d mere", n);</span>
+	</code></pre>
+
+<li>Echivalentul in limbaj de asamblare:</li>
+<pre><code>
+	<span class="i">segment</span> <span class="r">data use32 class=data</span>
+		n <span class="r">dd</span> 7
+		format  <span class="r">db</span> "Ana are %d mere", 0  <span class="comentariu">; definim formatul</span>
+	<span class="i">segment</span> <span class="r">code use32 class=code</span>
+		<span class="comentariu">; ...</span>
+		<span class="i"> push</span> <span class="r">dword [n]</span>  <span class="comentariu">; punem pe stiva valoarea lui n</span>
+		<span class="i"> push</span> <span class="r">dword format</span>  
+		<span class="i"> call</span> <span class="r">[printf]</span>       <span class="comentariu">; apelam functia printf</span>
+		<span class="i"> add</span> <span class="r">esp, 4 * 2 </span>    <span class="comentariu">; eliberam parametrii de pe stiva</span>
+		<span class="comentariu">; ...</span>
+</code></pre>
+</ul>
+
+<h5>Afisarea unui mesaj care contine mai multe numere in baza 10.</h5> 
+<ul>
+<li>In limbaj de programare de nivel inalt:</li>
+	<pre><code>
+	<span class="i">printf</span><span class="r">("Ana are %d mere si %d pere", 7, 8);</span>
+	</code></pre>
+
+<li>Echivalentul in limbaj de asamblare:</li>
+<pre><code>
+	<span class="i">segment</span> <span class="r">data use32 class=data</span>
+		format  <span class="r">db</span> "Ana are %d mere si %d pere", 0  <span class="comentariu">; definim formatul</span>
+	<span class="i">segment</span> <span class="r">code use32 class=code</span>
+		<span class="comentariu">; ...</span>
+		<span class="i"> push</span> <span class="r">dword 8</span>  <span class="comentariu">; punem parametrii pe stiva</span>
+		<span class="i"> push</span> <span class="r">dword 7</span> 
+		<span class="i"> push</span> <span class="r">dword format</span>  
+		<span class="i"> call</span> <span class="r">[printf]</span>       <span class="comentariu">; apelam functia printf</span>
+		<span class="i"> add</span> <span class="r">esp, 4 * 3 </span>    <span class="comentariu">; eliberam parametrii de pe stiva</span>
+		<span class="comentariu">; ...</span>
+</code></pre>
+</ul>
+&nbsp;
+<h3>Citirea de la tastatura</h3>
+<p>Pentru a citi date de la tastatura se foloseste functia <em><u>scanf</u></em>.</p>
+<p>Sintaxa functiei <em><u>scanf</u></em> in limbaj de programare de nivel inalt este:</p>
+
+<pre><code><span class="r">int</span> <span class="i">scanf</span><span class="r">(const char * format, adresa_variabila_1, ...);</span></code></pre>
+
+<p>Sintaxa acestei functii este similara cu cea a functiei printf. Diferenta majora consta in faptul ca argumentele sale nu trebuie sa fie valori constante sau continuturi de variabile, ci numai adrese in memorie, unde se vor stoca valorile citite.</p>
+
+<h4>Exemplu:</h4>
+<h5>Citirea unui numar natural in variabila n</h5> 
+<ul>
+<li>In limbaj de programare de nivel inalt:</li>
+	<pre><code>
+	<span class="i">scanf</span><span class="r">("%d", &n);</span>
+		
+	<span class="comentariu"> &n reprezinta adresa variabilei n in care functia scanf va completa valoarea citita de la tastatura</span>
+	</code></pre>
+<li>Echivalentul in limbaj de asamblare:</li>
+<pre><code>
+	<span class="i">segment</span> <span class="r">data use32 class=data</span>
+		n</span> <span class="r">dd</span>  0       <span class="comentariu">; definim variabila n</span>
+		format  <span class="r">db</span> "%d", 0  <span class="comentariu">; definim formatul</span>
+	<span class="i">segment</span> <span class="r">code use32 class=code</span>
+		<span class="comentariu">; ...</span>
+		<span class="i">push</span> <span class="r">dword n</span>       <span class="comentariu">; punem parametrii pe stiva de la dreapta la stanga</span>
+		<span class="i">push</span> <span class="r">dword format</span>
+		<span class="i">call</span> <span class="r">[scanf]</span>       <span class="comentariu">; apelam functia scanf pentru citire</span>
+		<span class="i">add</span> <span class="r">esp, 4 * 2 </span>    <span class="comentariu">; eliberam parametrii de pe stiva</span>
+		<span class="comentariu">; ...</span>
+
+
+</code></pre>
+</ul>
+
+	
+	</div>
+</div>
+	<h2>Operatii cu fisiere text</h2>
+<div id="second-accordion">	
+	<h2>Operatii cu fisiere text</h2>
+	<div class="article">
+Un fisier reprezinta o secventa de octeti.
+
+Pentru a citi dintr-un fisier sau pentru a scrie intr-un fisier, e nevoie de 3 pasi:
+<ol>
+ 	<li>Deschiderea fisierului, care poate consta in:
+<ul>
+ 	<li>Deschiderea unui fisier existent</li>
+ 	<li>Crearea unui fisier nou</li>
+</ul>
+</li>
+ 	<li>Efectuarea operatiilor de scriere si/sau citire</li>
+ 	<li>Inchiderea fisierului.</li>
+</ol>
+</div>
+<h2>Deschiderea unui fisier</h2>
+	<div class="article">
+Pentru deschiderea unui fisier existent sau crearea unui fisier nou, se foloseste functia <strong><u>fopen</u></strong>
+
+<h3><i>Sintaxa functiei </i></h3>
+<strong><u>fopen</u></strong> in limbaj de programare de nivel inalt este:
+
+<pre><code>FILE * <span class="i">fopen</span><span class="r">(const char* nume_fisier, const char * mod_acces)</span></code></pre>
+
+Functia fopen respecta conventia <em>cdecl </em>si se gaseste in <em>msvcrt.dll .</em>
+<h3><i>Argumentele functiei fopen:</i></h3>
+Primul argument al functiei este adresa unui sir de caractere reprezentand numele fisierului:
+
+Al doilea argument este adresa unui sir de caractere, reprezentand modalitatea in care se va deschide fisierul.
+<table border="1" cellspacing="0" cellpadding="5">
+<tbody>
+<tr>
+<td>Mod</td>
+<td>Semnificatie</td>
+<td>Descriere</td>
+</tr>
+<tr>
+<td>r</td>
+<td>citire (read)</td>
+<td>-    Deschide un fisier text pentru citire. Fisierul trebuie sa existe deja pe disc.</td>
+</tr>
+<tr>
+<td>w</td>
+<td>scriere (write)</td>
+<td>-    Daca nu exista un fisier cu acel nume, creaza fisierul si il deschide pentru scriere.<br>
+-    Daca un fisier cu acel nume exista deja, deschide acel fisier pentru scriere. Continutul initial va fi sters. Scrierea se va face de la inceputul fisierului.</td>
+</tr>
+<tr>
+<td>a</td>
+<td>adaugare (append)</td>
+<td>-    Daca nu exista un fisier cu acel nume, creaza fisierul si il deschide pentru scriere.<br>
+-    Daca un fisier cu acel nume exista deja, deschide acel fisier pentru scriere, dar scrierea se va face la sfarsitul fisierului, in continuarea continutului existent. Continutul initial al fisierului va fi pastrat.</td>
+</tr>
+<tr>
+<td>r+</td>
+<td>citire si scriere fisier existent</td>
+<td>-    Deschide un fisier text pentru citire si scriere. Fisierul trebuie sa existe deja pe disc.</td>
+</tr>
+<tr>
+<td>w+</td>
+<td>citire si scriere</td>
+<td>-    Daca nu exista un fisier cu acel nume, creaza fisierul si il deschide pentru citire si scriere.<br>
+-    Daca un fisier cu acel nume exista deja, deschide acel fisier pentru citire si scriere. Continutul initial va fi sters. Scrierea se va face de la inceputul fisierului.</td>
+</tr>
+<tr>
+<td>a+</td>
+<td>citire si adaugare</td>
+<td>-    Daca nu exista un fisier cu acel nume, creaza fisierul si il deschide pentru citire si scriere.<br>
+-    Daca un fisier cu acel nume exista deja, deschide acel fisier pentru citire si scriere. Continutul initial al fisierului va fi pastrat. Citirea se va face de la inceputul fisierului. Scrierea se va face in continuarea continutului existent.</td>
+</tr>
+</tbody>
+</table>
+<h3><i>Observatii:</i></h3>
+<ul>
+ 	<li>Numele unui fisier trebuie sa includa si extensia (ex: nume<u>.txt</u>, exemplu<u>.asm</u>).</li>
+ 	<li>Fisierele se vor crea sau deschide din directorul curent (in acelasi director in care se afla fisierul sursa asm). <u>Important</u>: pentru a putea deschide un fisier existent folosind numele acestuia, fisierul trebuie sa se afle in acelasi director cu fisierul sursa .asm, altfel acesta nu va fi gasit.</li>
+ 	<li>Operatiile de scriere nu vor reusi pentru fisiere deschise doar cu drepturi de citire (ex: ”r”). Operatiile de citire nu vor reusi pentru fisiere deschise doar cu drepturi de scriere sau adaugare (ex: ”w”, ”a”)</li>
+ 	<li>Ambele argumente ale functiei <em>fopen</em> reprezinta siruri de caractere care trebuie sa se termine cu valoarea 0 (asemenea formatului pentru functia printf).</li>
+</ul>
+<h4>Valoarea returnata de functia fopen:</h4>
+Daca fisierul este deschis cu succes, functia fopen va completa in registrul EAX un identificator (descriptor de fisier) care va fi folosit in continuare pentru a lucra cu acel fisier (pentru operatii de scriere, citire, etc.).
+
+Altfel (in caz de eroare), functia fopen va completa in registrul EAX valoarea 0.
+<h3><i>Alte observatii:</i></h3>
+Este important sa se verifice valoarea returnata de functie in EAX (daca nu a fost eroare), inainte de a efectua alte operatii cu acel fisier.
+
+Daca in cadrul unui program se deschid mai multe fisiere <u>diferite</u> folosind functia fopen, fiecare valoare returnata de functiei trebuie salvata <u>separat</u>, deoarece reprezinta o valoare distincta prin care este identificat un fisier.
+
+Dupa finalizarea lucrului cu un fisier deschis, este important sa se si inchida acel fisier (de obicei se face la finalul programului – inainte de exit). Pentru a inchide un fisier (deschis in prealabil de functia fopen) se foloseste functia <em>fclose</em>.
+</div>
+<h2>Scrierea intr-un fisier</h2>
+<div class="article">
+Pentru a scrie un text intr-un fisier se foloseste functia <strong><u>fprintf</u></strong>.
+
+<h3><i>Sintaxa functiei</i></h3> 
+
+<strong><u>fprintf</u></strong> in limbaj de programare de nivel inalt este:
+
+<pre><code>int <span class="i">fprintf</span><span class="r">(FILE * stream, const char * format, &lt;variabila_1&gt;, &lt;constanta_2&gt;, &lt;...&gt;)</span></code></pre>
+
+Functia fprintf respecta conventia <em>cdecl </em>si se gaseste in <em>msvcrt.dll .</em>
+
+Sintaxa functiei <em>fprintf</em> este asemantoare cu sintaxa functiei <em>printf</em> (folosita pentru afisare in consola). Diferenta este faptul ca functia fprintf are ca prim parametru identificatorul fisierului in care se va scrie textul, in plus fata de parametrii functiei printf.
+<h3><i>Argumentele functiei fprintf</i></h3>
+Primul argument al functiei reprezinta descriptorul de fisier (identificatorul) returnat de apelul functiei <em>fopen</em>.
+
+Urmatorul argument al functiei este un sir de caractere ce contine formatul afisarii, urmat de un numar de argumente (valori constante sau nume de variabile) egal cu cel specificat in cadrul formatului.
+
+Asemenea functiei printf, sirul de caractere transmis in parametrul <em>format</em> poate contine anumite marcaje de formatare, ce incep cu caracterul ’%’, care vor fi inlocuite de valorile specificate in urmatoarele argumente, formatate corespunzator.
+<table border="1" cellspacing="0" cellpadding="5">
+<tbody>
+<tr>
+<td>Specificator</td>
+<td>Ce se afiseaza</td>
+<td>Exemplu</td>
+<td>Dimensiune reprezentare valoare</td>
+</tr>
+<tr>
+<td>c</td>
+<td>Caracter</td>
+<td>a</td>
+<td>byte</td>
+</tr>
+<tr>
+<td>d sau i</td>
+<td>Intreg zecimal cu semn</td>
+<td>392</td>
+<td>dword</td>
+</tr>
+<tr>
+<td>u</td>
+<td>Intreg zecimal fara semn</td>
+<td>7235</td>
+<td>dword</td>
+</tr>
+<tr>
+<td>x</td>
+<td>Numar in hexazecimal fara semn</td>
+<td>7fa</td>
+<td>dword</td>
+</tr>
+<tr>
+<td>s</td>
+<td>String (sir de caractere, terminat cu 0)</td>
+<td>exemplu</td>
+<td>sir de bytes terminat in 0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>Citirea dintr-un fisier</h2>
+<div class="article">
+Pentru a citi un text dintr-un fisier se foloseste functia <strong><u>fread</u></strong>.
+
+<h3><i>Sintaxa functiei</h3></i>
+
+<strong><u>fread</u></strong> in limbaj de programare de nivel inalt este:
+
+<pre><code>int <span class="i">fread</span><span class="r">(void * str, int size, int count, FILE * stream)</span></code></pre>
+
+Functia fread respecta conventia <em>cdecl </em>si se gaseste in <em>msvcrt.dll .</em>
+<h3><i>Argumentele functiei fread</h3></i>
+Primul argument al functiei fread reprezinta adresa unui sir de elemente in care se vor completa datele citite din fisier.
+
+Al doilea argument reprezinta dimensiunea unui element care va fi citit din fisier.
+
+Al treilea argument reprezinta numarul maxim de elemente care se vor citi din fisier.
+
+Ultimul argument al functiei reprezinta descriptorul de fisier (identificatorul) returnat de apelul functiei <em>fopen</em>.
+
+In cazul citirii fisierelor text, primul argument al functiei fread este un sir de bytes si al doilea argument este 1 (=dimensiunea unui byte). Al treilea argument este dimensiunea sirului de bytes (numarul de elemente).
+<h3><i>Valoarea returnata de functia fread:</h3></i>
+Functia fread va completa in registrul EAX numarul de elemente citite.
+
+Daca acest numar este mai mic decat valoarea argumentului <em>count</em>, atunci fie apelul functiei fread a intampinat o eroare la citire, fie s-a ajuns la finalul fisierului.
+<h3><i>Observatii:</h3></i>
+Fisierele text pot fi avea dimensiuni prea mari pentru putea citi continutul acestora cu un singur apel al functiei fread. In acest caz este nevoie de apeluri repetate ale functiei fread, pana cand intreg continutul fisierului este citit. In sectiunea „Exemple” vom prezenta un program care exemplifica acest scenariu.
+
+Pentru a verifica daca s-a ajuns la finalul fisierului cu operatia de citire se poate verifica daca valoarea returnata de fread este 0.
+</div>
+<h2>Inchiderea unui fisier deschis</h2>
+<div class="article">
+Dupa finalizarea lucrului cu un fisier deschis, acesta trebuie inchis. Acest pas nu trebuie sa lipseasca dintr-un program care a deschis fisiere. Pentru inchiderea unui fisier se foloseste functia <strong><u>fclose</u></strong>.
+
+<h3><i>Sintaxa functiei</h3></i> 
+
+<strong><u>fclose</u></strong> in limbaj de programare de nivel inalt este:
+
+<pre><code>int <span class="i">fclose</span><span class="r">(FILE * descriptor)</span></code></pre>
+
+Functia fclose respecta conventia <em>cdecl </em>si se gaseste in <em>msvcrt.dll .</em>
+<h3><i>Argumentul functiei fclose</h3></i>
+Argumentul functiei fclose este descriptorul de fisier (identificatorul) returnal de apelul functiei <em>fopen</em>.
+	</div>
+
+</div>	
+
+
+</div>
+</body>
+</html>

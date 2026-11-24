@@ -1,0 +1,270 @@
+
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arhitectura Sistemelor de Calcul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=30092025">
+</head>
+<body>
+  <header>
+   <div>
+        <h1><a href="https://www.cs.ubbcluj.ro/~diana.sotropa/teaching/asc">Arhitectura Sistemelor de Calcul</a></h1>
+        <h4>Anul 1, Informatică Română, an universitar 2025-2026</h4>
+         <a href="http://www.cs.ubbcluj.ro/~diana.sotropa/">Dr. Diana Șotropa, Lector Universitar</a>
+  
+    </div>
+    <div>
+    <div class="hamburger" onclick="toggleMobileNav()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav>
+      <a href="index.php#despre">Despre</a>
+      <a href="index.php#noutati">Noutăți</a>
+      <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+      <a href="index.php#laboratoare">Laboratoare</a>
+      <a href="index.php#contact">Contact</a>
+    </nav>
+    <a class="contact" href="mailto:diana.sotropa@ubbcluj.ro"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#ffffff"/>
+</svg> diana.sotropa@ubbcluj.ro</a>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.php#despre">Despre</a>
+    <a href="index.php#noutati">Noutăți</a>
+    <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+    <a href="index.php#laboratoare">Laboratoare</a>
+    <a href="index.php#contact">Contact</a>
+  </div>
+
+  <div class="container"><link rel="stylesheet" href="assets/old-styles.css?v=30092025">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	$( function() {
+		$(".modal .x").on("click",function(){$('.modal').remove();$('.informatie_modal').remove();})
+		$(".modalP .x").on("click",function(){$('.modalP').remove();})
+		$( "#accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#second-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#third-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#fourth-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#fifth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#sixth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#accordion-trei" ).accordion({
+			collapsible: true, active : 3, heightStyle: "content"
+		});
+		// Hide all panels
+
+		// Get hash from query string
+		var hash = window.location.hash;
+		console.log(hash);
+
+		if (hash) {
+			
+		$(".article").hide();
+			// Get panel header element
+			var requestedPanel = $(hash);
+			if (requestedPanel.length) {
+				// Hide all panels
+				$(".article").hide();
+				// Show requested panel
+				requestedPanel.next(".article").show();
+			}
+		}
+});
+</script>
+  <div id="menu">
+<ul>
+<li><a href='ro-lab8-exemple.php'>EXEMPLE</a></li><li><a href='ro-lab8-exercitii.php'>EXERCITII</a></li><li class='active'><a href='ro-lab8-teorie.php'>TEORIE</a></li></ul>
+</div>
+<div id="content">
+	<h1>Laborator 8 - Suport teoretic</h1>
+	<h2>Programare multi-modul (asm+asm)</h2>
+<div id="accordion">	
+	<h2>Programare multi-modul (asm+asm)</h2>
+	<div class="article">
+<p> Programele  non-triviale (de amploare) prezintă problematici specifice complexității  crescute a codului, necesitând ca atare și instrumente care adresează aceste  aspecte.  Natural apar următoarele întrebări: </p>
+<ul>
+  <li>cum este posibil a fi împărțită (descompusă) problema  atacată în sub-probleme de dificultate redusă? </li>
+  <li>care dintre sub-problemele identificate după descompunere sunt deja cunoscute și au rezolvări consacrate, bine cunoscute și care pot fi refolosite?</li>
+</ul>
+</div>
+<h2>Subprograme  în limbajul de asamblare x86 </h2>
+<div class="article">
+
+<ul><li>O  variantă pentru împărțirea codului în sub-probleme o reprezintă modularizarea  codului. Limbajul  de asamblare nu recunoaște noțiunea de <em>subprogram</em>. Putem însa crea o  secvență de instrucțiuni care să poată fi apelată din alte zone ale programului  și după terminarea ei să returneze controlul programului apelant.<br>
+ </li><li> O astfel de secvență se numește <em>procedură</em>. Apelul unei proceduri se  poate face cu o instructiune <em>jmp</em>. Problema care apare la un astfel de  salt este că procesorul nu ține minte de unde a fost trimis la &quot;procedură&quot;  și prin urmare nu știe unde sa revină cu execuția după terminarea procedurii.  Este necesar deci ca la apelul unei proceduri să salvăm undeva adresa de  revenire, iar revenirea din procedură este de fapt o instrucțiune de salt la  acea adresă.<br>
+ </li><li> Locul unde se salvează adresa de  revenire este <em>stiva de executie</em>. Este nevoie de stivă deoarece o  procedură poate apela o altă procedură, acea procedură poate apela alta,  s.a.m.d.<br>
+ </li><li> Există două instrucțiuni ce permit  apelul și revenirea din proceduri: <em>call</em> si <em>ret</em>.</li></ul>
+ <h3><em>Sintaxa:</em></h3>
+<pre><code><span class="i">call</span> <span class="r">eticheta</span></code></pre>
+  <ul><li>
+  Instrucțiunea <em>call</em> este  de fapt o instrucțiune <em>jmp</em> care în plus introduce în varful stivei  adresa instrucțiunii care urmează - valoarea din EIP (instrucțiunea care vine  imediat dupa <em>call</em> și nu destinația saltului produs de instructiunea <em>call</em>).<br>
+  </li><li>Instrucțiunea <em>ret</em> extrage  din vârful stivei o adresă si execută un salt la acea adresă (practic se  modifică EIP, valoarea extrasă de pe stivă este stocată în registrul EIP).  Instrucțiunea nu are argumente deoarece adresa la care sare programul este  extrasă din vârful stivei (nu este dată explicit).<br>
+  </li></ul>
+  <h3><em>Observație:</em></h3>
+<ul>
+  <li>Pentru  a evita posibilele ambiguități ce pot sa apară atunci când numele unei etichete  definită în procedură (etichetă locală) este identic cu numele altei etichete  definite în programul &quot;principal&quot;, numele etichetelor  &quot;locale&quot; trebuie să înceapă cu caracterul &quot;.&quot;</li>
+</ul>
+<h3><em>Exemplu</em></h3>
+<pre><code><span class="i">.eticheta:</span><span class="comentariu">; etichetă utilizată în procedură</span></code></pre>
+<pre><code><span class="i">eticheta:</span><span class="comentariu">; etichetă globală</span></code></pre>
+  <ul><li>
+  Asamblorul   NASM oferă prin intermediul  preprocesorului un mecanism simplu prin care un program de multe linii poate fi  împărțit în mai multe fișiere. În general, datorită similarității cu directiva <em>#include</em> a limbajului C, rolul de  utilizare în practică al acesteia este același: permite separarea declarațiilor  programului în unul sau mai multe fișiere ce vor fi incluse acolo unde  respectivele declarații sunt necesare, întocmai cum și în C se obișnuiește  separarea/gruparea declarațiilor în fișiere <em>header </em>(fișiere cu extensia .h), fișiere ce sunt ulterior incluse de către codul  scris în fișire C care necesită (referă) declarațiile în cauză.<br>
+ </li><li> La  nivel de preprocesor, directiva <strong>%include</strong> îi permite unei componente de program să fie construită din mai multe fișiere  ce vor fi asamblate împreună.<br>
+  </li><li>Ca urmare o procedura poate fi definită în același fisier  sursa (a se vedea <em>lab11_procedura.asm</em>)  sau într-un fișier separat (a se vedea <em>lab11_proc_main.asm</em> și <em>factorial.asm</em>, ambele fișiere sunt  în același director, asamblarea, editarea de legaturi si executia se fac ca și  până acum). În aceste cazuri, în urma asamblării veți obține un singur fisier  *.obj!</li></ul>
+<h3><i>lab11_procedura.asm</i></h3>
+  <pre><code>; programul calculeaza factorialul unui numar si afiseaza in consola rezultatul
+; procedura factorial este definita in segmentul de cod si primeste pe stiva ca  si parametru un numar
+bits  32
+global  start
+extern  printf, exit
+import  printf msvcrt.dll
+import  exit msvcrt.dll
+segment  data use32 class=data
+	format_string db &quot;factorial=%d&quot;,  10, 13, 0
+segment  code use32 class=code
+;  urmeaza definirea procedurii
+factorial: 
+	mov eax, 1
+	mov ecx, [esp + 4] 
+	; mov ecx, [esp + 4] scoate de pe stiva  parametrul procedurii
+	; ATENTIE!!! in capul stivei este adresa de  retur
+	; parametrul procedurii este imediat dupa  adresa de retur
+	; a se vedea desenul de mai jos
+	;
+	; stiva
+	;
+	;|-------------------|
+	;| adresa retur  |  &lt;-  esp
+	;|-------------------|
+	;|   00000006h  |  &lt;- parametrul pasat procedurii, esp+4
+	;|-------------------|
+	; ....
+	.repet: 
+		mul ecx
+	loop .repet ; atentie, cazul ecx = 0 nu e  tratat!
+	ret
+;  programul &quot;principal&quot;       
+start:
+	push dword 6        ; se salveaza pe stiva numarul  (parametrul procedurii)
+	call factorial      ; apel procedura
+	; afisare rezultat
+	push eax
+	push format_string
+	call [printf]
+	add esp, 4*2
+	push 0
+	call [exit]</code></pre>
+<h3><i>lab11_proc_main.asm - Diferența față de lab11_procedura.asm este ca procedura  factorial este definită în alt fisier (factorial.asm)  fiind necesara includerea acestuia folosind directiva %include.</i></h3>
+  <pre><code>;  programul calculeaza factorialul unui numar si afiseaza in consola rezultatul
+;  procedura factorial este definita in fisierul factorial.asm
+bits  32
+global  start
+import  printf msvcrt.dll
+import  exit msvcrt.dll
+extern  printf, exit
+;  codul definit in factorial.asm va fi copiat aici
+%include  &quot;factorial.asm&quot;
+segment  data use32 class=data
+	format_string db  &quot;factorial=%d&quot;, 10, 13, 0
+segment  code use32 class=code
+start:
+	push dword 6
+	call factorial
+	push eax
+	push format_string
+	call [printf]
+	add esp, 2*4
+	push 0
+	call [exit]</code></pre>
+  
+<h3><i>  factorial.asm</i></h3>
+<pre><code>%ifndef  _FACTORIAL_ASM_ ; continuam daca _FACTORIAL_ASM_ este nedefinit
+%define  _FACTORIAL_ASM_ ; si ne asiguram ca devine definit
+;  astfel %include permite doar o singura includere
+;definire  procedura
+factorial:   ; int _stdcall factorial(int n)
+	mov eax, 1
+	mov ecx, [esp + 4]
+	;  mov ecx, [esp + 4] scoate de pe stiva parametrul procedurii
+	; pentru explicatii a se vedea  lab11_procedura.asm
+	repet: 
+		mul ecx
+	loop repet ; atentie, cazul ecx  = 0 nu e tratat!
+	ret 4
+%endif</code></pre>
+</div>
+<h2>Programe din mai multe module</strong></h2>
+<div class="article">
+<p>Un  program scris în limbaj de asamblare poate fi împărțit în mai multe fișiere  sursă, fiecare fiind asamblat separat în fișiere <em>.obj</em>. Pentru a scrie un program din mai multe fișiere sursă trebuie  să respectăm urmatoarele: </p>
+<ul type="disc">
+  <li>toate segmentele vor fi declarate cu modificatorul <em>public</em>,       pentru că în programul final segmentul de cod este construit din       concatenarea segmentelor de cod din fiecare modul; la fel și segmentul de       date.</li>
+  <li>etichetele și numele variabilelor dintr-un modul care trebuie       &quot;exportate&quot; în alte module trebuie sa faca obiectul unor       declaratii <em>global</em></li>
+  <li>etichetele și variabilele care sunt declarate într-un       modul și sunt folosite în alt modul trebuie să fie &quot;importate&quot;       prin directiva <em>extern</em></li>
+  <li>o variabila trebuie declarată în întregime într-un       modul (nu poate fi jumătate într-un modul și jumătate într-altul). De       asemenea, trecerea executiei dintr-un modul în altul se poate face doar       prin instructiuni de salt (<em>jmp</em>, <em>call</em> sau <em>ret</em>).</li>
+  <li>punctul de intrare este prezent doar în modulul ce       contine &quot;programul principal&quot;</li>
+</ul>
+<p>Fiecare modul se va asambla separat, folosind comanda:</p>
+<pre><code><span class="i">nasm -fobj</span> <span class="r">nume_modul.asm</span></code></pre>
+  apoi modulele se vor lega  impreuna cu comanda<br>
+<pre><code><span class="i">alink</span> <span class="r">modul_1.obj modul_2.obj ...  modul_n.obj </span><span class="i">-oPE -subsys console -entry start</span></code></pre>
+
+	</div>
+    <h2>Etape asamblare / link-editare/ debugging / executie</h2>
+    <div class="article">
+<h3>ASAMBLARE:</h3>
+<pre><code><span class="i">nasm</span> <span class="r">-f obj modul.asm</span></code></pre>
+<ul><li>Optiunea -f indica tipul de fisier care sa fie generat, in cazul acesta fisier obj.</li></ul>
+<h3>LINK-EDITARE</h3>
+<pre><code><span class="i">alink</span> <span class="r">modul1.obj ... moduln.obj -oPE -subsys console -entry start</span></code></pre>
+<ul><li>In folder-ul nasm din asm_tools exista fisierul "ALINK.TXT" care descrie optiunile pentru alink.</li>
+<li>Alink options:<br>
+<span class="i">-o</span> <span class="r">xxx</span>  <br>
+<span class="r">xxx:</span>
+<ul><li>COM = output COM file</li>
+<li>EXE = output EXE file</li>
+<li>PE  = output Win32 PE file (.EXE)</li></ul>
+
+<span class="r">-subsys xxx:</span><br>
+Optiunea specifica tipul de aplicatie generata (default=windows)<br>
+<ul><li>windows, win or gui => windows subsystem</li>
+<li>console, con or char => console subsystem</li>
+<li>native => native subsystem</li>
+<li>posix => POSIX subsystem</li></ul>
+                  
+<span class="r">-entry name </span><br>                  
+Optiunea specifica punctul de intrare in program (prima instructiune de executat)
+</li></ul>
+<h3>DEBUG</h3>
+<pre><code><span class="i">OLLYDBG.EXE</span> <span class="r">modul.exe </span></code></pre>
+<h3>EXECUTIE</h3>
+<pre><code><span class="i">modul.exe    </span></code></pre>
+    </div>
+</div>
+</div>
+</body>
+</html>

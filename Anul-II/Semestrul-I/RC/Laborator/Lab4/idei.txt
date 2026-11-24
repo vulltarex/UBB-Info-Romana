@@ -1,0 +1,16 @@
+ - fiecare trimite la server un username
+ - cei conectati la chat pot trimite mesaje la tot chat room ul sau mesaje private unui singur username
+ - notificare daca unu pleaca cu left the chat
+ 
+ ce poate primi serverul:
+ 0 = conectare (cu username)
+ 1 = mesaj public
+ 2 = mesaj privat
+ 3 = parasire chatroom
+
+ raspunsuri de la server:
+ 4 = ok
+ 5 = username luat
+ 6 = username de lungime 0
+ 7 = user not in chat
+ 8 = trebuie trimis un username intai

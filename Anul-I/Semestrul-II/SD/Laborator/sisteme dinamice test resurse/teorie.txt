@@ -1,0 +1,6 @@
+ec dif ordin 1 sau 2 cu grafic sau cauchy - lb2.pdf
+sist ec dif generale sau cauchy - lb3.pdf
+calcul de limite, derivate, integrale si operatii cu matrici - lb1.pdf
+modele matematice practice (dezint. radioactiva/racire) lb4-exercitii.pdf
+puncte de echilibru si stabilitate (jacobian/val proprii) - lb6.pdf
+

@@ -1,0 +1,11 @@
+nr_aparitii(E, l1...ln) = 0, daca n = 0
+                          1 + nr_aparitii(E, l2...ln), daca l1 = E
+                          nr_aparitii(E, l2...ln), altfel
+
+sterge(l1...ln, E) = [], daca n = 0
+                     sterge(l2...ln, E), daca l1 = E
+                     l1 (+) sterge(l2...ln), altfel
+
+perechi(l1...ln, Col) = Col, daca n = 0
+                        perechi(l2..ln, [l1, Nr] (+) Col), unde Nr este nr_aparitii
+

@@ -1,0 +1,9 @@
+Jurnal-de-dimineata,Stiri,1,Principalele-evenimente-ale-noptii
+Misiune-Imposibila,Film,2,miau
+Viata-la-sat,Informare,1,Traditii-si-agricultura
+Teleenciclopedia,Documentar,1,Cultura-si-stiinta
+Finala-UCL,Sport,3,Meci-fotbal-direct
+Povesti-de-noapte,Divertisment,2,Interviuri-mondenitati
+Stiri-Pro,Stiri,1,Informatii-ultima-ora
+Planeta-Pamant,Documentar,4,Explorarea-ecosistemelor
+Midnight-Jazz,Muzica,2,Concert-jazz-live

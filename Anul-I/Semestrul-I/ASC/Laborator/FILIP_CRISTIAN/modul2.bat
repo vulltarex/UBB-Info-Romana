@@ -1,0 +1,1 @@
+nasm modul2.asm -fwin32

@@ -1,0 +1,122 @@
+//1
+/* Returneaza o pereche formata din cele mai mari doua elemente ale pozitive vectorului l
+ * pre: l este un vector de intregi cu cel putin doua elemente
+ * post: este returnata o pereche de intregi formata din cel mai mare, respectiv al doilea cel mai mare element pozitiv al vectorului sau
+ * o pereche {-1, -1} daca nu exista elemente pozitive
+ * exceptii: std::exception daca vectorul are mai putin de doua elemente
+ */
+#include <assert.h>
+#include <iostream>
+#include <vector>
+void testFunc() {
+    std::vector<int> test;
+    test.push_back(1);
+    test.push_back(2);
+    test.push_back(3);
+    assert(f(test).first == 3);
+    assert(f(test).second == 2);
+    test.clear();
+    try {
+        f(test);
+        assert(false);
+    }
+    catch (const std::exception&) {
+        assert(true);
+    }
+    test.push_back(-3);
+    test.push_back(-2);
+    assert(f(test).first == -1);
+    assert(f(test).second == -1);
+    test.clear();
+    test.push_back(3);
+    test.push_back(-2);
+    assert(f(test).first == 3);
+    assert(f(test).second == -1);
+}
+
+//2a
+// apar erori, deoarece metodele virtuale si mostenirea sunt rezervate claselor, nu struct-urilor
+
+NU E ADEVARAT!!!! STRUCT-URILE DOAR SUNT IMPLICIT PUBLICE, SE EXECUTA NORMAL
+
+//2b
+//4
+//4
+//10
+//4
+
+//3
+class Meniu {
+private:
+    int pret;
+public:
+    Meniu(int pret) : pret(pret) {}
+    virtual int getPret() { return pret; }
+    virtual std::string descriere() = 0;
+    virtual ~Meniu() = default;
+};
+
+class CuCafea : public Meniu {
+private:
+    Meniu* meniu;
+public:
+    CuCafea(Meniu* m) : Meniu(m->getPret()), meniu(m) {}
+    int getPret() override { return meniu->getPret() + 5; }
+    std::string descriere() override { return meniu->descriere() + " cu cafea"; }
+    ~CuCafea() { delete meniu; }
+};
+
+class CuRacoritoare : public Meniu {
+private:
+    Meniu* meniu;
+public:
+    CuRacoritoare(Meniu* m) : Meniu(m->getPret()), meniu(m) {}
+    int getPret() override { return meniu->getPret() + 4; }
+    std::string descriere() override { return meniu->descriere() + " cu racoritoare"; }
+    ~CuRacoritoare() { delete meniu; }
+};
+
+class MicDejun : public Meniu {
+private:
+    std::string denumire;
+public:
+    MicDejun(const std::string& denumire, int pret) : Meniu(pret), denumire(denumire) {}
+    std::string descriere() override { return denumire; }
+};
+
+//3.2
+std::vector<Meniu*> listaMeniuri() {
+    std::vector<Meniu*> rez;
+    rez.push_back(new CuCafea(new CuRacoritoare(new MicDejun("Omleta", 15))));
+    rez.push_back(new CuCafea(new MicDejun("Ochiuri", 10)));
+    rez.push_back(new MicDejun("Omleta", 15));
+    return rez;
+}
+
+//3.3
+int main() {
+    std::vector<Meniu*> rez = listaMeniuri();
+    std::sort(rez.begin(), rez.end(), [](const auto a, const auto b) { return a->getPret() > b->getPret(); });
+    for (const auto m : rez) {
+        std::cout << m->descriere() << ' ' << m->getPret() << " RON\n";
+        delete m;
+    }
+    return 0;
+}
+
+//4
+template <typename tip>
+class Measurement {
+public:
+    tip value;
+    Measurement(tip val) : value(val) {}
+    Measurement& operator+(tip val) {
+        return Measurement(this->value + val);
+    }
+    bool operator<=(const Measurement& other) {
+        return this->value <= other.value;
+    }
+    bool operator<(const Measurement& other) {
+        return this->value < other.value;
+    }
+};

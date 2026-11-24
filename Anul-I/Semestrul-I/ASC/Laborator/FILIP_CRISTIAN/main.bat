@@ -1,0 +1,1 @@
+cl main.c /link modul1.obj modul2.obj

@@ -1,0 +1,144 @@
+/AUDIT-repo.md
+/CONTEXT-workflow-claude.md
+/CLAUDE.md
+.claude/
+progress.md
+
+fise-discipline/
+Notite/
+
+.env
+.env.*
+!.env.example
+config.properties
+!config.example.properties
+*.bak
+/Anul-II/Semestrul-I/BD/Laborator/mediu-sql/
+
+/Anul-I/Semestrul-II/AG/note_sesiune.pdf
+/Anul-I/Semestrul-II/AG/AG 2026.pdf
+/Anul-I/Semestrul-II/Geometrie/212code.pdf
+/Anul-I/Semestrul-II/SDA/Examen/Rezultate examen 10 iunie.pdf
+
+/Anul-I/Semestrul-II/OOP/Examen/Practic/Rares/
+/Anul-I/Semestrul-II/OOP/Laborator/proiect_teo/
+/Anul-I/Semestrul-II/SO/Laborator/teaching-notes copy.pdf
+/Anul-I/Semestrul-II/SO/Laborator/stupi-stud/
+/Anul-I/Semestrul-II/OOP/Examen/Scris/REZOLVARI.pdf
+# > 100MB
+/Anul-I/Semestrul-I/Analiza/Cursuri 2-13 Analiza.pdf
+
+# sistem
+.DS_Store
+desktop.ini
+
+# medii și cache
+.venv/
+venv/
+__pycache__/
+*.pyc
+.gradle/
+
+# IDE
+.idea/
+.vs/
+*.iml
+*.vcxproj.user
+LastCoverageResults.log
+
+# build
+build/
+out/
+cmake-build-*/
+x64/
+ARM64/
+Debug/
+Release/
+*.dSYM/
+*.ipch
+*.pdb
+*.obj
+*.o
+*.exe
+a.out
+
+# binare compilate fără extensie (SO)
+/Anul-I/Semestrul-II/SO/Examen/practice/7
+/Anul-I/Semestrul-II/SO/Examen/practice/8
+/Anul-I/Semestrul-II/SO/Laborator/c_debug_practice/program*
+!/Anul-I/Semestrul-II/SO/Laborator/c_debug_practice/program*.c
+/Anul-I/Semestrul-II/SO/Laborator/processes-threads/**/p[0-9]
+/Anul-I/Semestrul-II/SO/Laborator/processes/prob
+/Anul-I/Semestrul-II/SO/Laborator/curs4/a
+/Anul-I/Semestrul-II/SO/Laborator/test-sapt7/3
+
+# binare compilate fără extensie (RC)
+/Anul-II/Semestrul-I/RC/Laborator/Lab3/server
+/Anul-II/Semestrul-I/RC/Laborator/Lab3/client
+/Anul-II/Semestrul-I/RC/Laborator/Lab3/client_max
+/Anul-II/Semestrul-I/RC/Laborator/Lab4/client
+/Anul-II/Semestrul-I/RC/Laborator/Lab5/clientUDP
+/Anul-II/Semestrul-I/RC/Laborator/Lab5/clientUDP1
+/Anul-II/Semestrul-I/RC/Laborator/Lab5/serverUDP
+/Anul-II/Semestrul-I/RC/Laborator/Lab5/serverUDP1
+/Anul-II/Semestrul-I/RC/Laborator/Lab5/udpClientC
+/Anul-II/Semestrul-I/RC/Laborator/Lab5/udpServerConc
+/Anul-II/Semestrul-I/RC/Laborator/Test1/client
+/Anul-II/Semestrul-I/RC/Laborator/Test1/server1
+/Anul-II/Semestrul-I/RC/Laborator/Test1/server2
+/Anul-II/Semestrul-I/RC/Laborator/Practice/TCP/*/client
+/Anul-II/Semestrul-I/RC/Laborator/Practice/TCP/*/server
+
+# unelte incluse
+asm_tools/
+/Anul-I/Semestrul-I/ASC/Laborator/asm_tools virtual machine/nasm/
+/Anul-I/Semestrul-I/ASC/Laborator/asm_tools virtual machine/npp/
+/Anul-I/Semestrul-I/ASC/Laborator/asm_tools virtual machine/ollydbg/
+
+*.zip
+*.pl~
+*.swo
+*.swp
+*~
+*.apkg
+
+
+/Anul-I/Semestrul-II/SD/Laborator/sisteme dinamice test resurse/*
+!/Anul-I/Semestrul-II/SD/Laborator/sisteme dinamice test resurse/Lb*-exercitii.pdf
+!/Anul-I/Semestrul-II/SD/Laborator/sisteme dinamice test resurse/teorie.*
+!/Anul-I/Semestrul-II/SD/Laborator/sisteme dinamice test resurse/test.mw
+
+# javadoc generat în MAP Lab3 (sursele sunt în src/)
+docs/javadoc/
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/*.html
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/*.js
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/*.svg
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/*.css
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/element-list
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/domain/
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/repository/
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/service/
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/ui/
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/index-files/
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/script-dir/
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/resources/
+/Anul-II/Semestrul-I/MAP/Laborator/Lab3/legal/
+
+# date de test generate
+/Anul-II/Semestrul-I/RC/Laborator/Lab4/garbage.txt
+/Anul-I/Semestrul-II/SO/Laborator/shell_practice_pack/inputs/tree/big.dat
+/Anul-I/Semestrul-II/SO/Laborator/shell_practice_pack/inputs/tree/big1M.bin
+/Anul-I/Semestrul-II/SO/Laborator/shell_practice_pack/inputs/tree/medium.dat
+/Anul-I/Semestrul-II/SO/Laborator/shell_practice_pack/inputs/tree/small.bin
+# fișiere cu nume aleatoare create la rularea clientului din RC Lab4
+/Anul-II/Semestrul-I/RC/Laborator/Lab4/-
+/Anul-II/Semestrul-I/RC/Laborator/Lab4/J.3aE
+/Anul-II/Semestrul-I/RC/Laborator/Lab4/SW
+/Anul-II/Semestrul-I/RC/Laborator/Lab4/ew=
+/Anul-II/Semestrul-I/RC/Laborator/Lab4/m7C
+/Anul-II/Semestrul-I/RC/Laborator/Lab4/m7C{Gc}i
+/Anul-II/Semestrul-I/RC/Laborator/Lab4/mk
+/Anul-II/Semestrul-I/RC/Laborator/Lab4/utK
+
+# fișiere temporare Word
+~WRL*.tmp

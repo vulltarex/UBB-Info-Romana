@@ -1,0 +1,7 @@
+root UPDATE 15
+student1 LOGIN 45
+student2 COMPILE 120
+root LOGIN 5
+student1 COMPILE 10
+profesor LOGIN 60
+student3 LOGIN 25

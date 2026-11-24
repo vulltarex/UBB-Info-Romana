@@ -1,0 +1,150 @@
+//1
+/* Returneaza vectorul furnizat ca parametru sortat descrescator dupa frecventa elementelor
+ * pre: l este un vector de intregi nevid
+ * post: este returnat un vector ce contine elementele furnizate vectorului furnizat ca parametru sortate descrescator dupa frecventa aparitiei
+ * acestora
+ * arunca: std::exception daca vectorul este vid
+ */
+#include <assert.h>
+#include <iostream>
+#include <vector>
+
+void testFunc() {
+    std::vector<int> test;
+    test.push_back(1);
+    test.push_back(2);
+    test.push_back(2);
+    test.push_back(3);
+    test.push_back(3);
+    test.push_back(3);
+    assert(f(test).at(0) == 3);
+    assert(f(test).at(1) == 3);
+    assert(f(test).at(2) == 3);
+    assert(f(test).at(3) == 2);
+    assert(f(test).at(4) == 2);
+    assert(f(test).at(5) == 1);
+    test.clear();
+    try {
+        f(test);
+        assert(false);
+    }
+    catch (const std::exception&) {
+        assert(true);
+    }
+}
+
+//2a
+/*
+AABAprintAABprintA
+ */
+//2b
+/*
+A
+A
+print
+~A
+~A
+ */
+
+//3
+class Participant {
+public:
+    Participant() = default;
+    virtual void tipareste() = 0;
+    virtual bool eVoluntar() { return true; }
+    virtual ~Participant() = default;
+};
+
+class Angajat : public Participant {
+private:
+    Participant* participant;
+public:
+    Angajat(Participant* p) : participant(p) {}
+    void tipareste() override {
+        participant->tipareste();
+        std::cout << " angajat";
+    }
+    bool eVoluntar() override { return false; }
+    ~Angajat() { delete participant; }
+};
+
+class Director : public Personal {
+public:
+    Director(std::string& nume) : Personal(nume) {}
+    void tipareste() override {
+        Personal::tipareste();
+        std::cout << " Director";
+    }
+};
+
+class ONG {
+private:
+    std::vector<Participant*> participanti;
+public:
+    ONG() = default;
+    void add(Participant* p) {
+        participanti.push_back(p);
+    }
+    std::vector<Participant*> getAll(bool voluntari) const {
+        std::vector<Participant*> rez;
+        for (auto p : participanti) {
+            if (p->eVoluntar() == voluntari) {
+                rez.push_back(p);
+            }
+        }
+        return rez;
+    }
+    ~ONG() {
+        for (auto p : participanti) delete p;
+    }
+};
+
+//3.2
+ONG func() {
+    ONG ong;
+    ong.add(new Administrator("Ion"));
+    ong.add(new Angajat(new Administrator("Nicu")));
+    ong.add(new Director("Doru"));
+    ong.add(new Angajat(new Director("Ana")));
+    return ong;
+}
+//3.3
+int main() {
+    ONG ong = func();
+    std::cout << "Angajati:\n";
+    std::vector<Participant*> angajati = ong.getAll(false);
+    for (auto p : angajati) {
+        p->tipareste();
+        std::cout << '\n';
+    }
+    std::vector<Participant*> voluntari = ong.getAll(true);
+    for (auto p : voluntari) {
+        p->tipareste();
+        std::cout << '\n';
+    }
+    return 0;
+}
+
+//4
+template <typename T>
+class Cos {
+private:
+    std::vector<Cos> stari;
+    std::vector<T> cos;
+public:
+    Cos(const Cos& other) {
+        for (auto stare : other.stari)
+            this->stari.push_back(stare);
+        for (auto obiect : other.cos)
+            this->cos.push_back(obiect);
+    }
+    Cos& operator+(T& e) {
+        stari.push_back(*this);
+        cos.push_back(e);
+        return *this;
+    }
+    void undo() {
+        *this = stari.pop_back();
+    }
+    ~Cos() = default;
+};

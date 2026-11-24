@@ -1,0 +1,5 @@
+Ping-Pong,Meciuri de tenis de masa,Hobby,100
+titlu,desc,tip,4
+Cumparaturi,Mancare pentru saptamana viitoare,Personal,60
+abc,aaa,tip1,50
+Lab OOP,Laborator C++ despre clase si obiecte,Facultate,120

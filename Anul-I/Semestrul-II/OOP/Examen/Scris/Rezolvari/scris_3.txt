@@ -1,0 +1,115 @@
+/* Functia verifica daca parametrul a este prim
+ * pre: a este un numar intreg strict pozitiv
+ * post: se returneaza true daca a este prim, false altfel
+ * exceptii: std::exception - daca a este un numar negativ sau zero
+ */
+#include <assert.h>
+#include <exception>
+#include <vector>
+#include <iostream>
+
+void test() {
+    assert(f(1) == false);
+    assert(f(2) == true);
+    assert(f(3) == true);
+    try {
+        f(-1);
+        assert(false);
+    }
+    catch (const std::exception&) {
+        assert(true);
+    }
+}
+
+//2a
+//A()
+//A()
+//B()
+//printA
+//printB
+
+//2b
+//7
+//8
+
+//3
+class Transformer {
+public:
+    Transformer() = default;
+    virtual void transform(std::vector<int>& nrs) = 0;
+    virtual ~Transformer() = default;
+};
+
+class Composite : public Transformer {
+private:
+    Transformer* t1;
+    Transformer* t2;
+public:
+    Composite(Transformer* tr1, Transformer* tr2) : t1(tr1), t2(tr2) {}
+    void transform(std::vector<int>& nrs) override {
+        t1->transform(nrs);
+        t2->transform(nrs);
+    }
+    ~Composite() {
+        delete t1;
+        delete t2;
+    }
+};
+
+class Nuller : public Adder {
+public:
+    Nuller(int cat) : Adder(cat) {}
+    void transform(std::vector<int>& nrs) override {
+        std::vector<int> rez;
+        for (int nr : nrs) rez.push_back(nr);
+        Adder::transform(rez);
+        for (int i = 0; i < nrs.size(); i++) {
+            if (rez[i] > 10) nrs[i] = 0;
+        }
+    }
+};
+
+//3.2
+Numbers func() {
+    Numbers* numbers = new Numbers(new Composite(new Nuller(9), new Composite(new Swapper(), new Adder(3))));
+    return *numbers;
+}
+//3.3
+int main() {
+    Numbers n1 = func(), n2 = func();
+    for (int i = 1; i <= 5; i++) {
+        n1.addd(i);
+        n2.addd(i + 5);
+    }
+    n1.transform();
+    n2.transform();
+    return 0;
+}
+
+//4
+template <typename T>
+class ToDo {
+private:
+    std::vector<T> toDoList;
+public:
+    void printToDoList(std::ostream& s) {
+        s << "De facut:";
+        for (const T& task : toDoList) {
+            s << task << ';';
+        }
+    }
+    ToDo& operator<<(const T& task) {
+        toDoList.push_back(task);
+        return *this;
+    }
+};
+
+class Examen {
+private:
+    std::string materie, ora;
+public:
+    Examen(const std::string& mat, const std::string& hr) : materie(mat), ora(hr) {}
+    const std::string getDescriere() const {
+        return materie + " ora " + ora;
+    }
+};

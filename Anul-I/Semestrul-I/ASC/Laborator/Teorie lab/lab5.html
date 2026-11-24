@@ -1,0 +1,850 @@
+
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arhitectura Sistemelor de Calcul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=30092025">
+</head>
+<body>
+  <header>
+   <div>
+        <h1><a href="https://www.cs.ubbcluj.ro/~diana.sotropa/teaching/asc">Arhitectura Sistemelor de Calcul</a></h1>
+        <h4>Anul 1, Informatică Română, an universitar 2025-2026</h4>
+         <a href="http://www.cs.ubbcluj.ro/~diana.sotropa/">Dr. Diana Șotropa, Lector Universitar</a>
+  
+    </div>
+    <div>
+    <div class="hamburger" onclick="toggleMobileNav()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav>
+      <a href="index.php#despre">Despre</a>
+      <a href="index.php#noutati">Noutăți</a>
+      <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+      <a href="index.php#laboratoare">Laboratoare</a>
+      <a href="index.php#contact">Contact</a>
+    </nav>
+    <a class="contact" href="mailto:diana.sotropa@ubbcluj.ro"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#ffffff"/>
+</svg> diana.sotropa@ubbcluj.ro</a>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.php#despre">Despre</a>
+    <a href="index.php#noutati">Noutăți</a>
+    <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+    <a href="index.php#laboratoare">Laboratoare</a>
+    <a href="index.php#contact">Contact</a>
+  </div>
+
+  <div class="container"><link rel="stylesheet" href="assets/old-styles.css?v=30092025">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	$( function() {
+		$(".modal .x").on("click",function(){$('.modal').remove();$('.informatie_modal').remove();})
+		$(".modalP .x").on("click",function(){$('.modalP').remove();})
+		$( "#accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#second-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#third-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#fourth-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#fifth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#sixth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#accordion-trei" ).accordion({
+			collapsible: true, active : 3, heightStyle: "content"
+		});
+		// Hide all panels
+
+		// Get hash from query string
+		var hash = window.location.hash;
+		console.log(hash);
+
+		if (hash) {
+			
+		$(".article").hide();
+			// Get panel header element
+			var requestedPanel = $(hash);
+			if (requestedPanel.length) {
+				// Hide all panels
+				$(".article").hide();
+				// Show requested panel
+				requestedPanel.next(".article").show();
+			}
+		}
+});
+</script>
+  <div id="menu">
+<ul>
+<li><a href='ro-lab5-exemple.php'>EXEMPLE</a></li><li><a href='ro-lab5-exercitii.php'>EXERCITII</a></li><li class='active'><a href='ro-lab5-teorie.php'>TEORIE</a></li></ul>
+</div>
+<div id="content">
+	<h1>Laborator 5 - Suport teoretic</h1>
+	<h2>Instructiuni de comparare, salt conditionat si de ciclare. Operatii pe siruri.</h2>
+<div id="accordion">	
+	<h2>Comparații între operanzi</h2>
+	<div class="article">
+<h2>Instructiunea CMP</h2>
+
+<pre><code><span class="i">CMP</span> <span class="r">&lt;opd&gt;, &lt;ops&gt;</span></code></pre>
+
+<ul><li>
+Instructiunea CMP realizeaza comparatia intre valorile numerice ale celor doi operanzi prin efectuarea unei scăderi fictive opd-ops.
+</li></ul>
+
+<table border="1" cellpadding="5" cellspacing="0">
+<tbody>
+<tr>
+<td >   <strong>  CMP</strong> <em>d,s</em></td>
+<td>comparaţie valori operanzi  (nu modifică operanzii) (execuţie fictivă <em>d - s</em>)</td>
+<td>OF,SF,ZF,AF,PF şi CF</td>
+</tr>
+</tbody>
+</table>
+
+<ul><li><strong>CMP</strong> scade valoarea operandului sursă din operandul destinaţie, dar spre deosebire de instrucţiunea <strong>SUB</strong>, rezultatul nu este reţinut, el neafectând nici una din valorile iniţiale ale operanzilor. Efectul acestei instrucţiuni constă numai în modificarea valorii unor flaguri în conformitate cu efectuarea operaţiei opd-ops. Instrucţiunea <strong>CMP</strong> este cel mai des folosită în combinaţie cu instrucţiuni de salt condiţionat.
+</li><li>
+<strong>Deşi numele ei este CMP este important de subliniat ca în realitate aceasta instructiune NU COMPARA nimic, nestabilind nici un criteriu de compara</strong><strong>ţ</strong><strong>ie şi neluând de fapt nici o decizie, ci ea doar PREGATESTE decizia corespunzător cu flagurile setate, comparaţia efectivă si decizia corespunzatoare fiind luata concret de instrucţiunea de salt conditionat care va fi folosită ulterior instructiunii CMP ! Dacă nu folosim ulterior nici o instructiune decizională, CMP nu are nici un rol concret în vreo comparatie, ea reprezentând doar o simpla scadere fictiva cu rol de afectare a flagurilor şi nu îşi va merita în nici un caz numele de CMP (compare).</strong>
+</li><li>
+Operatorul destinatie poate sa fie registru sau variabila in memorie.
+</li><li>
+Operandul sursa poate sa fie registru, variabila in memorie sau constanta.
+</li><li>
+Ambii operanzi ai instructiunii CMP trebuie sa fie de aceasi dimensiune.
+</li></ul>
+
+<h3><i>Exemplul 1: </i></h3>
+<pre><code><span class="i">cmp</span> <span class="r">eax, ebx</span> <span class="comentariu">; ”compara” valorile stocate in cei doi registri (scadere fictiva eax-ebx)</span>
+<span class="i">jle</span> <span class="r">done</span> <span class="comentariu">;în funcţie de instrucţiunea de salt condiţionat utilizată (aici JLE) se stabileste criteriul de comparare.</span>
+<span class="comentariu">;In acest caz: daca continutul din EAX in interpretarea cu semn este mai mic sau egal cu continutul din EBX atunci JUMP la eticheta Done, </span>
+<span class="comentariu">;Altfel continua cu urmatoarea  instructiune (flagul testat aici este ZF).</span>
+<span class="i">done:</span>
+<span class="comentariu">;instructiuni care urmează etichetei done</span>
+</code></pre>
+<h3><i>Exemplul 2: </i></h3>
+<pre><code><span class="i">mov</span> <span class="r">al,200</span> <span class="comentariu">; AL = C8h</span>
+<span class="i">mov</span> <span class="r">bl,100</span>
+<span class="i">cmp</span> <span class="r">al, bl</span> <span class="comentariu">; se realizeaza scaderea fictiva al-bl si se seteaza </span>
+<span class="comentariu">; flagurile in mod corespunzator acesteia (in acest caz vom avea SF=0, OF=1, CF=0 şi ZF=0)</span>
+<span class="i">JB</span> <span class="r">et2</span> <span class="comentariu">;instructiunea de salt conditionat stabileste criteriul de comparare, in acest caz Jump if Below – comparatie pentru numere fara semn (este 200 BELOW 100 ?) si se testeaza continutul lui CF: dacă CF=1 saltul se va efectua, dacă CF=0 saltul NU se va efectua. </span>
+<span class="comentariu">;Cum CF=0 în cazul nostru, saltul NU se va efectua.</span>
+<span class="comentariu">;............. ;set de instructiuni care urmează</span>
+<span class="i">et2:</span>
+<span class="comentariu">;............. ;set de instructiuni care urmează etichetei</span>
+</code></pre>
+<h3><i>Exemplul 3: </i></h3>
+<pre><code><span class="i">mov</span> <span class="r">al,-56</span> <span class="comentariu">; AL = C8h = 200 in interpretarea fara semn</span>
+<span class="i">mov</span> <span class="r">bl,100</span>
+<span class="i">cmp</span> <span class="r">al, bl</span> <span class="comentariu">;se realizeaza scaderea fictiva al-bl si se seteaza flagurile in mod corespunzator acesteia (pentru cazul nostru vom avea SF=0, OF=1, CF=0 şi ZF=0)</span>
+<span class="i">JNGE</span> <span class="r">et2</span> <span class="comentariu">;se verifica conditia JNGE - Jump if not greater or equal </span>
+<span class="comentariu">;(comparaţie CU SEMN -56 fată de 100)</span> 
+<span class="comentariu">;concret se verifica daca este diferit continutul din SF si OF</span> 
+<span class="comentariu">; Avand in vedere ca în cazul nostru SF=0 şi OF=1, deci SF &lt;&gt; OF, condiţia este îndeplinită (şi intr-adevăr -56 este „NOT GREATER OR ;EQUAL” fata de 100) deci saltul la eticheta et2 se va efectua</span> 
+<span class="i">mov</span> <span class="r">dx,1</span></span> 
+<span class="i">et2:</span>
+<span class="i">mov</span> <span class="r">cx,1</span>
+</code></pre>
+<h3><i>Exemplul 4: </i></h3>
+<pre><code><span class="i">mov</span> <span class="r">al,-56</span> <span class="comentariu">; AL = C8h = 200 in interpretarea fara semn</span>
+<span class="i">mov</span> <span class="r">bl,100</span>
+<span class="i">cmp</span> <span class="r">al, bl</span> <span class="comentariu">;se realizeaza scaderea fictiva al-bl si se seteaza  flagurile in mod corespunzator acesteia (pentru cazul nostru vom avea SF=0, OF=1, CF=0 şi ZF=0)</span>
+<span class="i">JNBE</span> <span class="r">et2</span> <span class="comentariu">;se verifica conditia JNBE - Jump if not below or equal </span>
+<span class="comentariu">;(comparaţie FARA SEMN  200 fată de 100)</span>
+<span class="comentariu">;concret se verifica daca CF=0 şi ZF=0</span>
+<span class="comentariu">;Avand in vedere ca în cazul nostru CF=0 şi ZF=0, condiţia este îndeplinită (şi intr-adevăr 200 este „NOT BELOW OR EQUAL” ;fata de 100) deci saltul la eticheta et2 se va efectua</span>
+<span class="i">mov</span> <span class="r">dx,1</span>
+<span class="i">et2:</span>
+<span class="i">mov</span> <span class="r">cx,1</span>
+</code></pre>
+<h2>Instructiunea TEST</h2>
+
+<pre><code><span class="i">TEST</span> <span class="r">&lt;opd&gt;, &lt;ops&gt;</span></code></pre>
+
+<ul><li>Instructiunea TEST realizeaza operatia logica SI intre cei doi operanzi (executie fictiva ops <strong>AND</strong> opd) fara a salva rezultatul operatiei in vreunul dintre cei doi operanzi.
+</li><li>
+Ambii operanzi ai instructiunii TEST trebuie sa fie de aceasi dimensiune.
+</li><li>
+Singurul efect al unei instructiuni TEST este modificarea continutului flagurilor specificate in tabelul de mai sus corespunzator cu rezultatul operatiei AND efectuate.
+</li></ul>
+
+<table  border="1" cellpadding="5" cellspacing="0">
+<tbody>
+<tr>
+<td ><strong>TEST</strong> <em>d,s</em></td>
+<td >execuţie fictivă  <em>d</em> <strong>AND</strong> <em>s</em></td>
+<td >OF = 0, CF = 0<br>
+
+SF,ZF,PF -  modificaţi<br>
+
+AF - nedefinit</td>
+</tr>
+</tbody>
+</table>
+
+<h3><i>Exemplu 1:</i></h3>
+
+<pre><code><span class="i">ambiiOPeranziZero:</span> <span class="comentariu">;set de instructiuni care compun eticheta....</span>
+<span class="i">test</span> <span class="r">ECX, ECX</span> <span class="comentariu">; set ZF to 1 if ECX == 0</span>
+<span class="i">je</span> <span class="r">ambiiOPeranziZero</span> <span class="comentariu">; în funcţie de instrucţiunea de salt condiţionat utilizată</span>
+<span class="comentariu">; (aici JE) se stabileste criteriul de comparare. </span>
+<span class="comentariu">;In acest caz: jump la eticheta if ZF = 1</span>
+<span class="comentariu">; alternativ se putea folosi aici varianta jz AmbiiOPeranziZero, aceste doua instructiuni de salt conditionat (JE şi JZ) fiind similare in ceea ce priveste conditia testata (true if ZF=1)</span>
+ </code></pre>
+
+<h3><i>Exemplu 2:</i></h3>
+
+<pre><code><span class="i">mov</span> <span class="r">AH,[v]</span>
+<span class="i">test</span> <span class="r">AH,0F2h </span>
+<span class="i">js</span> <span class="r">et2</span> <span class="comentariu">; în funcţie de instrucţiunea de salt condiţionat utilizată (aici JS) se stabileste criteriul de comparare.  </span>
+<span class="comentariu">; In acest caz: daca rezultatul operatiei AH AND 0F2h este un numar strict negativ in interpretarea cu semn (adica daca bitul de semn al rezultatului este 1) atunci Jump ;la eticheta et2 (flagul testat este SF).</span>
+<span class="i">et2:</span> <span class="comentariu">;set de instructiuni care compun eticheta....</span>
+</code></pre>
+
+<ul><li>Similar cu situatia de la instructiunea CMP, avem de făcut şi aici următoarea observaţie:
+</li><li>
+<strong>Deşi numele ei este TEST este important de subliniat ca în realitate aceasta instructiune NU TESTEAZA nimic, nestabilind nici un criteriu de testare şi neluând de fapt nici o decizie, ci ea doar PREGATESTE decizia corespunzător cu flagurile setate, criteriul de testare, testarea efectivă si decizia corespunzatoare fiind luata concret de instrucţiunea de salt conditionat care va fi folosită ulterior instructiunii TEST ! Dacă nu folosim ulterior nici o instructiune decizională, TEST nu are nici un rol concret în vreo testare, ea reprezentând doar o simpla operatie SI bit cu bit cu rol de afectare a flagurilor şi nu îşi va merita în nici un caz numele de TEST (testare a unei conditii).</strong>
+</li>
+</ul>
+	</div>	
+	<h2>Salturi condiționate de flag-uri</h2>
+	<div class="article">
+<ul><li>Cand se compara doua numere cu semn se folosesc termenii "less than" (mai mic decat) si "greater than" (mai mare decat), iar cand se compara doua numere fara semn se folosesc termenii "below" (inferior, sub) si respectiv "above" (superior, deasupra, peste).
+</li><li>
+Redam mai jos o parte din documentatia INTEL, referitoare la aceste instructiuni de salt. 
+(<a href="https://software.intel.com/en-us/articles/intel-sdm" target="_blank">&#128279; Combined Volume Set of Intel® 64 and IA-32 Architectures Software Developer’s Manuals, 
+incepand de la pag. 1058</a>)
+</li></ul>
+
+<h3><span class="i">JMP – Unconditional Jump</span></h3>
+
+<table border="1" cellspacing="0" cellpadding="5">
+<tbody>
+<tr>
+<td><strong>Mnemonic</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>JMP rel8</td>
+<td>Jump short, relative, displacement relative to next instruction.</td>
+</tr>
+<tr>
+<td>JMP rel16</td>
+<td>Jump near, relative, displacement relative to next instruction.</td>
+</tr>
+<tr>
+<td>JMP rel32</td>
+<td>Jump near, relative, displacement relative to next instruction.</td>
+</tr>
+<tr>
+<td>JMP r/m16</td>
+<td>Jump near, absolute indirect, address given in r/m16.</td>
+</tr>
+<tr>
+<td>JMP r/m32</td>
+<td>Jump near, absolute indirect, address given in r/m32.</td>
+</tr>
+<tr>
+<td>JMP ptr16:16</td>
+<td>Jump far, absolute, address given in operand.</td>
+</tr>
+<tr>
+<td>JMP ptr16:32</td>
+<td>Jump far, absolute, address given in operand.</td>
+</tr>
+<tr>
+<td>JMP m16:16</td>
+<td>Jump far, absolute indirect, address given in m16:16.</td>
+</tr>
+<tr>
+<td>JMP m16:32</td>
+<td>Jump far, absolute indirect, address given in m16:32.</td>
+</tr>
+</tbody>
+</table>
+<ul><li>
+Transfers program control to a different point in the instruction stream without recording return information. 
+</li><li>The destination (target) operand specifies the address of the instruction being jumped to. 
+</li><li>This operand can be an immediate value, a general-purpose register, or a memory location.
+</li></ul>
+
+This instruction can be used to execute four different types of jumps: 
+
+<ul><li>
+<strong>Near jump:</strong> A jump to an instruction within the current code segment (the segment currently pointed to by the CS register), sometimes referred to as an intrasegment jump.
+<li>
+<strong>Short jump:</strong> A near jump where the jump range is limited to -128 to +127 from the current EIP value.
+<li>
+<strong>Far jump:</strong> A jump to an instruction located in a different segment than the current code segment but at the same privilege level, sometimes referred to as an intersegment jump.
+</li></ul>
+
+<h3><span class="i">Jcc — Jump if Condition Is Met</span></h3>
+
+<ul><li>The conditions for each Jcc mnemonic are given in the "{description}" column of the table on the preceding page. The terms "less" and "greater" are used for comparisons of signed integers and the terms "above" and "below" are used for unsigned integers.
+</li></ul>
+
+<table border="1" cellspacing="0" cellpadding="5">
+<tbody>
+<tr>
+<td><strong>Mnemonic</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>JA rel8</td>
+<td>Jump short if above (CF=0 and ZF=0).</td>
+</tr>
+<tr>
+<td>JAE rel8</td>
+<td>Jump short if above or equal (CF=0).</td>
+</tr>
+<tr>
+<td>JB rel8</td>
+<td>Jump short if below (CF=1).</td>
+</tr>
+<tr>
+<td>JBE rel8</td>
+<td>Jump short if below or equal (CF=1 or ZF=1).</td>
+</tr>
+<tr>
+<td>JC rel8</td>
+<td>Jump short if carry (CF=1).</td>
+</tr>
+<tr>
+<td>JCXZ rel8</td>
+<td>Jump short if CX register is 0.</td>
+</tr>
+<tr>
+<td>JECXZ rel8</td>
+<td>Jump short if ECX register is 0.</td>
+</tr>
+<tr>
+<td>JE rel8</td>
+<td>Jump short if equal (ZF=1).</td>
+</tr>
+<tr>
+<td>JG rel8</td>
+<td>Jump short if greater (ZF=0 and SF=OF).</td>
+</tr>
+<tr>
+<td>JGE rel8</td>
+<td>Jump short if greater or equal (SF=OF).</td>
+</tr>
+<tr>
+<td>JL rel8</td>
+<td>Jump short if less (SF&lt;&gt;OF).</td>
+</tr>
+<tr>
+<td>JLE rel8</td>
+<td>Jump short if less or equal (ZF=1 or SF&lt;&gt;OF).</td>
+</tr>
+<tr>
+<td>JNA rel8</td>
+<td>Jump short if not above (CF=1 or ZF=1).</td>
+</tr>
+<tr>
+<td>JNAE rel8</td>
+<td>Jump short if not above or equal (CF=1).</td>
+</tr>
+<tr>
+<td>JNB rel8</td>
+<td>Jump short if not below (CF=0).</td>
+</tr>
+<tr>
+<td>JNBE rel8</td>
+<td>Jump short if not below or equal (CF=0 and ZF=0).</td>
+</tr>
+<tr>
+<td>JNC rel8</td>
+<td>Jump short if not carry (CF=0).</td>
+</tr>
+<tr>
+<td>JNE rel8</td>
+<td>Jump short if not equal (ZF=0).</td>
+</tr>
+<tr>
+<td>JNG rel8</td>
+<td>Jump short if not greater (ZF=1 or SF&lt;&gt;OF).</td>
+</tr>
+<tr>
+<td>JNGE rel8</td>
+<td>Jump short if not greater or equal (SF&lt;&gt;OF).</td>
+</tr>
+<tr>
+<td>JNL rel8</td>
+<td>Jump short if not less (SF=OF).</td>
+</tr>
+<tr>
+<td>JNLE rel8</td>
+<td>Jump short if not less or equal (ZF=0 and SF=OF).</td>
+</tr>
+<tr>
+<td>JNO rel8</td>
+<td>Jump short if not overflow (OF=0).</td>
+</tr>
+<tr>
+<td>JNP rel8</td>
+<td>Jump short if not parity (PF=0).</td>
+</tr>
+<tr>
+<td>JNS rel8</td>
+<td>Jump short if not sign (SF=0).</td>
+</tr>
+<tr>
+<td>JNZ rel8</td>
+<td>Jump short if not zero (ZF=0).</td>
+</tr>
+<tr>
+<td>JO rel8</td>
+<td>Jump short if overflow (OF=1).</td>
+</tr>
+<tr>
+<td>JP rel8</td>
+<td>Jump short if parity (PF=1).</td>
+</tr>
+<tr>
+<td>JPE rel8</td>
+<td>Jump short if parity even (PF=1).</td>
+</tr>
+<tr>
+<td>JPO rel8</td>
+<td>Jump short if parity odd (PF=0).</td>
+</tr>
+<tr>
+<td>JS rel8</td>
+<td>Jump short if sign (SF=1).</td>
+</tr>
+<tr>
+<td>JZ rel8</td>
+<td>Jump short if zero (ZF = 1).</td>
+</tr>
+<tr>
+<td>JA rel16/32</td>
+<td>Jump near if above (CF=0 and ZF=0).</td>
+</tr>
+<tr>
+<td>JAE rel16/32</td>
+<td>Jump near if above or equal (CF=0).</td>
+</tr>
+<tr>
+<td>JB rel16/32</td>
+<td>Jump near if below (CF=1).</td>
+</tr>
+<tr>
+<td>JBE rel16/32</td>
+<td>Jump near if below or equal (CF=1 or ZF=1).</td>
+</tr>
+<tr>
+<td>JC rel16/32</td>
+<td>Jump near if carry (CF=1).</td>
+</tr>
+<tr>
+<td>JE rel16/32</td>
+<td>Jump near if equal (ZF=1).</td>
+</tr>
+<tr>
+<td>JZ rel16/32</td>
+<td>Jump near if 0 (ZF=1).</td>
+</tr>
+<tr>
+<td>JG rel16/32</td>
+<td>Jump near if greater (ZF=0 and SF=OF).</td>
+</tr>
+<tr>
+<td>JGE rel16/32</td>
+<td>Jump near if greater or equal (SF=OF).</td>
+</tr>
+<tr>
+<td>JL rel16/32</td>
+<td>Jump near if less (SF&lt;&gt;OF).</td>
+</tr>
+<tr>
+<td>JLE rel16/32</td>
+<td>Jump near if less or equal (ZF=1 or SF&lt;&gt;OF).</td>
+</tr>
+<tr>
+<td>JNA rel16/32</td>
+<td>Jump near if not above (CF=1 or ZF=1).</td>
+</tr>
+<tr>
+<td>JNAE rel16/32</td>
+<td>Jump near if not above or equal (CF=1).</td>
+</tr>
+<tr>
+<td>JNB rel16/32</td>
+<td>Jump near if not below (CF=0).</td>
+</tr>
+<tr>
+<td>JNBE rel16/32</td>
+<td>Jump near if not below or equal (CF=0 and ZF=0).</td>
+</tr>
+<tr>
+<td>JNC rel16/32</td>
+<td>Jump near if not carry (CF=0).</td>
+</tr>
+<tr>
+<td>JNE rel16/32</td>
+<td>Jump near if not equal (ZF=0).</td>
+</tr>
+<tr>
+<td>JNG rel16/32</td>
+<td>Jump near if not greater (ZF=1 or SF&lt;&gt;OF).</td>
+</tr>
+<tr>
+<td>JNGE rel16/32</td>
+<td>Jump near if not greater or equal (SF&lt;&gt;OF).</td>
+</tr>
+<tr>
+<td>JNL rel16/32</td>
+<td>Jump near if not less (SF=OF).</td>
+</tr>
+<tr>
+<td>JNLE rel16/32</td>
+<td>Jump near if not less or equal (ZF=0 and SF=OF).</td>
+</tr>
+<tr>
+<td>JNO rel16/32</td>
+<td>Jump near if not overflow (OF=0).</td>
+</tr>
+<tr>
+<td>JNP rel16/32</td>
+<td>Jump near if not parity (PF=0).</td>
+</tr>
+<tr>
+<td>JNS rel16/32</td>
+<td>Jump near if not sign (SF=0).</td>
+</tr>
+<tr>
+<td>JNZ rel16/32</td>
+<td>Jump near if not zero (ZF=0).</td>
+</tr>
+<tr>
+<td>JO rel16/32</td>
+<td>Jump near if overflow (OF=1).</td>
+</tr>
+<tr>
+<td>JP rel16/32</td>
+<td>Jump near if parity (PF=1).</td>
+</tr>
+<tr>
+<td>JPE rel16/32</td>
+<td>Jump near if parity even (PF=1).</td>
+</tr>
+<tr>
+<td>JPO rel16/32</td>
+<td>Jump near if parity odd (PF=0).</td>
+</tr>
+<tr>
+<td>JS rel16/32</td>
+<td>Jump near if sign (SF=1).</td>
+</tr>
+<tr>
+<td>JZ rel16/32</td>
+<td>Jump near if 0 (ZF=1).</td>
+</tr>
+</tbody>
+</table>
+
+<ul><li>These jumps checks the state of one or more of the status flags in the EFLAGS register (CF, OF, PF, SF, and ZF) and, if the flags are in the specified state (condition), performs a jump to the target instruction specified by the destination operand.
+</li><li>
+A condition code (cc) is associated with each instruction to indicate the condition being tested for. If the condition is not satisfied, the jump is not performed and execution continues with the instruction following the Jcc instruction.
+</li><li>
+The target instruction is specified with a relative offset (a signed offset relative to the current value of the instruction pointer in the EIP register). 
+</li><li><strong>A relative offset (rel8, rel16, or rel32) is generally specified as a label in assembly code, but at the machine code level, it is encoded as a signed, 8-bit or 32-bit immediate value, which is added to the instruction pointer.</strong> 
+</li><li>Instruction coding is most efficient for offsets of -128 to +127. If the operand-size attribute is 16, the upper two bytes of the EIP register are cleared, resulting in a maximum instruction pointer size of 16 bits.
+</li><li>
+The Jcc instruction does not support far jumps (jumps to other code segments). When the target for the conditional jump is in a different segment, use the opposite condition from the condition being tested for the Jcc instruction, and then access the target with an unconditional far jump (JMP instruction) to the other segment.
+</li><li>
+The <strong>JECXZ</strong> and <strong>JCXZ</strong> instructions differ from the other Jcc instructions because they do not check the status flags. Instead they check the contents of the ECX and CX registers, respectively, for 0. Either the CX or ECX register is chosen according to the address-size attribute.
+</li><li>
+These instructions are useful at the beginning of a conditional loop that terminates with a conditional loop instruction (such as LOOPNE). They prevent entering the loop when the ECX or CX register is equal to 0, which would cause the loop to execute 232 or 64K times, respectively, instead of zero times.
+</li></ul>
+
+<ul><li>
+Sumarizand, prin analiza tabelului de mai sus, se observă că unele instrucţiuni testează exact aceeaşi condiţie, ele fiind astfel similare ca efect. Faptul că o aceeaşi instrucţiune apare sub mai multe forme sintactice echivalente provine din posibilitatea de a exprima o aceeaşi situaţie sub mai multe formulări echivalente. De exemplu condiţia op1 „mai mic sau egal” (JLE) decât op2 se poate exprima şi sub forma op1 „NU este mai mare decât” (JNG) op2. Similar, condiţia JB (Jump if below – tradus prin „este inferior”) se poate exprima şi sub forma „NU este superior sau egal” (JNAE) etc.
+</li></li>
+In tabelul următor aveţi grupate toate instructiunile echivalente ca efect, echivalenţa lor fiind dată tocmai pe baza condiţiei testate. Ca urmare, este totuna de exemplu dacă folosiţi într-o comparaţie JAE, JNB sau JNC, efectul lor fiind identic: „salt dacă CF=0”.
+</li></ul>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td><strong>  MNEMONICA</strong></td>
+<td><strong>SEMNIFICAŢIE (salt dacă..&lt;&lt;relaţie&gt;&gt;)</strong></td>
+<td><strong>Condiţia verificată</strong></td>
+</tr>
+<tr>
+<td><strong>JB</strong>
+<br>
+<strong>JNAE</strong>
+<br>
+<strong>JC</strong></td>
+<td>este inferior
+<br>
+nu este superior sau egal
+<br>
+există transport</td>
+<td>CF=1</td>
+</tr>
+<tr>
+<td><strong>JAE</strong>
+<br>
+<strong>JNB</strong>
+<br>
+<strong>JNC</strong></td>
+<td>este superior sau egal
+<br>
+nu este inferior
+<br>
+nu există transport</td>
+<td>CF=0</td>
+</tr>
+<tr>
+<td><strong>JBE</strong>
+<br>
+<strong>JNA</strong></td>
+<td>este inferior sau egal
+<br>
+nu este superior</td>
+<td>CF=1 sau ZF=1</td>
+</tr>
+<tr>
+<td><strong>JA</strong>
+<br>
+<strong>JNBE</strong></td>
+<td>este superior
+<br>
+nu este inferior sau egal</td>
+<td>CF=0  şi  ZF=0</td>
+</tr>
+<tr>
+<td><strong>JE</strong>
+<br>
+<strong>JZ</strong></td>
+<td>este egal
+<br>
+este zero</td>
+<td>ZF=1</td>
+</tr>
+<tr>
+<td><strong>JNE</strong>
+<br>
+<strong>JNZ</strong></td>
+<td>nu este egal
+<br>
+nu este zero</td>
+<td>ZF=0</td>
+</tr>
+<tr>
+<td><strong>JL</strong>
+<br>
+<strong>JNGE</strong></td>
+<td>este mai mic decât
+<br>
+nu este mai mare sau egal</td>
+<td>SF&ne;OF</td>
+</tr>
+<tr>
+<td><strong>JGE</strong>
+<br>
+<strong>JNL</strong></td>
+<td>este mai mare sau egal
+<br>
+nu este mai mic decât</td>
+<td>SF=OF</td>
+</tr>
+<tr>
+<td><strong>JLE</strong>
+<br>
+<strong>JNG</strong></td>
+<td>este mai mic sau egal
+<br>
+nu este mai mare decât</td>
+<td>ZF=1 sau SF&ne;OF</td>
+</tr>
+<tr>
+<td><strong>JG</strong>
+<br>
+<strong>JNLE</strong></td>
+<td>este mai mare decât
+<br>
+nu este mai mic sau egal</td>
+<td>ZF=0 şi SF=OF</td>
+</tr>
+<tr>
+<td><strong>JP</strong>
+<br>
+<strong>JPE</strong></td>
+<td>are paritate
+<br>
+paritatea este pară</td>
+<td>PF=1</td>
+</tr>
+<tr>
+<td><strong>JNP</strong>
+<br>
+<strong>JPO</strong></td>
+<td>nu are paritate
+<br>
+paritatea este impară</td>
+<td>PF=0</td>
+</tr>
+<tr>
+<td><strong>JS</strong></td>
+<td>are semn negativ</td>
+<td>SF=1</td>
+</tr>
+<tr>
+<td><strong>JNS</strong></td>
+<td>nu are semn negativ</td>
+<td>SF=0</td>
+</tr>
+<tr>
+<td><strong>JO</strong></td>
+<td>există depăşire</td>
+<td>OF=1</td>
+</tr>
+<tr>
+<td><strong>JNO</strong></td>
+<td>nu există depăşire</td>
+<td>OF=0</td>
+</tr>
+</tbody>
+</table>
+
+<ul><li>
+Pentru a facilita alegerea corectă de către programator a variantelor de salt condiţionat în raport cu rezultatul unei comparaţii (adică, dacă programatorul doreşte interpretarea rezultatului comparaţiei cu semn sau fără semn) dăm următorul tabel:
+</li></ul>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td> Relaţia între operanzi ce se doreşte a fi testată</td>
+<td>Comparaţie cu semn</td>
+<td>Comparaţie fără semn</td>
+</tr>
+<tr>
+<td>d = s</td>
+<td>JE</td>
+<td>JE</td>
+</tr>
+<tr>
+<td>d &ne; s</td>
+<td>JNE</td>
+<td>JNE</td>
+</tr>
+<tr>
+<td>d &gt; s</td>
+<td>JG</td>
+<td>JA</td>
+</tr>
+<tr>
+<td>d &lt; s</td>
+<td>JL</td>
+<td>JB</td>
+</tr>
+<tr>
+<td>d &ge; s</td>
+<td>JGE</td>
+<td>JAE</td>
+</tr>
+<tr>
+<td>d &le; s</td>
+<td>JLE</td>
+<td>JBE</td>
+</tr>
+</tbody>
+</table>
+
+<ul><li>Studiul acestor tabele reiterează afirmaţia noastră anterioară: nu instrucţiunea CMP este cea care face distincţie între o comparaţie cu semn şi una fără semn! Rolul de a interpreta în mod diferit (cu semn sau fără semn) rezultatul final al comparaţiei revine NUMAI instrucţiunilor de salt condiţionat specificate ULTERIOR comparaţiei efectuate.
+</li><li>
+Tabelul de mai sus îl considerăm foarte util pentru interpretarea rezultatelor instrucţiunilor aritmetice în general. Fără a mai efectua o instrucţiune CMP, considerând d rezultatul ultimei instrucţiuni aritmetice executate şi punând s=0, tabelul rămâne valabil.
+</li></ul>
+	</div>	
+	<h2>Instructiuni de ciclare</h2>
+	<div class="article">
+<ul><li>Procesoarele x86 sunt prevăzute cu instrucţiuni speciale pentru realizarea ciclării. Ele sunt: LOOP, LOOPE, LOOPNE şi JECXZ.
+</li><li>Sintaxa lor este:</li></ul>	
+<pre><code><span class="i">[instructiune]</span> <span class="r">eticheta</span></code></pre>
+<ul><li>
+Instrucţiunea LOOP comandă reluarea execuţiei blocului de instrucţiuni ce începe la etichetă, atâta timp cât valoarea din registrul ECX este diferită de 0.  Se efectuează întâi decrementarea registrului ECX şi apoi se face testul şi eventual saltul. Saltul este de această dată în mod obligatoriu "scurt" (max. 127 octeţi - atenţie deci la "distanţa" dintre LOOP şi etichetă!). 
+</li></ul>
+<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">mov <span class="r">ecx, 5</span>
+<span class="r">start_loop:</span>
+<span class="comentariu">; the code here would be executed 5 times</span>
+<span class="i">loop <span class="r">start_loop</span>
+</code></pre>
+
+<ul><li>În cazul în care condiţiile de terminare a ciclului sunt mai complexe se pot folosi instrucţiunile LOOPE şi LOOPNE.
+</li><li>
+Instrucţiunea LOOPE (LOOP while Equal) diferă faţă de LOOP prin condiţia de terminare, ciclul terminându-se fie dacă ECX=0, fie dacă ZF=0. În cazul instrucţiunii LOOPNE (LOOP while Not Equal) ciclul se va termina fie dacă ECX=0, fie dacă ZF=1. Chiar dacă ieşirea din ciclu se face pe baza valorii din ZF, decrementarea lui ECX are oricum loc.
+</li><li>
+LOOPE mai este cunoscută şi sub numele de LOOPZ iar LOOPNE mai este cunoscută şi sub numele de LOOPNZ. Aceste instrucţiuni se folosesc de obicei precedate de o instrucţiune CMP sau SUB 
+</li></ul>
+<ul><li>Instructiunile JECXZ si JCXZ sunt instructiuni de jump conditional dar difera de setul standard al acestor instructiuni prin faptul ca acestea NU verifica statusul flagurilor. JECXZ si JCXZ verifica numai daca continutul din ECX sau CX are valoarea 0. Aceste instructiuni pot fi utilizate la inceputul unei bucle care se termina cu un loop conditional pentru a preveni intrarea in bucla cand ECX sau CX au valoarea 0. Daca se va intra in bucla cu CX=0, avand in vedere faptul ca “se efectuează întâi decrementarea registrului ECX şi apoi se face testul şi eventual saltul” acest aspect va determina executia unei bucle de 2^32 ori sau 2^16 ori, in loc de 0 ori cum ar fi normal pe baza valorii CX=0..        </li></ul>
+
+<h3><i>Exemplu:</i></h3>
+<pre><code><span class="i">mov</span> <span class="r">ecx, numar</span> <span class="comentariu">; numar de iteratii</span>
+<span class="i">JECXZ <span class="r">endFor</span>	<span class="comentariu">;skip loop if numar=0</span>
+<span class="r">forIndex</span>
+<span class="comentariu">; instructiuni</span>
+<span class="i">Loop</span> <span class="r">forIndex</span>	<span class="comentariu">; repeat</span>
+<span class="r">endFor</span>
+</code></pre>
+Echivalent cu:
+<pre><code><span class="i">mov</span> <span class="r">ECX, numar</span>
+<span class="i">cmp</span> <span class="r">ECX,0</span>
+<span class="i">JZ</span> <span class="r">endFor</span>
+<span class="r">forIndex</span>
+<span class="comentariu">; instructiuni</span>
+<span class="i">Loop</span> <span class="r">forIndex</span>	<span class="comentariu">; repeat</span>
+<span class="r">endFor</span>
+</code></pre>
+
+<ul><li>Este important să precizăm aici faptul că nici una dintre instrucţiunile de ciclare prezentate nu afectează flag-urile şi de asemenea că</li></ul>
+
+<table border="1" cellspacing="0" cellpadding="5">
+<tbody>
+<tr>
+<td><pre><code><span class="i">loop</span> <span class="r">Bucla</span></code></pre></td>
+<td ><pre><code><span class="i">dec</span> <span class="r">ecx</span>
+<span class="i">jnz</span> <span class="r">Bucla</span></code></pre></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+		
+<ul><li>deşi semantic echivalente, nu au exact acelaşi efect, deoarece spre deosebire de LOOP, instrucţiunea DEC afectează indicatorii OF, ZF, SF şi PF. </li></ul>
+
+	</div>	
+	
+</div>	
+
+
+</div>
+</body>
+</html>

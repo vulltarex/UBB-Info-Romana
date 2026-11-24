@@ -1,0 +1,24 @@
+     1                                  bits 32
+     2                                  
+     3                                  global _cifra_sute
+     4                                  
+     5                                  segment code public code use32
+     6                                      _cifra_sute:
+     7                                          ;cod intrare
+     8 00000000 55                              push ebp
+     9 00000001 89E5                            mov ebp, esp
+    10                                          
+    11 00000003 8B4508                          mov eax, [ebp + 8]
+    12 00000006 BB64000000                      mov ebx, 100
+    13 0000000B 31D2                            xor edx, edx
+    14 0000000D F7F3                            div ebx
+    15 0000000F BB0A000000                      mov ebx, 10
+    16 00000014 31D2                            xor edx, edx
+    17 00000016 F7F3                            div ebx
+    18 00000018 89D0                            mov eax, edx
+    19                                          
+    20                                          ;cod iesire
+    21 0000001A 89EC                            mov esp, ebp
+    22 0000001C 5D                              pop ebp
+    23                                          
+    24 0000001D C3                              ret

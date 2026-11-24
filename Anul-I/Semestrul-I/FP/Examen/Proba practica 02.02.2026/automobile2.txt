@@ -1,0 +1,5 @@
+1,dacia,50,logan,22:02:2026
+2,opel,100,astra,01:01:2020
+3,ford,95,focus,30:11:2029
+4,toyota,500,corolla,15:4:2015
+5,hyundai,1234,kona,19:9:2027

@@ -1,0 +1,555 @@
+
+
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arhitectura Sistemelor de Calcul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=30092025">
+</head>
+<body>
+  <header>
+   <div>
+        <h1><a href="https://www.cs.ubbcluj.ro/~diana.sotropa/teaching/asc">Arhitectura Sistemelor de Calcul</a></h1>
+        <h4>Anul 1, Informatică Română, an universitar 2025-2026</h4>
+         <a href="http://www.cs.ubbcluj.ro/~diana.sotropa/">Dr. Diana Șotropa, Lector Universitar</a>
+  
+    </div>
+    <div>
+    <div class="hamburger" onclick="toggleMobileNav()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    <nav>
+      <a href="index.php#despre">Despre</a>
+      <a href="index.php#noutati">Noutăți</a>
+      <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+      <a href="index.php#laboratoare">Laboratoare</a>
+      <a href="index.php#contact">Contact</a>
+    </nav>
+    <a class="contact" href="mailto:diana.sotropa@ubbcluj.ro"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 5.25L3 6V18L3.75 18.75H20.25L21 18V6L20.25 5.25H3.75ZM4.5 7.6955V17.25H19.5V7.69525L11.9999 14.5136L4.5 7.6955ZM18.3099 6.75H5.68986L11.9999 12.4864L18.3099 6.75Z" fill="#ffffff"/>
+</svg> diana.sotropa@ubbcluj.ro</a>
+    </div>
+  </header>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.php#despre">Despre</a>
+    <a href="index.php#noutati">Noutăți</a>
+    <a href="index.php#cerinte">Cerințe</a>
+      <a href="index.php#cursuri">Cursuri</a>
+      <a href="index.php#seminarii">Seminarii</a>
+    <a href="index.php#laboratoare">Laboratoare</a>
+    <a href="index.php#contact">Contact</a>
+  </div>
+
+  <div class="container"><link rel="stylesheet" href="assets/old-styles.css?v=30092025">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script>
+	$( function() {
+		$(".modal .x").on("click",function(){$('.modal').remove();$('.informatie_modal').remove();})
+		$(".modalP .x").on("click",function(){$('.modalP').remove();})
+		$( "#accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#second-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#third-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#fourth-accordion" ).accordion({
+			collapsible: true, active : 0, heightStyle: "content"
+		});
+		$( "#fifth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#sixth-accordion" ).accordion({
+			collapsible: true, active : 'none', heightStyle: "content"
+		});
+		$( "#accordion-trei" ).accordion({
+			collapsible: true, active : 3, heightStyle: "content"
+		});
+		// Hide all panels
+
+		// Get hash from query string
+		var hash = window.location.hash;
+		console.log(hash);
+
+		if (hash) {
+			
+		$(".article").hide();
+			// Get panel header element
+			var requestedPanel = $(hash);
+			if (requestedPanel.length) {
+				// Hide all panels
+				$(".article").hide();
+				// Show requested panel
+				requestedPanel.next(".article").show();
+			}
+		}
+});
+</script>
+  <div id="menu">
+<ul>
+<li><a href='ro-lab9-exemple.php'>EXEMPLE</a></li><li><a href='ro-lab9-exercitii.php'>EXERCITII</a></li><li class='active'><a href='ro-lab9-teorie.php'>TEORIE</a></li></ul>
+</div>
+<div id="content">
+	<h1>Laborator 9 - Suport teoretic</h1>
+	<h2>Programare multi-modul (asm+C)</h2>
+<div id="accordion">	
+	<h2>Programare multi-modul (asm+C)</h2>
+	<div class="article">
+Legătura dintre două module, indiferent de limbajele în care sunt scrise, presupune că dintr-un modul se apelează un subprogram descris în celălalt modul. 
+Vom presupune că unul din module este descris în limbaj de asamblare, iar celălalt într-un limbaj de programare de nivel înalt.
+	
+	<h3>Motivație:
+</h3>
+<ul>
+  <li>viteză mare de execuție în rezolvarea task-urilor cu consum minim de resurse;</li>
+</ul>
+<h3>Codul de apel</h3>	
+<div align="center">
+<img src="files/cod-de-apel.PNG" width="400">
+</div>
+<h3>Codul de intrare</h3>	
+<div align="center">
+<img src="files/cod-de-intrare.PNG" width="330">
+</div>
+<h3>Codul de ieșire</h3>	
+<ul>
+<li>Restaurarea resurselor nevolatile alterate;</li>
+<li>Eliberarea variabilelor locale ale funcției;</li>
+<li>Dezafectarea cadrului de stivă;</li>
+<li>Revenirea din funcție și eliberarea argumentelor.</li>
+</ul>
+Exceptând resursele volatile și rezultatele directe ale funcției, starea programului după acești pași trebuie să reflecte starea inițială, de dinainte de apel!
+
+<h3>Declararea simbolurilor externe:</h3>
+<ul>
+	<li>Pentru a accesa din cadrul unui program C o funcție definită în asamblare, funcția trebuie declarată global în programul asm și trebuie să conțină caracterul '_' în fața numelui ei </li>
+	<li>Dacă funcția va fi apelată în programul C ca <pre><Span class="i">fun()</span></pre>, atunci programul asm va conține următoarele:
+<pre>global <Span class="i">_fun</span>
+segment code public code use32
+<Span class="i">_fun:</span>
+</pre>
+	</li>
+</ul>
+<h3>Nealterarea valorilor unor regiștri</h3>
+Limbajele de nivel înalt impun ca anumiți regiștri să își păstreze la ieșire valoarea cu care intră într-o procedură. 
+În acest scop, dacă subprogramul definit în limbaj de asamblare modifică unii din aceștia, atunci valorile lor de intrare trebuie salvate (eventual pe stivă).
+Ele vor fi restaurate înainte de revenirea din procedură. 
+<ul>
+<li>PUSHAD și POPAD pot fi utilizați pentru a salva și restaura valorile celor 8 regiștri generali.</li>
+</ul>
+<h3>Transmiterea parametrilor unei funcții</h3>
+<ul>
+	<li>
+		parametrii sunt transmiși prin intermediul stivei, ceea ce oferă o flexibilitate mai mare decât transmiterea parametrilor prin regiștri (referitor la numărul de parametri);
+	</li>
+	</ul>
+<h3>Crearea cadrului de stivă</h3>
+<ul>
+
+	<li>La intrarea în funcție se va seta registrul EBP&larr;ESP, valoare care va fi restaurantă la ieșirea din funcție;
+
+Deoarece ESP se modifică odată cu introducerea paramtrilor în stivă, cel mai indicat mod este de a accesa valorile parametrilor prin intermediul unui registru de bază sau index.
+Dintre aceste variante, registrul EBP este cel mai indicat scopului nostru, deoarece orice referire la EBP se face relativ la segmentul de stivă.
+Secvența care pregătește accesul la stivă este:
+<pre><span class="r">push ebp</span>
+<span class="r">mov ebp, esp</span></pre>
+</li>
+	</ul>
+<h3>Alocarea de spațiu de memorie pentru datele locale</h3>
+Uneori este necesar ca procedura să aibă date locale. Dacă valoarea lor nu trebuie să se păstreze într două apeluri consecutive ale procedurii atunci acestea vor fi alocate în segmentul de stivă și le vom numi <u>date volatile</u>.
+În caz contrar spunem că este vorba despre <u>date statice</u> și spațiul pentru ele va fi alocat într-un segment diferit de segmentul de stivă, de exemplu în segmentul de date.
+
+Alocarea unui număr n de octeți (n fiind multiplu de 4) pentru datele locale se poate face relativ la EBP.
+<pre><span class="r">sub esp,n</span></pre>
+Așadar:
+<ul>
+<li>registrul EBP va fi folosit pentru a accesa parametrii (de exemplu [EBP+8] accesează primul parametru reprezentat pe 32 de biți);</li>
+<li>primul parametru accesibil din stivă este ultimul parametru adăugat pe stivă de către programul apelant;</li>
+<li>se rezervă spațiu pe stivă pentru variabilele locale, de exemplu: <pre>sub esp,4*1</pre></li>
+<li>această metodă simplifică modalitatea de accesare a parametrilor în special în cadrul funcțiilor cu număr variabil de parametri;</li>
+<li>este responsabilitatea programatorului să scoată parametrii de pe stivă. </li>
+</ul>
+
+<h3>Returnarea valorilor de către o funcție</h3>
+<ul>
+	<li>dacă funcția returnează un întreg, atunci acesta este returnat în EAX;</li>
+	<li>dacă funcția returnează un șir, atunci adresa acestuia este returnată în EAX;</li>
+	<li>prin folosirea convenției CDECL se presupune că regiștrii EBX, ESI, EDI, EBP și ESP nu își modifică valoarea în timpul apelului de funcții;</li>
+	
+</ul>
+<h3>Revenirea din procedură</h3>
+La revenirea din procedură trebuie să se execute operațiile:
+<ul>
+<li>refacerea valorilor regiștrilor (vezi secțiunea <i>Nealterarea valorilor unor regiștri</i>);</li>
+<li>refacerea stivei astfel încât în vârf să conțină adresa de revenire:
+<pre><span class="r">mov esp, ebp</span>
+<span class="r">pop ebp </span></pre></li>
+</ul>
+<h3>Scheletul unei funcții:</h3>
+	<pre>
+global <Span class="i">_fun</span>
+segment code public code use32 
+<Span class="i">_fun:</span>      
+        <span class="r">push ebp</span>
+        <span class="r">mov ebp, esp   </span>
+        pushad 
+        <span class="comentariu">;... codul funcției ... </span>
+        popad 
+        mov eax, returned_value </span>
+        <span class="r">mov esp, ebp</span>
+        <span class="r">pop ebp </span>
+        end
+	</pre> 
+
+</div>
+<h2>Utilizarea procedurilor definite în asamblare în cadrul unui program C</h2>
+	<div class="article">
+<h3>Exemplul 1</h3>
+<p>Se definește în cadrul unui program asm o procedură numită hello_world care nu primește nici un parametru și nu returnează nimic. Aceasta afisează pe ecran textul &quot;Hello World!&quot;.</p>
+<table width="100%">
+<tr>
+<th width="50%">
+<p>hello_world.asm</p></th>
+<th><p>hello_world.c</p></th>
+</tr>
+<td>
+<pre>bits 32
+extern _printf
+global <span class="r">_hello_world</span>
+segment data public data use32
+	mesaj db 'Hello world!', 0
+segment code public code use32
+<span class="r">_hello_world:</span>
+	push ebp
+	mov ebp,esp
+	push dword mesaj	
+	call _printf
+	add esp, 4*1
+	pop ebp
+    ret</pre>
+</td><td>
+<pre>#include &lt;stdio.h&gt;
+
+
+<span class="r">void hello_world();</span>
+
+int main()
+{
+	<span class="r">hello_world()</span>;
+	printf("Programul care nu face nimic e gata!");
+	return 0;
+	
+}
+
+
+</pre>
+</td></tr></table>
+<p>Observați utilizarea cuvântului cheie <strong>extern. </strong>Acesta transmite compilatorului că  funcția / variabila este definită într-un alt fișier (și nu în fișierul curent). Linker-ul are datoria creării unei conexiuni între această declarație a funcției / variabilei și definiția acesteia.</p>
+<h3>Exemplul 2</h3>
+<p>Se definește în cadrul unui program asm o procedură numită return_10 care nu primește nici un parametru și  returnează un întreg. </p>
+<table width="100%">
+<tr>
+<th width="50%">
+<p>return_10.asm</p></th>
+<th><p>return_10.c</p></th>
+</tr>
+<tr>
+<td>
+<pre>bits 32
+global <span class="r">_return_10</span>
+segment data public data use32
+segment code public code use32
+<span class="r">_return_10:</span>
+	<span class="i">mov eax, 10</span>
+	ret</pre>
+</td><td>
+<pre>#include &lt;stdio.h&gt;
+<span class="r">int return_10();</span>
+int main()
+{
+	printf("Programul returneaza %d!",<span class="r">return_10()</span>);
+	return 0;
+}</pre>
+</td></tr></table>
+<h3>Exemplul 3</h3>
+<p>Se definește în cadrul unui program asm o procedură numită sum care primește doi parametri întregi și  returnează suma lor (un întreg). </p>
+<table width="100%">
+<tr>
+<th width="50%">
+<p>sum.asm</p></th>
+<th><p>sum.c</p></th>
+</tr>
+<tr>
+<td>
+<pre>bits 32
+
+global <span class="r">_sum</span>
+segment data public data use32
+segment code public code use32
+<span class="r">_sum:</span>
+	push ebp
+	mov ebp, esp	                   	
+	<span class="i">mov eax, [ebp+8]</span>
+	<span class="i">add eax, [ebp+12]</span>  
+	mov esp, ebp
+	pop ebp
+    ret</pre>
+</td><td>
+<pre>
+
+#include &lt;stdio.h&gt;
+
+<span class="r">int sum(int, int);</span>
+
+int main()
+{
+	
+	printf("%d\n", <span class="r">sum(2, 3)</span>);
+	return 0;
+	
+}
+
+</pre>
+</td></tr></table>
+<h3>Exemplul 4</h3>
+<p>Se definește în cadrul unui program asm o procedură numită factorial care primește un parametru întreg pozitiv și returnează factorialul lui (un întreg pozitiv). </p>
+<table width="100%">
+<tr>
+<th width="50%">
+<p>factorial.asm</p></th>
+<th><p>factorial.c</p></th>
+</tr>
+<tr>
+<td>
+<pre>bits 32
+global <span class="r">_factorial</span>
+segment data public data use32
+segment code public code use32
+<span class="r">_factorial:</span>
+	push ebp
+	mov ebp,esp
+	sub esp, 4                   
+	<span class="i">mov eax, [ebp+8] </span>
+	cmp eax,2
+	jbe   .trivial
+	.recursiv:
+		dec  eax
+		push eax
+		call <span class="r">_factorial</span>
+		add  esp, 4    
+		mov  [ebp-4], eax   ; m = (n-1)!
+		mov  eax, [ebp+8]   ; n
+		mul  dword [ebp-4]  ; edx:eax &larr; n * m
+		jmp  .final
+	.trivial:
+		xor  edx, edx     
+	.final:
+	add esp, 4
+    mov esp, ebp
+    pop ebp
+    ret
+    </pre>
+</td><td>
+<pre>
+
+
+
+
+
+#include &lt;stdio.h&gt;
+
+<span class="r">int factorial(int);</span>
+
+int main()
+{
+	int n, f;
+	printf("n = ");
+	scanf("%d", &n);
+
+	<span class="r">f = factorial(n);</span>
+
+	printf("factorial(%d) = %d\n", n, f);
+
+	return 0;
+}
+
+
+
+
+
+
+
+</pre>
+</td></tr></table>
+</div>
+</div>
+<h2>Programare multi-modul (asm+C) în Visual Studio</h2>
+<p>Următorul tutorial se bazează pe Visual Studio 2015, se  presupune că aveți instalat pe calculator o versiune de Visual Studio. Pentru mai multe detalii accesati in TEAMS, in canalul General, sectiunea Files, fisierul procedura_instalare.doc.</p>
+<p>Exemplul urmator arata cum putem compila, rula si depana programul din sectiunea <u>Exemple</u>. </p>
+<div id="second-accordion">
+<!--
+<h2>Varianta 1:  se lucrează în mediul Visual Studio </h2>
+<div class="article">
+<p>Dacă se lucrează  în Visual Studio, pentru a putea compila/asambla sursa scrisă în limbaj  de asamblare trebuie:</p>
+<ul>
+  <li>să  se specifice drept <strong>Pre-Build  Event</strong> comanda de asamblare (a se vedea pașii descriși mai jos);</li>
+  <li>să se includă fișierul *.obj rezultat drept intrare adițională la linkeditare.</li>
+</ul>
+<p>În continuare se prezintă o modalitate pentru a crea un  proiect C în Visual Studio. Pentru a compila/asambla și a depana proiectul se  urmează pașii:</p>
+<ul>
+  <li>se creează un proiect gol (File -&gt; New  Project)</li>
+</ul>
+<p align="center"><img width="719" height="447" src="files/multimodul-1.png"></p>
+<ul>
+  <li>Se adaugă fișierul C (click dreapta pe proiect  în fereastra Solution Explorer -&gt; Add -&gt; New item):</li>
+</ul>
+<p align="center"><img width="711" height="319" src="files/multimodul-2.png"></p>
+<p align="center"><img width="720" height="366" src="files/multimodul-3.png"></p>
+<ul>
+  <li>se scrie modulul / programul C  </li>
+</ul>
+<pre>#include &lt;stdio.h&gt;
+// functia declarata in fisierul modulAsm.asm
+int asmConcat(char sir[], char sirR[]);
+. . .
+void citireSirC(char sir[])
+{
+    scanf("%s", sir);
+}</pre>
+<ul>
+  <li>se adaugă modulul scris în limbaj de asamblare  (click dreapta pe proiect -&gt; Add -&gt; New item)</li>
+</ul>
+<p align="center"><img width="720" height="418" src="files/multimodul-4.png"></p>
+<ul>
+  <li>modulul *.asm conține codul</li>
+</ul>
+<pre>bits 32
+; informam asamblorul despre existenta functiei _citireSirC si a variabilei _str3
+extern _citireSirC
+extern _str3
+. . .
+    ; intoarcem ca si rezultat lungimea sirului concatenat
+    mov eax, [lenRez]
+    ret
+    ; conventie stdcall - este responsabilitatea programului apelant sa elibereze parametrii transmisi	</pre>
+<ul>
+  <li>Se configurează Visual Studio pentru asamblarea și  editarea legăturilor (click dreapta pe proiect -&gt; Properties), în meniul <em>Pre-Build Events</em> se introduce comanda  (se presupune că nasm.exe se găsește pe disc la locația C:\nasm\nasm.exe – se  specifică calea completă deoarece calea către nasm.exe nu a fost adăugată în  variabila <em>Path</em> Windows)  </li>
+</ul>
+<pre>C:\nasm\nasm  modulAsm.asm -f win32 -g -o modulAsm.obj</pre>
+<p align="center">
+  <img width="720" height="330" src="files/multimodul-5.png"></p>
+<ul>
+  <li>pentru editarea corectă a legăturilor se  specifică dependințele ca în figura de mai jos, se adauga comanda </li>
+</ul>
+<pre>;$(ProjectDir)\modulAsm.obj</pre>
+  la <em>Additional Dependencies</em> (click dreapta pe proiect -&gt; Properties)<br>
+<p align="center">  <img width="667" height="260" src="files/multimodul-6.png"></p>
+<ul>
+  <li>se compilează programul (meniul Build -&gt;  Build Solution sau CTRL + SHIFT + B), mesajele de eroare generate de nasm.exe  la asamblarea codului pot fi vizualizate în fereastra Output. </li>
+</ul>
+<p><strong>ATENȚIE!!</strong> Dacă programul foloseste funcția scanf pentru citirea de la tastatură (funcție care nu  este sigură – justificarea depășește conținutul cursului, NU SE RECOMANDĂ  FOLOSIREA FUNCTIEI scanf!!) trebuie adaugată directiva <strong>_CRT_SECURE_NO_WARNINGS </strong>(click  dreapta pe proiect -&gt; Properties -&gt; C/C++ -&gt;  Preporocessor -&gt; Preprocessor Definitions  -&gt; edit și se adaugă _CRT_SECURE_NO_WARNINGS), în caz contrar compilarea  eșuează cu mesajul </p>
+<p><strong>ATENȚIE!!</strong>
+Daca doriti sa folositi functia printf doar in modulul asm, fara sa o folositi si in modulul C, atunci VS va da eroare la compilare, pentru ca nu stie sa importe functia. Asta tine strict de mediul in care lucram si de modalitatea in care sunt importate functiile din diverse librarii. 
+In cazul acesta, solutia este sa adaugam in mod explicit libraria la inputul linker-ului. Exact ca la pasul la care am adaugat fisierul obj la Linker: intram cu click dreapta pe proiect -> Properties la Linker -> Input -> Additional Dependencies si adaugam libraria: <strong>legacy_stdio_definitions.lib</strong>. 
+</p>
+<table border="1" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>Severity</p></td>
+    <td><p>Code</p></td>
+    <td><p>Description</p></td>
+    <td><p>Project</p></td>
+    <td><p>File</p></td>
+    <td><p>Line</p></td>
+    <td><p>Suppression State</p></td>
+  </tr>
+  <tr>
+    <td><p>Error</p></td>
+    <td><p>C4996</p></td>
+    <td><p>'scanf': This    function or variable may be unsafe. Consider using scanf_s instead. To    disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for    details.</p></td>
+    <td><p>program</p></td>
+    <td><p>c:\tmp\multimodul\program\program\main.c</p></td>
+    <td><p>38</p></td>
+    <td><p>&nbsp;</p></td>
+  </tr>
+</table>
+<p align="center"><img width="719" height="394" src="files/multimodul-7.png"></p>
+<p>Rezultatul în urma compilarii/asamblării și editării legăturilor  este:<br>
+  ========== Build: 1  succeeded, 0 failed, 0 up-to-date, 0 skipped ========== <br>
+  Dacă se execută programul:<br>
+ </p>
+<p align="center"> <img width="720" height="146" src="files/multimodul-8.png"></p>
+<p>Dacă se dorește depanarea programului se pot urma pașii, de  exemplu se dorește depanarea procedurii asmConcat:</p>
+<ul>
+  <li>se pune un <em>breakpoint</em> in modulul C pe linia care apelează procedura asmConcat. Pentru a configura un  breakpoint în Visual Studio se mută cursorul pe linia dorită si se apasă F9  (sau click dreapta pe linia dorită -&gt; Breakpoint -&gt; Insert Breakpoint).</li>
+  <li>Se lansează programul în mod <em>Debug</em> folosind scurtătura F5 (sau din  meniul Debug -&gt; Start Debugging).</li>
+  <li>Pentru a putea vedea și depana codul scris în  limbaj de asamblare trebuie sa urmărim execuția programului în fereastra <em>Dissasembly</em>, pentru a vedea această  fereastră Debug -&gt; Windows -&gt; Dissasembly. Afișăm și conținutul  registrilor (Debug -&gt; Windows -&gt; Registers) și memoria (Debug -&gt;  Windows -&gt; Memory -&gt; Memory 1). În toate aceste ferestre de depanare,  dacă se dorește afișarea unor informații suplimentare (ex. valoarea Flags)  click dreapta în fereastra respectivă si se alege informația dorită. Pentru a  vizualiza stiva la locația dată de ESP se scrie &ldquo;ESP&rdquo; în căsuța text <em>Address</em> din fereastra Memory, daca se  dorește vizualizarea memoriei începand de la adresa sirului citit în modulul C  se scrie în căsuța text <em>Address</em> &ldquo;str1&rdquo; din fereastra Memory.</li>
+  <li>Figura de mai jos prezintă ferestrele folosite  pentru depanarea programului, programul este oprit la apelul procedurii <em>asmConcat</em>.</li>
+</ul>
+<p align="center"><img width="719" height="707" src="files/multimodul-9.png"></p>
+<ul>
+  <li>Așa cum se  observă în figura de mai sus, porțiunea de cod din programul C (dezasamblată) responsabilă  pentru apelul functiei asmConcat (lenStrRez  = asmConcat(str1, strRez);) își pune pe stivă adresa șirurilor  pasate ca parametru în convenție CDECL. Pentru a depana procedura <em>asmConcat</em>  se execută codul instrucțiune cu instrucțiune  (F11) pană se ajunge la linia </li>
+</ul>
+<pre>call _asmConcat (03916D0h)</pre>
+  unde se urmărește apelul  (Debug -&gt; Step Into sau F11) după care se depanează procedura asmConcat.<br>
+<p align="center">  <img width="514" height="503" src="files/multimodul-10.png"> </p>
+  După cum se observă din  figura de mai sus, pe stivă la adresa dată de ESP se găsește valoarea EIP la  momentul apelului <em>call</em>. </p>
+<ul>
+  <li>În acest mod se poate depana programul  rezultat.</li>
+</ul>
+<p>Dacă  se creează un proiect C++, liniile din fișierul cpp ce declară resursele ce vor  fi importate din modulul asm trebuie să aibă prefixul:<em>extern &quot;C&quot;</em>!!<br>
+  Ex.  liniile de cod din main.c</p>
+<pre>  int asmConcat(char sir[], char sirR[]);
+  char str3[] = &quot;0011223344&quot;;</pre>
+<p>devin în  main.cpp</p>
+<pre>  extern &quot;C&quot; int  asmConcat(char sir[], char sirR[]);
+  extern &quot;C&quot;  char str3[] = &quot;0011223344&quot;; </pre>
+  </div>
+ -->
+<h2>Se utilizează linia de comandă pentru a compila/asambla modulele</h2>
+<div class="article">
+<p>Pașii urmați pentru a compila programul main.c sunt:</p>
+<ul>
+  <li>se deschide linia de comandă Visual Studio,  pentru aceasta se navighează în meniul Windows <em>Start</em> la <em>Visual Studio</em> și  se alege opțiunea <em>VS2015 x86 Native Tools  Command Prompt</em>, ca în figura de mai jos.</li>
+</ul>
+<p align="center"><img width="328" height="592" src="files/multimodul-11.png"></p>
+<ul>
+  <li>În fereastra terminal se navighează către  directorul unde se găsesc sursele programului. În exemplul din figura de mai  jos sursele se găsesc în directorul tmp, comanda <em>dir</em> listează conținutul directorului curent. Pe lângă fișierele  sursă ale programului, în directorul tmp se găsește și programul executabil <em>nasm.exe</em> folosit pentru asamblarea lui <em>modulAsm.asm</em>.</li>
+</ul>
+<p align="center"><img width="485" height="338" src="files/multimodul-12.png"></p>
+<ul>
+  <li>În primul pas se asamblează <em>modulAsm.asm</em> folosind comanda: </li>
+</ul>
+<pre>nasm modulAsm.asm -fwin32 -o modulAsm.obj</pre>
+  (a se vedea figura de mai jos). Rezultatul  este fisierul <em>modulAsm.obj</em>.<br>
+<p align="center">  <img width="432" height="307" src="files/multimodul-13.png"></p>
+<ul>
+  <li>Folosind compilatorul Visual Studio (cl.exe) se  compileaza <em>main.c</em>, se dorește  editarea legăturilor în acest pas -&gt; se specifică ca și parametru <em>/linker</em> fișierul <em>modulAsm.obj</em>. Rezultatul este programul main.exe.</li>
+</ul>
+<p align="center"><img width="500" height="498" src="files/multimodul-14.png"></p>
+<ul>
+  <li>programul poate fi executat apelând din linia de  comandă <em>main.exe</em>:</li>
+</ul>
+<p align="center"><img width="719" height="174" src="files/multimodul-15.png"></p>
+<p>  Se  poate depana programul folosind Ollydbg, pentru aceasta la asamblare/compilare  trebuie specificat acest lucru, comenzile sunt:<br>
+<pre>&gt; nasm modulAsm.asm -fwin32 -g -o modulAsm.obj<br>
+&gt; cl /Z7 main.c /link modulAsm.obj</pre>
+  Din Ollydbg, File  -&gt; Open și se deschide <em>main.exe</em>.<br>
+  În Visual C dacă  se dorește includerea de informații de depanare, opțiunile sunt /Z{7|i|I} (a se  vedea <a href="https://msdn.microsoft.com/en-us/library/958x11bc.aspx">https://msdn.microsoft.com/en-us/library/958x11bc.aspx</a>). </p>
+
+</div>
+
+</div>
+</div>
+</body>
+</html>

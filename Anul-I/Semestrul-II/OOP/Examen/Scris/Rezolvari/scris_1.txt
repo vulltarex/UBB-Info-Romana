@@ -1,0 +1,84 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+class Smoothy {
+private:
+    int pret;
+public:
+    Smoothy(int pret) : pret(pret) {}
+    virtual int getPret() { return pret; }
+    virtual std::string descriere() = 0;
+    virtual ~Smoothy() = default;
+};
+
+class DecoratorSmoothy : public Smoothy {
+private:
+    Smoothy* smooty;
+public:
+    DecoratorSmoothy(Smoothy* smoothy)
+    : Smoothy(smoothy->getPret()),
+    smooty(smoothy) {}
+    int getPret() override { return smooty->getPret(); }
+    std::string descriere() override { return smooty->descriere(); }
+    ~DecoratorSmoothy() { delete smooty; }
+};
+
+class SmoothyCuFrisca : public DecoratorSmoothy {
+public:
+    SmoothyCuFrisca(Smoothy* smoothy) : DecoratorSmoothy(smoothy) {}
+    int getPret() override { return DecoratorSmoothy::getPret() + 2; }
+    std::string descriere() override { return DecoratorSmoothy::descriere() + " cu frisca"; }
+};
+
+class SmoothyCuUmbreluta : public DecoratorSmoothy {
+public:
+    SmoothyCuUmbreluta(Smoothy* smoothy) : DecoratorSmoothy(smoothy) {}
+    int getPret() override { return DecoratorSmoothy::getPret() + 3; }
+    std::string descriere() override { return DecoratorSmoothy::descriere() + " cu umbreluta"; }
+};
+
+class BasicSmoothy : public Smoothy {
+private:
+    std::string nume;
+public:
+    BasicSmoothy(std::string nume, int pret) : Smoothy(pret), nume(nume) {}
+    std::string descriere() override { return nume; }
+};
+
+//2
+std::vector<Smoothy*> listaSmoothy() {
+    std::vector<Smoothy*> rez;
+    rez.push_back(new SmoothyCuFrisca(new SmoothyCuUmbreluta(new BasicSmoothy("kivi", 1))));
+    rez.push_back(new SmoothyCuFrisca(new BasicSmoothy("capsuni", 2)));
+    rez.push_back(new BasicSmoothy("kivi", 3));
+    return rez;
+}
+//3
+int main() {
+    std::vector<Smoothy*> rez = listaSmoothy();
+    std::sort(rez.begin(), rez.end(), [](Smoothy* a, Smoothy* b){ return a->descriere() < b->descriere(); });
+    for (auto s : rez) std::cout << s->descriere() << ' ' << s->getPret() << " RON\n";
+    for (auto s : rez) delete s;
+    return 0;
+}
+
+//4
+template <typename tip>
+class Geanta {
+private:
+    std::string owner;
+    std::vector<tip> obiecte;
+public:
+    Geanta(const std::string& owner) : owner(owner) {}
+    Geanta& operator+(const tip& obiect) {
+        obiecte.push_back(obiect);
+        return *this;
+    }
+    auto begin() {
+        return obiecte.begin();
+    }
+    auto end() {
+        return obiecte.end();
+    }
+};
