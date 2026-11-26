@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+          fx:controller="seminar9.controller.MovieFormController"
+          stylesheets="@style.css"
+          hgap="12" vgap="12">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <Label text="Title" styleClass="muted" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+    <TextField fx:id="titleField" promptText="e.g. Inception" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="260"/>
+
+    <Label text="Director" styleClass="muted" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+    <TextField fx:id="directorField" promptText="e.g. Christopher Nolan" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+    <Label text="Year" styleClass="muted" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+    <TextField fx:id="yearField" promptText="e.g. 2010" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+    <Label text="Duration (min)" styleClass="muted" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+    <TextField fx:id="durationField" promptText="e.g. 148" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.columnSpan="2">
+        <padding><Insets top="8"/></padding>
+        <Button text="Cancel" cancelButton="true" onAction="#onCancel"/>
+        <Button text="Save" defaultButton="true" onAction="#onSave"/>
+    </HBox>
+</GridPane>
